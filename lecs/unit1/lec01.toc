@@ -1,0 +1,3 @@
+\beamer@sectionintoc {1}{Some definitions in hydrology}{2}{0}{1}
+\beamer@sectionintoc {2}{Why stochastic methods in hydrology?}{6}{0}{2}
+\beamer@sectionintoc {3}{Deterministic hydrology vs Stochastic hydrology}{8}{0}{3}
