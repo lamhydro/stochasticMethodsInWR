@@ -114,8 +114,10 @@ $$
     According to \cite{}, "stochastic methods thus aim at predicting the value of some variable at non-observed times or at non-observed locations, while also stating how uncertain we are when making these predictions".
     \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{fi1l1.png}
+    \includegraphics[width=0.9\textwidth]{fi4l1.png}
+    \captionof{figure}{Observed vs simulated discharge (above) and residuals (below). Taken from \cite{norbiato2008flash}}
     \end{figure}
+    \vspace{-0.5cm}
     \alert{Uncertainty} is the key factor for the implementation of stochastic methods.  For instance, when observed ($Q$) and estimated ($\hat{Q}$) discharges are compared, there are some diferences (\alert{residuals}) between the two data sets ($e = \hat{x}-x$). 
 \end{block}
 \end{frame}
@@ -141,18 +143,25 @@ $$
     \hline
     \alert{Deterministic hydrology} & \alert{Stochastic hydrology} \\
     \hline
-    Result from physical, chemical and biological deterministic laws, particularly from fluid mechanics and thermodynamics laws & Most of physical processes in nature are governed by laws of chance (stochastic or random) \\ \hline
-    State variables are related to each other to represent fundamental laws throuhg mathematical expressions & The response of physical processes are governed by laws of change where every variable is a stochastic variable. \\\hline
+    Result from physical, chemical and biological deterministic laws, particularly from fluid mechanics (e.g. Saint-Venant equations) and thermodynamics laws. Also from deterministic analysis (e.g. rating curve) & Most of physical processes in nature are governed by laws of chance (stochastic or random). Result from a physical model where variables and parameters are treated as random variables \\ \hline
+    State variables are related to each other to represent fundamental laws through mathematical expressions & The response of physical processes are governed by laws of change where every variable is a stochastic variable. \\\hline
+    Errors are taken into account only during calibration (e.g. adjust hydraulic conductivity) & In some cases, errors are considered during simulation as the \alert{probability distribution} of them is known \\ \hline
     \emph{E.g. The response (runoff) of a impervious surface to a specific rainfall event with negligible evaporation and infiltration processes.} & \emph{E.g. Runoff, precipitation, evaporation, sediment transport, etc} \\\hline
     \emph{E.g. A rating function on the form of $Q = f(y)$ where $Q$ represent discharge through a fix-bed river cross section and $y$ water level stage.} &  \emph{E.g. The the annual precipitation at a point or over an area or other hydrological process at annual scale where no deterministic components are presented.}\\ \hline
     \end{tabular}
-    \begin{itemize}
+\end{frame}
+
+\begin{frame}{Deterministic hydrology vs Stochastic hydrology}
+    
+   \begin{itemize}
         \item Note that \emph{stochastic} $\rightleftharpoons$ \emph{change} $\rightleftharpoons$ \emph{random} $\rightleftharpoons$ \emph{probabilistic} are interchangeable. 
         \item There are no pure deterministic processes in hydrology; contrary, these are a combination of conservation and change laws.  
         \item Hydrological processes can be a combination of both: e.g. periodic behaviour (deterministic trigonometric function) $+$ random variation  $\rightarrow$ \alert{periodic-stochastic process}
         \item Note that a deterministic relationship function between random variables is also a random variables. E.g. The response of a river basin (runoff) to rainfall events is better understood by analysing not only the deterministic relationships but also the stochastic properties of observed rainfall, runoff, climate and basin data. 
     \end{itemize}
 \end{frame}
+
+
 
 \begin{frame}{Deterministic hydrology vs Stochastic hydrology}
 \begin{minipage}{0.49\textwidth}
@@ -167,7 +176,5 @@ $$
     \captionof{figure}{Annual maximum discharges of the Danube River at Orshova Romania. 1) time series of maximum, 2) time series mean and 3) time series trend.}
 \end{minipage}
 \end{frame}
-
-
 
 \end{document}
