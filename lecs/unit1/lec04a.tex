@@ -1,0 +1,86 @@
+\documentclass[8pt]{beamer}
+\usetheme{default} % Very simple theme
+\usecolortheme{dove} % Minimalist grayscale colors
+\setbeamertemplate{navigation symbols}{} % Remove navigation bar
+
+% Define brand-like colors
+\definecolor{myblue}{RGB}{0, 102, 204}    % Blue for standard blocks
+\definecolor{mygreen}{RGB}{0, 153, 0}     % Green for example blocks
+\definecolor{myred}{RGB}{204, 0, 0}       % Red for alert blocks
+\definecolor{myorange}{RGB}{255, 128, 0} % For \emph
+
+% Accent color for titles, bullets, etc.
+\setbeamercolor{structure}{fg=myblue}
+
+% Block colors
+\setbeamercolor{block title}{bg=myblue, fg=white}
+\setbeamercolor{block body}{bg=blue!5, fg=black}
+
+\setbeamercolor{exampleblock title}{bg=mygreen, fg=white}
+\setbeamercolor{exampleblock body}{bg=green!5, fg=black}
+
+\setbeamercolor{alertblock title}{bg=myred, fg=white}
+\setbeamercolor{alertblock body}{bg=red!5, fg=black}
+\setbeamercolor{alerted text}{fg=myred}
+
+% Optional: color for \example text
+\setbeamercolor{example text}{fg=mygreen}
+
+% Custom emph (orange text instead of italic)
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{myorange}{#1}}
+
+
+\usepackage{graphicx} % Package for images
+\usepackage{amsmath} % Package for images
+\graphicspath{{figs/}} % Path to your figures directory
+\usepackage{array}  % For better column spacing
+\usepackage{caption} % Required for \captionof
+
+% Title Information
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 1: Introduction to probability and statistics \\ Lecture 4a: Model estimation and testing}
+\author{Luis Alejandro Morales, Ph.D.}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------
+% From Kotte
+\section{Generalities}
+\begin{frame}{Generalities}
+    \begin{itemize}
+        \item Statistical inference deals with  statistical estimations based on a \emph{sample} from the \emph{population}.
+        \item Some definitions:
+            \begin{itemize}
+                \item \alert{Population}: consist of all possible observations of a process (e.g. air temperature at certain location). Some of the observations in the in the population may not have any physical sense, perhabs, due to sensor errors. 
+                \item \alert{Sample}: is a subset of the population (e.g. instantaneous daily streamflow for a certain period in a station). A \emph{random sample} is thus a sample that is representative of the population.
+                \item \alert{Random variables}: is a \emph{real-valued function} defined on a \emph{sample space}. Wheather a random variable is \emph{discrete} or \emph{continuous} depends on how the sample space is defined. 
+                \item \alert{Statistic}: is a function of the observations that is quantifiable and does not contain any unknown parameter. Note that a \emph{statistic} is also a random variable that provides an \emph{estimation}.
+                \item \alert{Estimator}: is the method or rule of estimation. For instance, the \emph{sample mean} $\bar{X}$ is a point estimator of the \emph{population mean} $\mu$. 
+                \item \alert{Estimate}: is the value yielded by the estimator. 
+                 \end{itemize}
+             \item Suppose that the population of variable $X$ follows a \emph{Normal distribution} and the distribution parameters $\theta$ are unknown. Thus, a random sample of $X$ of size $n$.
+             \item Parameters $\theta$ can be described by a number or a range; this last include an uncertainty. 
+    \end{itemize}
+\end{frame}
+
+%-------
+% From Kotte
+\section{Properties of estimators}
+\begin{frame}{Properties of estimators}
+
+\end{frame}
+    
+
+
+
+
+\end{document}

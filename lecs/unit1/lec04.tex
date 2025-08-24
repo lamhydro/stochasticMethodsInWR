@@ -256,7 +256,7 @@ This indicate that $f_V(v)$ is simetric with respecto to $\mu_V$.
         \[
             M_X (t)  = E[e^{tX}]
         \]
-        Matemathically, $e^{tX}$ can be expanded in powers of $t$ about of zero as a Maclauring's series. Replacing in the equation above and getting the expected values for the expansion coefficients:
+        Mathematically, $e^{tX}$ can be expanded in powers of $t$ about of zero as a Maclauring's series. Replacing in the equation above and getting the expected values for the expansion coefficients:
 \[
     M_X (t)  = E[e^{tX}] = E \left[ 1 + Xt + \frac{1}{2!} (Xt)^2 + \cdots \right] = 1 + \mu_1 t + \frac{1}{2!}\mu_2 t^2 + \cdots 
         \]
@@ -394,7 +394,7 @@ Accordingly:
 \subsection{Characteristic functions} % From Bierk
 \begin{frame}{Characteristic functions}
     \begin{block}{Characteristic functions}
-        A \alert{characteristic function} of $X$ is an alternative function useful when the \emph{mgf} does not provive estimates of moments. It is defined as:
+        A \alert{characteristic function} of $X$ is an alternative function useful when the \emph{mgf} does not provide estimates of moments. It is defined as:
         \[
             \phi_X (t) = E[e^{itx}] = M_X (it)
         \]
@@ -918,7 +918,7 @@ To determine the upper bound of $c$ we need to get the joint \emph{pdf}. So that
 
 \begin{frame}{Joint probability distribution of continuous variables}
     \begin{exampleblock}{Storm intensity and duration}
-        The conditional cdf is (haciendo $y \equiv u$):
+        The conditional cdf is (making $y \equiv u$):
          \begin{align*}
              \displaystyle
              F_{Y|X} (y|x) &= \int_0^y a^{-1}\left[ (a+cu)(b+cx)-c \right]e^{-u(b+cx)} du\\
@@ -1072,8 +1072,8 @@ To determine the upper bound of $c$ we need to get the joint \emph{pdf}. So that
     \end{block}
 
 \end{frame}
-\subsection{Discrete probability distributions} % From Diaz-G
-
+\subsection{Discrete probability distributions} % From Diaz-G, Ben and Cornell and Kotte
+% WARNING! THIS SUBSECTION NEEDS TO BE UPDATED BASED ON THE HANDNOTES
 \begin{frame}{Discrete probability distributions}
 
     \begin{block}{The \alert{binomial} distribution}
@@ -1112,11 +1112,587 @@ $
 
 
 
-\subsection{Continuous probability distributions} % From Diaz-G
+\subsection{Continuous probability distributions} %% From Diaz-G, Ben and Cornell and Kotte
+\begin{frame}{Continuous probability distributions}
+    \emph{Continuous probability distributions} are applicable when the random variable is continuous; take any value in its real domain, e.g. river flow, air temperature. 
+    \begin{block}{\alert{Uniform} distribution}
+        It is the simplest distribution, and as it is indicated by its name, the \emph{pdf} is constant over a defined interval $a \leq x \leq b$. The \emph{pdf} is:
+         \begin{align*}
+             \displaystyle
+             f_X (x) &= \frac{1}{b-a} \text{, for } a\leq x \leq \\
+                     &= 0 \text{, otherwise}
+        \end{align*}
+        This distribution is also knows as the \emph{rectangular distribution}. Note that all values between $a$ and $b$ are equally probable and the area under the \emph{pdf} is equal to 1. The probability that $X$ fall in $(c,d)$ is $Pr[c < X < d] = \frac{d-c}{b-a}$. The unit uniform distribution is obtained when $a=0$ and $b=1$ ans it is commonly used to generate random variables in simulations. 
+    \end{block}
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi421.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi422.png} % from Kotte
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}{Continuous probability distributions}
+    \begin{block}{\alert{Uniform} distribution}
+
+        \begin{itemize}
+            \item \emph{Mean}
+                \[
+                    E[X] = \int_a^b \frac{x}{b-a} dx = \frac{1}{b-a} \left[ \frac{x^2}{2} \right]_a^b = \frac{b+a}{2}
+                \]
+            \item \emph{Variance}
+         \begin{align*}
+             \displaystyle
+             Var[X] = E[X^2] - \left( E[X] \right)^2 &= \int_a^b \frac{x^2}{b-a} dx - \left( E[X] \right)^2  \\
+                                                     &= \frac{1}{b-a} \left[ \frac{x^3}{3} \right]_a^b -  \frac{(b+a)^2}{4} \\
+                                                     &= \frac{b^3 - a^3}{3(b-a)} - \frac{(b+a)^2}{4} = \frac{b^2 + ba + a^2}{3} - \frac{(b+a)^2}{4}\\
+                                                     &= \frac{(b-a)^2}{12}
+        \end{align*}
+    \item \emph{Moment-generating function}
+\[
+    M_X (t) = E \left[e^{tX} \right] = \int_a^b \frac{e^{tx}}{b-a} dx = \frac{e^{tb} - e^{ta}}{t(b-a)}
+\]
+
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions}
+    \begin{block}{\alert{Exponential} distribution}
+        From the \alert{Poisson process} discussed previously, if we denote by random variable $T$ the time to the first arrival, then the probability that $T$ exceeds some value $t$ is equal to the probability that no events occur in that time interval of length $t$. While former probability is 1 - $F_T (t)$, the latter probability $p_X (0)$ is zero, which is the probability that a Poisson random variable $X$ with parameter $\lambda t$. Replacing:
+        \[
+            1- F_T (t) = \frac{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t} \quad t\geq 0
+        \]
+        Therefore:
+        \[
+            F_T (t) = 1 - e^{-\lambda t} \quad t\geq 0
+        \]
+        and the $f_t (t)$ is:
+        \[
+            f_T (t) = \frac{d F_T (t) }{dt} = \lambda e^{-\lambda t} \quad t\geq 0
+        \]
+        This equation define the \alert{exponential distribution}, which describes the time to the first occurence of a Poisson event. Note that $e^{-\lambda t}$ is the probability of no events in any interval of time of length $t$, whether or not it begins at time 0. In short, the interarrival times of a \alert{Poisson process} are independent and exponentially distributed. 
+        \begin{itemize}
+            \item \emph{Mean}
+                \vspace{-5pt}
+                \[
+                    E[T] = \int_0^\infty t \lambda e^{-\lambda t} dt
+                \]
+                \vspace{-5pt}
+                making $u=\lambda t$:
+                \vspace{-5pt}
+                \[
+                    E[T] = \frac{1}{\lambda} \int_0^\infty u e^{-u} du = \frac{1}{\lambda} \left[ e^{-u} (-u-1) \right]_0^\infty = \frac{1}{\lambda}
+                \]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions}
+    \begin{block}{\alert{Exponential} distribution}
+                Note that if $\lambda$ is the rate at which events occur in a \emph{Poisson process}, $\frac{1}{\lambda}$ is the average time between events. 
+       \begin{itemize}
+            \item \emph{Variance}
+                \vspace{-5pt}
+         \begin{align*}
+             \displaystyle
+             Var[T] = E[T^2] - \left( E[T] \right)^2 &= \int_0^\infty t^2 \lambda e^{-\lambda t} dt - \left( E[X] \right)^2  \\
+                                                     &= \frac{1}{\lambda^2} \int_0^\infty u^2 e^{-u} du - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
+         \end{align*}
+                \vspace{-5pt}
+         It easy to show that  the \emph{coefficient of variation} $V_T = \frac{\sqrt{Var[T]}}{E[T]} = 1$.
+
+    \item \emph{Moment-generating function}
+                \vspace{-5pt}
+\[
+    M_X (t) = E \left[e^{tX} \right] = \int_0^\infty e^{tx} \lambda e^{-\lambda x} dx = \frac{\lambda}{\lambda - t}, \quad \text{for } t < \lambda 
+\]
+       \end{itemize}
+    \end{block}
+                \vspace{-10pt}
+     \begin{exampleblock}{Floods affecting construction}
+         Engineers are concerned of the occurrence of a flood exceeding 100 m$^3$ s$^{-1}$ that can seriously affect infrastructure. If this streamflow is exceeded once every five years on average based on historical flow records, what is the change that the infrastructure construction which is scheduled to last 14 months can proceed without interruptions or detrimental effects? 
+         Suppose that flow exceeding this magnitude are independent and identically distributed events. The sample mean is $\bar{t} = 5$ years, thus $\bar{\lambda} = \frac{1}{5}$. From the exponential distribution, $Pr \left[ X \geq \frac{14}{12} \right] = e^{-1/5 . 14/12} = 0.79$. Accordingly, the risk is thus 1-0.79 = 0.21, which is quite high. The solution would be to shorten the period of construction. 
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions}
+    \begin{block}{\alert{Exponential} distribution}
+        \begin{itemize}
+            \item \emph{Memoryless property}
+                The \emph{Poisson process} is often said to be \emph{memoryless} meaning that  future behaviour is independent of its present or past behaviour. This memoryless trait of the Poisson arrivals and of the exponential distribution is best understood by determining the conditional distribution of $T$ given that $T > t_0$, that is, the distribution of the time between arrivals given that no arrivals occurred before $t_0$:
+                \vspace{-10pt}
+                \[
+                    F_{T|[T > t_0 ]} (t) = P[T \leq t | T > t_0] = \frac{P\left[(T \leq t) \cap (T > t_0) \right]}{P[T > t_0]}
+                \]
+                For $t < t_0$, the numerator is zero; for $t \geq t_0$ it is simply equal to $P[t_0 < T \leq t]$. Thus:
+                \vspace{-5pt}
+         \begin{align*}
+             \displaystyle
+             F_{T|[T > t_0 ]} (t) = \frac{F_T (t) - F_T (t_0)}{1- F_T (t_0)} &= \frac{(1-e^{-\lambda t}) - (1-e^{-\lambda t_0})}{e^{-\lambda t_0}} \\
+                                                                             &= \frac{e^{-\lambda t_0}-e^{-\lambda t}}{e^{-\lambda t_0}} = 1-e^{-\lambda(t-t_0)} \quad t \geq t_0
+         \end{align*}
+         \[
+             f_{T|[T> t_0]} (t) = \lambda e^{-\lambda (t-t_0)} \quad t \geq t_0
+         \]
+         If $\tau = t - t_0$, 
+                \vspace{-5pt}
+         \[
+             f_{T|[T> t_0]} (t_0 + \tau) = \lambda e^{-\lambda \tau} \quad \tau \geq 0
+         \]
+          This means that failure to observe an event up to $t_0$ does not alter one's prediction of the length of time (from $t_0$) before an event will occur. The future is not influenced by the past if events are \emph{Poisson arrivals}. An implication is that any choice of the time origin is satisfactory for the \emph{Poisson process}.
+
+        \end{itemize}
+        
+    \end{block}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} % From Diaz-Gra
+    \begin{block}{\alert{Triangular} distribution}
+        This distribution is defined in the range of $a \leq X \leq b$ and the \emph{pdf} is:
+\[
+f_X (x) =
+\begin{cases}
+    \frac{2(x-a)}{(b-a)(c-a)} & \text{if } a \leq x \leq c \\
+    \frac{2(b-x)}{(b-a)(b-c)} & \text{if } c < x \leq b \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+Note that $c$ correspond to the highest triangle vertex and it is the mode of \emph{pdf}. The \emph{cdf} is thus:
+\[
+F_X (x) =
+\begin{cases}
+    0 & \text{if } x < a \\
+    \frac{(x-a)^2}{(b-a)(c-a)} & \text{if } a \leq x \leq c \\
+    1-\frac{(b-x)^2}{(b-a)(b-c)} & \text{if } c < x \leq b \\
+    1 & \text{otherwise }
+\end{cases}
+\]
+\begin{itemize}
+    \item \emph{Mean}
+                \vspace{-5pt}
+        \[
+            E[X] = \int_a^b x f_X(x) dx = \frac{a+b+c}{3}
+        \]
+    \item \emph{Varianza}
+                \vspace{-5pt}
+        \[
+            Var[X] = E[X^2] - \left( E[X] \right)^2 = \int_a^b x^2 f_X(x) dx - \left( E[X] \right)^2 = \frac{a^2 + b^2 + c^2 -ab-ac-bc}{18}
+    \]
+\end{itemize}
+This distribution is used in hydrology as an alternative to the \alert{uniform distribution} to describe the sample space and the uncertainty of parameters in hydrological modelling. 
+
+    \end{block}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Gamma} distribution}
+        As in the case with discrete trials, it is also of interest to ask for the distribution of the time $X_k$ to the kth arrival of a \alert{Poisson process}. Now, the times between arrivals, $T_i$, $i= 1,2, \cdots, k$, are independent and have an exponential distribution with common parameter $\lambda$. $X_k$ is the sum  $T_1 + T_2 + \cdots + T_k$. Its distribution follows from repeated application of the convolution integral $f_Z (z) = \int_\infty^\infty f_X (z - y) f_Y (y) dy$, where $Z = X + Y$ and $X$ and $Y$ are independent. For any $k = 1, 2, 3, \cdots$:
+        \[
+            f_{X_k} (x) = \frac{\lambda (\lambda x)^{k-1} e^{-\lambda x}}{(k-1)!} \quad x \geq 0
+        \]
+        Thus, we say that $X$ follow a \emph{Gamma distribution} with parameters $k$ and $\lambda$. Regarding that $X$ can be considered as the sum of $k$ independent exponentially distributed random variables, then:
+        \begin{itemize}
+            \item \emph{Mean}
+                \[
+                    E[X] = \int_0^\infty x f_{X_k} (x) dx = \frac{k}{\lambda}
+                \]
+            \item \emph{Variance}
+                \[
+                    Var[X] = E[X^2] - \left( E[X] \right)^2 = \int_0^\infty x^2 f_{X_k} (x) dx - \left( E[X] \right)^2 = \frac{k}{\lambda^2}
+                \]
+        \end{itemize}
+        The denominator of the \emph{pdf} $(k-1)!$ is the product of the first $(k-1)$ natural numbers and can be written as the \alert{standard gamma function} $\Gamma (k)$. 
+     \end{block}
+
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Gamma} distribution}
+         $\Gamma (k)$ is applicable also to non integer  values of $k$ and is written as:
+ \[
+\Gamma (k) =
+\begin{cases}
+    \int_0^\infty u^{k-1} e^{-u} du & \text{for } k > 0 \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+    Integrating by parts, it can be shown that  $\Gamma (k+1)= k\Gamma (k)$ for any $k > 0$. Also, when $k=1$ $\Gamma (1)=1$ and when $k=1/2$ $\Gamma (1/2) = \sqrt{\pi}$. The \alert{standard gamma} \emph{pdf}, can be written as:
+ \[
+f_X (x) = 
+\begin{cases}
+    \frac{\lambda (\lambda x)^{k-1} e^{-\lambda x}}{\Gamma (k)}& \text{for } x \geq 0 \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+for $k>0$ and $\lambda > 0$. Note that $\Gamma (k)$ arise here as constant to normalize the function. $k$ is denominated as the \emph{shape parameter} as it defines the shape of the \emph{pdf} and $\lambda$ the \emph{scaling parameter} (see the figures).
+
+    \end{block}
+   \vspace{-9pt}
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi424a.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi424b.png} % from Kotte
+\end{minipage}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Gamma} distribution}
+        The $\Gamma (k)$ function is widely used as the \emph{incomplete gamma function} as:
+\[
+\Gamma (k,x) =
+\begin{cases}
+    \int_0^x u^{k-1} e^{-u} du & \text{for } k > 0 \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+This can be used to evaluate the gamma \emph{cdf}:
+\[
+F_X (x) =
+\begin{cases}
+    \int_0^x f_X (X) dx = \frac{\Gamma (k, \lambda x)}{\Gamma (k)} & \text{for } x \geq 0 \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+It has been found that empirical distributions of many natural and non-natural processes that take positive values closely resemble \emph{gamma distribution}. This distribution has been implemented to describe phenomena such as maximum stream flows and the depth of monthly precipitation. In statistics, the \emph{gamma distribution} is important because the \alert{chi-squared distribution} is a particular form of the gamma with $k=\nu /2$, where $\nu$ are the degrees of fredom, and $\lambda = 1/2$. The \emph{cdf} of the \emph{chi-squared distribution} is:
+\[
+    F (\chi^2) = \frac{1}{2} \int_0^{\chi^2} \frac{(t/2)^{(\nu/2)-1} e^{-t/2}}{\Gamma (\nu/2)} dt
+\]
+where $t$ is a dummy variable.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+ \begin{exampleblock}{Maximum flows}
+     Based on a histogram of data of maximum annual river flows in the Weldon River, USA, between 1930 and 1960, it was assume that the data followed a \emph{gamma pdf}. The parameters were estimated and equal to $k= 1.727$ and $\lambda = 0.00672$ cfs$^{-1}$. According to these values, $\mu_X = \frac{k}{\lambda} = \frac{1.727}{0.00672} = 256.7$ cfs, $\sigma_X  = \frac{\sqrt{k}}{\lambda} = 190$ cfs. Also, the probability that the maximum flow is less than 400 cfs in any year is $F_X (400) = \frac{\Gamma (1.727, \lambda 400}{\Gamma (1.727)} = \frac{0.71}{0.914} = 0.78$. No that the values to estimate the numerator and denominator are taken from tables of the gamma function. 
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Beta} distribution}
+        The \alert{Beta distribution} is uses to model a random variable whose values go from  0 to 1, and thus it is important in decision methods. The \emph{beta pdf}  is given by: 
+\[
+f_X (x) =
+\begin{cases}
+    \frac{1}{B(\alpha, \beta)} x^{\alpha-1} (1-x)^{\beta -1}  & \text{for } 0 < x < 1 \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+where $\alpha$ and $\beta$ are parameters that $\alpha > 0$ and $\beta > 0$, and:
+\[
+    B(\alpha, \beta) = \int_0^1 x^{\alpha -1} (1-x)^{\beta-1} dx = \frac{\Gamma (\alpha) \Gamma (\beta)}{\Gamma (\alpha + \beta)}
+\]
+From this two equations, the nth moment is:
+\[
+E[X^n] = \frac{B(\alpha + n, \beta)}{B(\alpha, \beta)}
+\]
+Considering that $\Gamma (k+1)= k\Gamma (k))$ and using this equation, we have:
+\[
+    E[X] = \frac{\alpha}{\alpha + \beta}
+\]
+Similarly, considering that $\Gamma (k+2) = (k+1)\Gamma (k+1)=(k+1)k\Gamma(k) $ and simplifying,
+\[
+    Var[X] = E[X^2] - \left( E[X] \right)^2 = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta +1)}
+\]
+
+               \end{block}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Beta} distribution}
+        The following figures show the \emph{pdf} and the \emph{cdf} for different combinations of $\alpha$ and $\beta$.
+               \end{block}
+   \vspace{-5pt}
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi425a.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi425b.png} % from Kotte
+\end{minipage}
+Note that when $\alpha = \beta$ the \emph{pdf} is symmetrical and when $\alpha=\beta=1$ is equivalent to the \emph{uniform distribution} with $a=0$ and $b=1$.
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Weibull} distribution}
+        The \alert{Weibull distribution} approximate closely to many natural phenomena. It has been used to model, for instance, the time to failure of electrical and mechanical systems. The \emph{pdf} is defined as:
+\vspace{-5pt}
+ \[
+f_X (x) =
+\begin{cases}
+    \frac{\beta}{\lambda} \left( \frac{x}{\lambda} \right)^{\beta -1} e^{-\left( \frac{x}{\lambda} \right)^{\beta}}, & \text{for } x > 0  \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+And the \emph{cdf} takes the form:
+\vspace{-5pt}
+ \[
+F_X (x) =
+\begin{cases}
+    f_X (x) = \frac{\beta}{\lambda} \left( \frac{x}{\lambda} \right)^{\beta -1} e^{-\left( \frac{x}{\lambda} \right)^{\beta}}, & \text{for } x > 0  \\
+    0 & \text{otherwise }
+\end{cases}
+\]
+where $\lambda > 0$. The figures below show the \emph{pdf} and \emph{cdf} for different values of $\beta$ and $\lambda = 1$.
+\end{block}
+\vspace{-5pt}
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi426a.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi426b.png} % from Kotte
+\end{minipage}
+Note than from the definition of the \emph{pdf} and \emph{cdf}, if a random variable $X \sim \text{ Weibull } (\beta, \lambda)$, then $Y = \left( X/\lambda \right)^{\beta} \sim \text{ exponential } (\lambda=1)$, $f_Y (y) = e^{-y}$. 
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Weibull} distribution}
+        \begin{itemize}
+            \item \emph{mean}
+                \[
+                    E[X] = \lambda \Gamma \left( 1 + \frac{1}{\beta} \right)
+                \]
+            \item \emph{variance}
+                \[
+                    Var[X] = E[X^2] - \left( E[X] \right)^2 = \lambda^2 \left[ \Gamma \left(1 + \frac{2}{\beta} \right) - \left( \Gamma \left( 1 + \frac{1}{\beta} \right) \right)^2 \right]
+                \]
+        \end{itemize}
+        Note that for $\beta=1$ the \emph{Weibull pdf} becomes the \emph{exponential pdf}.
+\end{block}
+ \begin{exampleblock}{Estimation of low flows} % from Kotte
+     From a ten-years daily average streamflow time series  in \emph{cfs} at the River Pang at Pangbourne 10-days averages are estimated. From this new aggregated time series, the minimum annual 10-days average flows are estimated. The ranked values are: $13.4 \quad 25.7 \quad 32.2 \quad 35.9 \quad 40.0 \quad 40.0 \quad 40.4 \quad 50.7 \quad 58.2 \quad 71.4$. Regarding that  the \emph{Weibull distribution} is associated with the \emph{extreme value theory}, the distribution can be applied to minima. Estimating the \emph{mean} and the \emph{variance} from the data and using the equations yield by the method of moments (see the equations above), one can resolve this two equations iteratively for the shape parameter $\beta$ and for the scale parameter $\lambda$. Alternatively, the \emph{methods of likelihood} can be used iteratively. An alternative procedure is to used the \emph{least-squares procedure} from the \emph{cdf}. So from the \emph{cdf}:
+     \[
+         \ln (x_i) - \ln (\lambda) = \frac{\left[\ln \left[-\ln \left(1 - F_X (x_i) \right) \right]\right]}{\beta}
+     \]
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+ \begin{exampleblock}{Estimation of low flows} % from Kotte
+     Applying the plotting position, which is the probability at which $x_i$ should be plotted, we have $F_X (x_i) = \frac{(i-0.35)}{n}$, and letting $z_i = \ln (x_i)$ and $ y_i= \ln \left[-\ln \left(1 - F_X (x_i) \right) \right]$, we obtain:
+\vspace{-5pt}
+     \[
+         z_i = \frac{y_i}{\beta} + \ln (\lambda) + \epsilon
+     \]
+     where $i$ is the rank of the data in ascending order, $n$ is the number of data values and $\epsilon$ is an error term in the regression. Applying the least-square fit to this equation for $n=10$:
+\vspace{-5pt}
+     \[
+         \hat{\beta} = \frac{\sum_{i=1}^{n=10} \left( y_i - \bar{y} \right)^2}{\sum_{i=1}^{n=10} \left( y_i - \bar{y} \right) \left(z_i - \bar{z} \right)} = 2.59
+     \]
+     and
+\vspace{-5pt}
+     \[
+     \hat{\lambda} = e^{\left( \bar{z} - \bar{y}/\hat{\beta}\right)} = 44.85 \, m^3/s
+ \]
+ where $\bar{z} = \frac{1}{10}\sum_{i=1}^{n=10} z_i $ and $\bar{y} = \frac{1}{10}\sum_{i=1}^{n=10} y_i $. This linear relationship between $z$ and $y$ represent the least-squares fit  of the data  to the two-parameter  \emph{Weibull distribution} (see figure).
+
+\vspace{-5pt}
+\begin{minipage}{0.39\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{fi427.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.59\textwidth}
+     The approximate lower 99\% confidence limit for $\beta$ is $\frac{\hat{\beta}}{2n} x_{2n,0.99}^2 = \frac{2.59}{20} 8.26 = 1.07$. Also, quantile estimates can be obtained using the estimates of the Weibull parameters and the preceding equations. For example the annual minimum 10-day flow with a return period of 10 yrs is: 
+\vspace{-5pt}
+     \[
+         y_{10} = \ln \left[ - \ln \left( 1-\frac{1}{10} \right) \right] = -2.25
+         \]
+\vspace{-7pt}
+         \[
+             x_{10} = e^{\left[ \left( \frac{y_{10}}{\hat{\beta}} \right) +\ln (\hat{\lambda}) \right]} = 18.8\, m^3/s
+         \]
+
+\end{minipage}
+   \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Normal} distribution}
+The \alert{Normal or Gauss distribution} originally emerged in the study of \emph{experimental errors}. This errors are differences between observations recorded under unchanged similar experimental conditions. In telecommunications, errors are used to be known as \emph{noise}, which  is, in general, the difference between the true estate and the observation. The \alert{Normal distribution} is thus ideal to represent such error when they are of an additive nature. The \emph{pdf} of the \alert{Normal distribution} of a random variable $X$ is:
+        \[
+            f_X (x) = \frac{1}{\sigma \sqrt{2\pi}} e^{\left[-\frac{1}{2}\left( \frac{x-\mu}{\sigma} \right)^2 \right]}, \text{ for } -\infty < x < \infty
+        \]
+    This \emph{pdf} is especified by two parameters: the mean or location parameter ($\mu$) and the standard deviation or scale parameter ($\sigma$), computed from the population. In practices, it is common to use the standardized  curve with the transformation of $X$ into $Z$ as $Z=\frac{X-\mu}{\sigma}$, so the \emph{pdf} is:
+\vspace{-6pt}
+        \[
+            f_Z (z) = \frac{1}{\sigma \sqrt{2\pi}} e^{\left(-\frac{1}{2}z^2 \right)}
+        \]
+
+\vspace{-20pt}
+\begin{minipage}{0.59\textwidth}
+        When $\mu=0$ and $\sigma=1$, the \emph{pdf} is:
+\vspace{-6pt}
+        \[
+            f_Z (z) = \frac{1}{\sqrt{2\pi}} e^{\left(-\frac{1}{2}z^2 \right)}
+        \]
+\end{minipage}
+\hfill
+\begin{minipage}{0.39\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{fi429.png}  % from Kotte      
+\end{minipage}
+
+    \end{block}
+                
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Normal} distribution}
+        \vspace{-4pt}
+        Note that the \emph{cdf} can only be calculated using numerical methods and it is:
+        \vspace{-5pt}
+            \begin{align*}
+                F_X (x) &= Pr[X \leq x] = Pr\left[ Z \leq \frac{X-\mu}{\sigma} \right] = Pr [Z \leq z] \\
+                        &=\int_{-\infty}^z \frac{1}{\sqrt{2\pi}} e^{- \left(\frac{u^2}{2}\right)} du, \, \text{for } -\infty < z < \infty  
+            \end{align*}
+            Because of the symmetry of the \emph{pdf}, $f_Z(-z) = 1-f_Z(z)$. Below, some properties of the normal distribution:
+        \vspace{-3pt}
+        \begin{itemize}
+            \item A linear transformation $Y = bX +a$  of a random variable $X$ with $N\sim(\mu,\sigma^2)$ makes $Y$ an  $N\sim(b\mu +a,b^2 \sigma^2)$ random variable. 
+            \item If $X_i$ $i=1,2, \cdots, n$ are independent and identically distributed random variables from a population with mean $\mu$ and standard deviation $\sigma$, then the random variable $\bar{X}_n = \sum_{i=1}^n \frac{X_i}{n}$ that is the sample mean, from a random sample of size n from the sample population, tends to have  an $N\sim(\mu,\sigma^2 /n)$ distribution as $n \rightarrow \infty$. This important results is called the \alert{central limit theorem}. The theorem states that even if the distribution of the random variable $X_i$ is nor normal, the so called sampling distribution of its mean will tend to normality asymptotically. 
+            \item If $X$ and $Y$ are independent random variables normally distributed with $\mu_X$ and $\mu_Y$, and $\sigma_X^2$ and  $\sigma_Y^2$, respectively, the expression $Z=X+Y$ is normally distributed too with $\mu_Z = \mu_X + \mu_Y$ and $\sigma_Z^2 = \sigma_X^2 + \sigma_Y^2$. This is also applicable for $Z = X-Y$ with $\mu_Z = \mu_X - \mu_Y$ and $\sigma_Z^2 = \sigma_X^2 + \sigma_Y^2$. If $X$ and $Y$ are not statistically independent but correlated, $Z$ is still normally distributed bu $\sigma_Z^2 = \sigma_X^2 + \sigma_Y^2 + 2\rho \sigma_X \sigma_Y$, where $\rho$ is the linear correlation between $X$ and $Y$.
+        \end{itemize}
+    \end{block}
+                
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+ \begin{exampleblock}{Streamflows} % from Diaz-Gra
+     Annual average discharges in river $X$ are distributed following a $N \sim (400,50^2)$.Annual average discharges of a tributary $Y$ of river $X$ are distributed as $N \sim (145, 76^2)$.  Downstream of the mouth of river $Y$, there is an outflow $D$ to supply water to agricultural fields. Downstream of $D$, annula avearge discharges in river X are distributed as $N \sim (425, 91.5^2)$. Assuming that $X$, $Y$ and $D$ are independent, the \emph{pdf} of annual average discharges in $D$ is normal with $\mu_D = 300 + 145 - 425 = 20$ and $\sigma_D^2 =91.5^2 - 76^2 - 50^2 = 9.81^2 $. The probability that $D>30$ can be estimated as $z=\frac{30-20}{9.81} = 1.0194$ and $F_Z (z=1.0194)=0.846$. So the $Pr[D > 30] = 1-0.846 = 0.154$. If $X$, $Y$ and $D$ are not independent and $\rho_{X,Y} = 0.15$ and $\rho_{X,D} = -0.35$ (under the assumption that that the lower the streamflow in $X$ the greater the flow derived by $D$), $\mu_D = 20$ and $91.5^2 = 97.0261^2 + \sigma_D^2 - 2 (-0.35)(97.0361)\sigma_D$, from where $\sigma_D^2 = 23.49^2$. For this case, the $Pr[D>30] = 0.3352$. 
+
+ \end{exampleblock}
+               
+\end{frame}
+
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Lognormal} distribution}
+        We know that the addition of large number of small random effects will tend to make the distribution of the aggregate approach normal. In contrast, if the phenomena arises from the multiplicative effect of a large number of uncorrelated factors, the distribution tend to be \alert{Lognormal}, that is, the logarithm of a random variable $X$ becomes normally distributed. Phenomena such as the particle size of sediment samples are \emph{Lognormal}, and the interarrival times of earthquakes. As this distribution of defined for non-negative values is used to describe daily average streamflows, maximum streamflows, and daily, monthly and annual rainfall. If $X$ is a positive random variable, then $Y = \ln (X)$. Accordingly, if $Y$ has $N \sim (\mu_Y , \sigma_{Y^2})$, $X$ has a \emph{Lognormal distribution} $LN \sim (\mu_{\ln(X)}, \sigma_{\ln(X)}^2)$. So the \emph{pdf} is:
+        \[
+            f_X (x) = \frac{1}{x \sigma_{\ln (X)} \sqrt{2\pi}} e^{\left[ -\frac{1}{2} \left[ \frac{\ln (X) -\mu_{\ln (X)}}{\sigma_{\ln (X)}} \right]^2 \right]}, \, \text{for } 0 \leq x < \infty
+            \]
+            See the figure below with plot of the \emph{Lognormal pdf}.
+   \end{block}
+
+\begin{minipage}{0.37\textwidth}
+\centering
+\includegraphics[width=0.95\linewidth]{fi4210.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.59\textwidth}
+    The expectation operator can be written as: 
+    \begin{align*}
+        E\left[X^r \right] &= \int_0^{\infty} x^r f_X (x) dx  \\
+        &= \frac{1}{\sigma_{\ln (X)} \sqrt{2\pi}} \int_{-\infty}^{\infty} e^{ry} e^{\left[ -\frac{1}{2} \left[ \frac{ y-\mu_{\ln (X)}}{\sigma_{\ln (X)}} \right]^2 \right]} dy
+    \end{align*}
+\end{minipage}
+                
+\end{frame}
+
+\begin{frame}{Continuous probability distributions} 
+    \begin{block}{The \alert{Lognormal} distribution}
+        From where $E \left[X^r \right] = E\left[ e^{Yr} \right]; Y \sim N\left( \mu_{\ln(X)]}, \sigma_{\ln(X)}^2 \right)$, so $E \left[X^r \right] = M_Y (r) = e^{r\mu_{\ln(X)} + \frac{1}{2} r^2 \sigma_{\ln(X)}^2}$. Thus , the \emph{mean} is:
+        \[
+        \mu_X = E[X] = e^{\left[ \mu_{\ln(X)} + \frac{1}{2} \sigma_{\ln(X)}^2 \right]} 
+    \]
+     and the \emph{variance} is:
+    \vspace{-9pt}
+        \[
+            \sigma_X^2 = E[X^2] - \mu_X^2 = e^{2\left[ \mu_{\ln(X)} + \sigma_{\ln(X)}^2 \right]} - e^{2\left[ \mu_{\ln(X)} + \frac{1}{2} \sigma_{\ln(X)}^2 \right]} = \mu_X^2 \left( e^{\left[ \sigma_{\ln(X)}^2\right]}  - 1 \right)
+    \]
+    When the \emph{Lognormal distribution} is defined upon an $a$ value, this is called the three-parameters Lognormal distribution or the \alert{Gibrat-Galton distribution}, that is, $LN (a, \mu_{\ln(X)}, \sigma_{\ln(X)}^2$. Accordingly, the transformation becomes $Y = \ln(X-a)$ so the \emph{pdf} is:
+    \vspace{-9pt}
+    \[
+            f_X (x) = \frac{1}{(x-a) \sigma_{\ln (X-a)} \sqrt{2\pi}} e^{\left[ -\frac{1}{2} \left[ \frac{\ln (X-a) -\mu_{\ln (X-a)}}{\sigma_{\ln (X-a)}} \right]^2 \right]}, \, \text{for } a \leq x < \infty
+        \]
+        where the \emph{mean} is:
+    \vspace{-9pt}
+        \[
+            \mu_{\ln(X-a)} = \ln \left(\mu_X -a \right) - \frac{1}{2} \ln \left[ 1 + \left( \frac{\sigma_X}{\mu_X -a} \right)^2 \right]
+        \]
+        and the \emph{variance} is:
+    \vspace{-9pt}
+        \[
+        \sigma_{\ln(X-a)}^2 = \ln \left[ 1 + \left( \frac{\sigma_X}{\mu_X -a} \right)^2 \right]
+    \]
+   \end{block}
+\end{frame}
+
+\begin{frame}{Some discrete and continuous probability density functions} 
+    \centering
+\includegraphics[width=0.91\linewidth]{taBi32a.png}  % from Bierk
+\end{frame}
+
+\begin{frame}{Some discrete and continuous probability density functions} 
+    \centering
+\includegraphics[width=0.95\linewidth]{taBi32b.png}  % from Bierk
+\end{frame}
+
+\begin{frame}{Characteristics functions of some  probability distributions} 
+    \centering
+\includegraphics[width=0.95\linewidth]{taBi33.png}  % from Bierk
+\end{frame}
 
 
 
 
+\subsection{Multivariate distributions} %% From  Kotte
+\begin{frame}{Multivariate distributions} 
+    Here, the multivariate type of distribution is examined for jointly distributed random variables. For instance the exponentially distributed storm intensity and duration lead to a \emph{bivariate exponential distribution} or intensity and duration considering the correlation between these two variables. While the \emph{bivariate normal distribution} is examined in detail other types are discussed briefly.
+    \begin{block}{The \alert{Bivariate normal} distribution}
+        The \emph{joint distribution} of two random variables $X$ and $Y$, each normally distributed is called the \alert{bivariate normal distribution}. The \emph{pdf} in standardized form is given for $Z_1$ and $Z_2$ as:
+        \vspace{-15pt}
+        \[
+            f_{Z_1 , Z_2} (z_1 , z_2) = \left[ 2\pi \left( 1- \rho^2 \right)^{1/2} \right]^{-1} e^{\left[ \frac{-\left( z_1^2 - 2\rho z_1 z_2 + z_2^2 \right)}{\left( 2- 2\rho^2 \right)} \right]}, \, \text{for } -\infty < z_1 , z_2 < \infty
+            \]
+            where $r$, $-1 \leq \rho \leq 1$, is linear correlation coefficient between the two variables. Note also that $Z_1 = \frac{X - \mu_X}{\sigma_X}$ and $Z_2 = \frac{Y - \mu_Y}{\sigma_Y}$ where $-\infty < \mu_X , \mu_Y < \infty$ and $\sigma_X , \sigma_Y > 0 $. In terms of $X$ and $Y$ ($-\infty < x , y < \infty$) the \alert{bivariate normal distribution} is:
+        \vspace{-5pt}
+        \[
+            f_{X , Y} (x , y) = \frac{1}{2 \pi \sigma_X \sigma_Y \sqrt{1- \rho^2}} e^{\left[ -\frac{1}{2(1-\rho^2)} \left[ \left(\frac{x-\mu_X}{\sigma_X}\right)^2 - 2\rho \frac{x-\mu_X}{\sigma_X} \frac{y-\mu_Y}{\sigma_Y} +  \left(\frac{y-\mu_Y}{\sigma_Y}\right)^2 \right] \right]}             
+        \]
+   \end{block}
+   \vspace{-15pt}
+\begin{minipage}{0.37\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{fi431.png}  % from Kotte      
+\end{minipage}
+\hfill
+\begin{minipage}{0.59\textwidth}
+    This figure shows the relationship of compressive strength and density in concrete. In general, the bivariate distribution shows how upon one variable is possible to predict the performance of another. 
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}{Multivariate distributions} 
+    \begin{block}{The \alert{Bivariate exponential} distribution}
+        There are many others useful bivariate distribution, this is case of the \alert{bivariate exponential distribution} whose \emph{cdf} is:
+        \[
+            F_{X,Y} (x,y) = 1-e^{-ax} - e^{-by} - e^{-ax - by - cxy}, \, \text{for } x,y \geq 0 
+        \]
+        where $a,b,c > 0$ are parameters of the distribution. 
+   \end{block}
+ \begin{block}{The \alert{Bivariate logistic} distribution}
+     The \emph{cdf} of the \alert{bivariate logistic distribution} in its basic form is:
+        \[
+            F_{X,Y} (x,y) = \left( 1 + e^{-x} + e^{-y} \right)^{-1}, \, \text{for } x,y \geq 0
+        \]
+   \end{block}
+
+        \end{frame}
 
 
 \end{document}
