@@ -3,17 +3,47 @@
 \usecolortheme{dove} % Minimalist grayscale colors
 \setbeamertemplate{navigation symbols}{} % Remove navigation bar
 
+% Define brand-like colors
+\definecolor{myblue}{RGB}{0, 102, 204}    % Blue for standard blocks
+\definecolor{mygreen}{RGB}{0, 153, 0}     % Green for example blocks
+\definecolor{myred}{RGB}{204, 0, 0}       % Red for alert blocks
+\definecolor{myorange}{RGB}{255, 128, 0} % For \emph
+
+% Accent color for titles, bullets, etc.
+\setbeamercolor{structure}{fg=myblue}
+
+% Block colors
+\setbeamercolor{block title}{bg=myblue, fg=white}
+\setbeamercolor{block body}{bg=blue!5, fg=black}
+
+\setbeamercolor{exampleblock title}{bg=mygreen, fg=white}
+\setbeamercolor{exampleblock body}{bg=green!5, fg=black}
+
+\setbeamercolor{alertblock title}{bg=myred, fg=white}
+\setbeamercolor{alertblock body}{bg=red!5, fg=black}
+\setbeamercolor{alerted text}{fg=myred}
+
+% Optional: color for \example text
+\setbeamercolor{example text}{fg=mygreen}
+
+% Custom emph (orange text instead of italic)
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{myorange}{#1}}
+
+
 \usepackage{graphicx} % Package for images
+\usepackage{amsmath} % Package for images
 \graphicspath{{figs/}} % Path to your figures directory
 \usepackage{array}  % For better column spacing
 \usepackage{caption} % Required for \captionof
 
 % Title Information
-\title{Stochastic methods in water resources}
-\subtitle{Lecture 1: Course introduction, definition of stochastic hydrology, other definitions}
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 1: Introduction to probability and statistics \\ Lecture 1: Course introduction, definition of stochastic hydrology, other definitions}
 \author{Luis Alejandro Morales, Ph.D.}
-\institute{Universidad Nacional de Colombia} %// Department of Civil and Agriculture Engineering}
-\date{\today}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
 
 \begin{document}
 
@@ -111,14 +141,14 @@ $$
 \begin{frame}{Why stochastic methods in water resources?}
 
     \begin{block}{Stochastic methods}
-    According to \cite{}, "stochastic methods thus aim at predicting the value of some variable at non-observed times or at non-observed locations, while also stating how uncertain we are when making these predictions".
+    According to Yevjevich, 1972, "stochastic methods thus aim at predicting the value of some variable at non-observed times or at non-observed locations, while also stating how uncertain we are when making these predictions".
     \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{fi4l1.png}
-    \captionof{figure}{Observed vs simulated discharge (above) and residuals (below). Taken from \cite{norbiato2008flash}}
+    \captionof{figure}{Observed vs simulated discharge (above) and residuals (below) (Taken from Norbiato, 2008).} %Taken from \cite{norbiato2008flash}}
     \end{figure}
     \vspace{-0.5cm}
-    \alert{Uncertainty} is the key factor for the implementation of stochastic methods.  For instance, when observed ($Q$) and estimated ($\hat{Q}$) discharges are compared, there are some diferences (\alert{residuals}) between the two data sets ($e = \hat{x}-x$). 
+    \alert{Uncertainty} is the key factor for the implementation of stochastic methods.  For instance, when observed ($Q$) and estimated ($\hat{Q}$) discharges are compared, there are some differences (\alert{residuals}) between the two data sets ($e = \hat{x}-x$). 
 \end{block}
 \end{frame}
 
@@ -127,19 +157,19 @@ $$
     \begin{itemize} 
         \small
         \item \alert{Observation error}: Errors are always present in observations. Also external factor such air temperature and pressure can influence on water level records.
-        \item \alert{Errors in boundary conditions}: In watershed hydrological modelling, the definition of boundary conditions,  most of the time,  does not account for flow exchange between neigbour basins, particularly, groundwater flow exchange bringing in uncertainty in water balance estimates. 
+        \item \alert{Errors in boundary conditions}: In watershed hydrological modelling, the definition of boundary conditions,  most of the time,  does not account for flow exchange between neighbour basins, particularly, groundwater flow exchange bringing in uncertainty in water balance estimates. 
         \item \alert{Errors in initial conditions}: Usually, initial conditions (initial values of state variables) are unknown at the beginning of model simulations causing uncertainty in model estimates. To correct it, models are "warm up" to pre-estimate initial conditions in order to reduce uncertainty.
-        \item \alert{Errors in input data}: Such errors are very common in watershed modelling. Input data to rainfall-runoff models such as precipitation or evaporation are difficult to observed for large areas so large errors are possed on data causing uncertainty in model's estimates.  
-        \item \alert{Errors due to unknown heterogeneity and parameters}: Unknown heterogeniety in processes representation is common in computational modelling as physical processes are oversimplified in models. Such simplifications, of course, do not capture process's heterogeneity inducing to errors. Vegetation properties and soil hydraulic conductivity are very heterogenous in space and time and difficul to represent correctly. Parameters that represent physical processes or properties are higly variable in space and time, however, modelling assume unique parameters for large areas and time frames leading to errors in model estimates. 
-        \item \alert{Errors due to scale discrepancies}: Model's domains usually assume homegenety at certain scale. For instance, in a distributed hydrological models if the size of a cell in the computational grid is 1km x 1km, it is assume that processes representation does nos change is continuous and homegeneous in the cell. This ignore the changes in the cell leading ot uncertain estimates. 
-        \item \alert{Model errors}: \emph{all models are wrong, but some are useful} by George Box. Models are an approximate representation of reality because they do not include all the intricate mechanism and interations that occur in natural systems. For instance, when surface flow is modelled the approximation of kinewatic wave is not always according to reality since small gradients of water level dominate the flow. 
+        \item \alert{Errors in input data}: Such errors are very common in watershed modelling. Input data to rainfall-runoff models such as precipitation or evaporation are difficult to observed for large areas so large errors are posed on data causing uncertainty in model's estimates.  
+        \item \alert{Errors due to unknown heterogeneity and parameters}: Unknown heterogeneity in processes representation is common in computational modelling as physical processes are oversimplified in models. Such simplifications, of course, do not capture process's heterogeneity inducing to errors. Vegetation properties and soil hydraulic conductivity are very heterogeneous in space and time and difficult to represent correctly. Parameters that represent physical processes or properties are highly variable in space and time, however, modelling assume unique parameters for large areas and time frames leading to errors in model estimates. 
+        \item \alert{Errors due to scale discrepancies}: Model's domains usually assume homogeneity at certain scale. For instance, in a distributed hydrological models if the size of a cell in the computational grid is 1km x 1km, it is assume that processes representation does nos change is continuous and homogeneous in the cell. This ignore the changes in the cell leading to uncertain estimates. 
+        \item \alert{Model errors}: \emph{all models are wrong, but some are useful} by George Box. Models are an approximate representation of reality because they do not include all the intricate mechanism and interactions that occur in natural systems. For instance, when surface flow is modelled the approximation of kinematic wave is not always according to reality since small gradients of water level dominate the flow. 
     \end{itemize} 
 \end{frame}
 
 \section{Deterministic hydrology vs Stochastic hydrology}
 \begin{frame}{Deterministic hydrology vs Stochastic hydrology}
     
-    \begin{tabular}{p{5.5cm}p{5.5cm}}  % No vertical bars
+    \begin{tabular}{p{4.5cm}p{4.5cm}}  % No vertical bars
     \hline
     \alert{Deterministic hydrology} & \alert{Stochastic hydrology} \\
     \hline
@@ -147,7 +177,7 @@ $$
     State variables are related to each other to represent fundamental laws through mathematical expressions & The response of physical processes are governed by laws of change where every variable is a stochastic variable. \\\hline
     Errors are taken into account only during calibration (e.g. adjust hydraulic conductivity) & In some cases, errors are considered during simulation as the \alert{probability distribution} of them is known \\ \hline
     \emph{E.g. The response (runoff) of a impervious surface to a specific rainfall event with negligible evaporation and infiltration processes.} & \emph{E.g. Runoff, precipitation, evaporation, sediment transport, etc} \\\hline
-    \emph{E.g. A rating function on the form of $Q = f(y)$ where $Q$ represent discharge through a fix-bed river cross section and $y$ water level stage.} &  \emph{E.g. The the annual precipitation at a point or over an area or other hydrological process at annual scale where no deterministic components are presented.}\\ \hline
+    \emph{E.g. A rating function on the form of $Q = f(y)$ where $Q$ represent discharge through a fix-bed river cross section and $y$ water level stage.} &  \emph{E.g. The annual precipitation at a point or over an area or other hydrological process at annual scale where no deterministic components are presented.}\\ \hline
     \end{tabular}
 \end{frame}
 
