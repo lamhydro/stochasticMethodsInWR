@@ -1,22 +1,49 @@
 \documentclass[8pt]{beamer}
-\usepackage{lmodern}  % Optional: Improves font quality
-%\renewcommand{\familydefault}{\rmdefault}  % Set default font to serif
 \usetheme{default} % Very simple theme
 \usecolortheme{dove} % Minimalist grayscale colors
 \setbeamertemplate{navigation symbols}{} % Remove navigation bar
 
+% Define brand-like colors
+\definecolor{myblue}{RGB}{0, 102, 204}    % Blue for standard blocks
+\definecolor{mygreen}{RGB}{0, 153, 0}     % Green for example blocks
+\definecolor{myred}{RGB}{204, 0, 0}       % Red for alert blocks
+\definecolor{myorange}{RGB}{255, 128, 0} % For \emph
+
+% Accent color for titles, bullets, etc.
+\setbeamercolor{structure}{fg=myblue}
+
+% Block colors
+\setbeamercolor{block title}{bg=myblue, fg=white}
+\setbeamercolor{block body}{bg=blue!5, fg=black}
+
+\setbeamercolor{exampleblock title}{bg=mygreen, fg=white}
+\setbeamercolor{exampleblock body}{bg=green!5, fg=black}
+
+\setbeamercolor{alertblock title}{bg=myred, fg=white}
+\setbeamercolor{alertblock body}{bg=red!5, fg=black}
+\setbeamercolor{alerted text}{fg=myred}
+
+% Optional: color for \example text
+\setbeamercolor{example text}{fg=mygreen}
+
+% Custom emph (orange text instead of italic)
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{myorange}{#1}}
+
+
 \usepackage{graphicx} % Package for images
+\usepackage{amsmath} % Package for images
 \graphicspath{{figs/}} % Path to your figures directory
 \usepackage{array}  % For better column spacing
 \usepackage{caption} % Required for \captionof
-\usepackage{natbib}
-%\addbibresource{references.bib}  % Load your bibliography file
+
 % Title Information
-\title{Stochastic methods in water resources}
-\subtitle{Lecture 2: Descriptive statistics, univariate and bivariate statistics}
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 1: Introduction to probability and statistics \\ Lecture 2: Descriptive statistics, univariate and bivariate statistics}
 \author{Luis Alejandro Morales, Ph.D.}
-\institute{Universidad Nacional de Colombia} %// Department of Civil and Agriculture Engineering}
-\date{\today}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
 
 \begin{document}
 
@@ -39,7 +66,7 @@
        
     \end{itemize}
 
-Data is analysed on \alert{data sample} which is . Statistical and probabilistic analysis of samples serve to make \alert{inferences} on the data population.
+    Data is analysed on \alert{data sample}, so that, \emph{statistical and probabilistic analysis} of samples serve to make \alert{inferences} on the data population.
 \end{frame}
 \begin{frame}{Hydrologic data}
     \begin{block}{Data types}
@@ -47,7 +74,7 @@ Data is analysed on \alert{data sample} which is . Statistical and probabilistic
         \begin{enumerate}
             \item \alert{Historic or chronology data}: Data observed continuously or discretely in time from any process that result in a time series. Most of the hydrologic data is of this type. E.g. gauge rainfall station. 
             \item \alert{Observations in space}: Data observed across an line, area or specific space. E.g. sediment characteristics across a river bed.
-            \item \alert{Laboratory or field experiment data}: Data acquired controlling esternal factors. Used in basic and applied research. 
+            \item \alert{Laboratory or field experiment data}: Data acquired controlling external factors. Used in basic and applied research. 
             \item \alert{Simultaneous measurements}: Simultaneous measurements of two or more variables in order to stablish relationships among them.
         \end{enumerate}
     \end{block}    
@@ -72,22 +99,26 @@ Data is analysed on \alert{data sample} which is . Statistical and probabilistic
 \begin{frame}{Graphical representation}
     The first step in the analysis of data is its representation. One kind of representation is \emph{graphical} representation. This provides insights into the form and shape of data leading to preliminary understanding of the generating process. Graphical representation types are:
 
-    \begin{minipage}{0.49\textwidth}{\alert{Bar chart}}
+    \begin{minipage}[]{0.68\textwidth}{\alert{Bar chart}}
+        \vspace{0pt}
         Representation of the data where in the $x$ axis we have the values of the discrete variable and the occurrence are represented by the heights ($y$) of the bars. 
     % Ex 1.1. Kotte
-    \begin{exampleblock}{Flood ocurrence}
+    \begin{exampleblock}{Flood occurrence}
         Consider the number of floods per year for a period of 34 years in the Magra River at Calamazza, located between Pisa and Genoa. A flood occurs when mean daily streamflows overcome a threshold.  
-    \includegraphics[width=0.9\textwidth]{fi111.jpeg}
+
+    \includegraphics[width=0.6\textwidth]{fi111.jpeg}
+
     The figure shows a symmetrical behaviour of floods with a mid-location close to 4 floods per year.
     \end{exampleblock}
 \end{minipage}
 \hfill
-\begin{minipage}{0.495\textwidth}{\alert{Dot diagram}}
+\begin{minipage}[]{0.30\textwidth}{\alert{Dot diagram}}
+        \vspace{0pt}
 Continuous data can be represented on a single axis when the data set is small. 
     \begin{exampleblock}{Drought index}
-       The meteorological drought index estimated based on monthly precipitation time series in the last 25 years is show in the figure. Note that the data is sorted in ascending order. 
-    %\includegraphics[width=0.9\textwidth]{fi111.png}
-    The plot shows the spread of the drought index and approximately the mean value.
+       The meteorological drought index estimated based on monthly precipitation time series in the last 25 years. %is show in the figure. Note that the data is sorted in ascending order. 
+    %\includegraphics[width=0.9\textwidth]{fi112.png}
+    %The plot shows the spread of the drought index and approximately the mean value.
     \end{exampleblock}
 \end{minipage}
 \end{frame}
@@ -95,9 +126,9 @@ Continuous data can be represented on a single axis when the data set is small.
 \begin{frame}{Graphical representation: Histogram}
         When data set is greater than 25 observations, data can be represented based on their frequency of occurrence. The data set can be discrete or continuous. This graphical representation of data in the frequency domain is known as \emph{histogram}. To plot a histogram:
         \begin{enumerate}
-            \item Sort the data in ascending order $x{min}\cdots x_{max}$.
+            \item Sort the data in ascending order $x_{min}\cdots x_{max}$.
             \item Estimate the data range ($r$) as $r = x_{max} - x_{min} $.
-            \item The data is initially divided  into groups or classes ($n_c$) according to the data magnitude where each group has a lower and upper limit.  According to Sturges (1926), $n_c = 1 + 3.3 \log_10 n $, donde $n$ is the number of data. Note that $n_c$ must be an positive integer and is recommended that $5 \le n_c \le 25$. $n_c$ can be estimated using Freedman and Diaconis (1981) formula  $n_c = \frac{r n^{1/3}}{2\left(Q_3 - Q_1\right)}$, where $Q_3$ is the median of the upper half of the data and $Q_1$ is the median of the lower half of the data. The difference $Q_3 - Q_1$ is known as the \emph{interquartile range}.
+            \item The data is initially divided  into groups or classes ($n_c$) according to the data magnitude where each group has a lower and upper limit.  According to Sturges (1926), $n_c = 1 + 3.3 \log_{10} n $, donde $n$ is the number of data. Note that $n_c$ must be an positive integer and is recommended that $5 \le n_c \le 25$. $n_c$ can be estimated using Freedman and Diaconis (1981) formula  $n_c = \frac{r n^{1/3}}{2\left(Q_3 - Q_1\right)}$, where $Q_3$ is the median of the upper half of the data and $Q_1$ is the median of the lower half of the data. The difference $Q_3 - Q_1$ is known as the \emph{interquartile range}.
             \item Establish the lower and the upper limits of each class.
             \item Count the number of data occurrence within each class (frequency).
             \item Plot the histogram where in the x-axis there is the limits of the $n_c$ classes and the y-axis the frequency. Frequency can be expressed as a \emph{relative frequency} which is, for each class, the frequency divided by $n$. Note that the sum of all relative frequencies is equal to 1, so the relative frequency indicate the chances of occurrence of certain values of $x$.
@@ -130,7 +161,8 @@ As $n \to \infty$, the class width tend to decrease and polygon line becomes a c
     \end{itemize}
     \begin{minipage}{0.495\textwidth}
     \begin{exampleblock}{Air temperature}
-        Consider mean hourly air temperature during the day and during the night at the Timau National Observatory, Indonesia \citep{priyatikanto2024weather}. The plot shows the histograms and the cummulative relative frequency curves for air temperature data at night and during the day. Note that the histogram are centered around a mid value and bid skewed toward the right. 
+        Consider mean hourly air temperature during the day and during the night at the Timau National Observatory, Indonesia. The plot shows the histograms and the cummulative relative frequency curves for air temperature data at night and during the day. Note that the histogram are centered around a mid value and bid skewed toward the right. 
+        %Consider mean hourly air temperature during the day and during the night at the Timau National Observatory, Indonesia \citep{priyatikanto2024weather}. The plot shows the histograms and the cummulative relative frequency curves for air temperature data at night and during the day. Note that the histogram are centered around a mid value and bid skewed toward the right. 
     \end{exampleblock}
 \end{minipage}
 \hfill
@@ -148,12 +180,13 @@ As $n \to \infty$, the class width tend to decrease and polygon line becomes a c
     \begin{minipage}{0.495\textwidth}
     % Ex 1.6. Kotte
     \begin{exampleblock}{Streamflow duration}
-        The figure shows the flow duration curve of the Dora Riparia River in the Italian Alps estimated for a period of 47 years. If for example, it is needed to divert flow when $10 < Q < 20$, the durantion curve can be analysed to extract the number of days when $Q$ exceed the streamflow limits and estimate the numerical integral to compute the area under the duration curve \citep{kottegoda2008applied}.
+        The figure shows the flow duration curve of the Dora Riparia River in the Italian Alps estimated for a period of 47 years. If for example, it is needed to divert flow when $10 < Q < 20$, the durantion curve can be analysed to extract the number of days when $Q$ exceed the streamflow limits and estimate the numerical integral to compute the area under the duration curve.
+        %The figure shows the flow duration curve of the Dora Riparia River in the Italian Alps estimated for a period of 47 years. If for example, it is needed to divert flow when $10 < Q < 20$, the durantion curve can be analysed to extract the number of days when $Q$ exceed the streamflow limits and estimate the numerical integral to compute the area under the duration curve \citep{kottegoda2008applied}.
     \end{exampleblock}
 \end{minipage}
 \hfill
 \begin{minipage}{0.495\textwidth}
-    %\includegraphics[width=0.95\textwidth]{fi117.png}
+    \includegraphics[width=0.95\textwidth]{fi117.png}
 \end{minipage}
 \end{frame}
 
@@ -183,13 +216,14 @@ As $n \to \infty$, the class width tend to decrease and polygon line becomes a c
         The \emph{median} ($x_m$) is the value in the middle of a ordered sample of $x$ when $n$ is odd. When $n$ is even, it is the average of the two central values in the ordered sample. In comparison with the mean, the median is slightly affected by outliers so it is known as the \emph{resistant measure}. From the cumulative relative frequency curve ($F_X$), the median corresponds to the $x$ values for which the cumulative relative frequency is equal to 0.5.  
     \end{block}
 
+    \vspace{-5pt}
     \begin{block}{Sample mode}
         The \emph{mode} is the most frequent value within the sample of $x$. However in some cases, there is not a unique most frequent value, so it must be obtained by analysing the histogram or the cumulative frequency curve. In cases where asymmetry of data increase, the mode becomes more useful than the mean and the median. Also, as the data sample increases, the mode tends to be the peak of the histogram.  
     \end{block}
     Other central tendency measure is the \emph{geometric mean} that is estimated as $\bar{x}_g = e^{\frac{1}{n} \sum_{i=1}^n \log x_i}$ and it can be useful when the data sample has a positive asymmetry. 
 
     \centering
-    \includegraphics[width=0.98\textwidth]{fie3.JPG}
+    \includegraphics[width=0.88\textwidth]{fie3.JPG}
 \end{frame}
 
 \begin{frame}{Measures of dispersion}
@@ -233,13 +267,14 @@ As $n \to \infty$, the class width tend to decrease and polygon line becomes a c
 
         \centering
         \includegraphics[width=0.98\textwidth]{fiBi25.png}
-        \captionof{figure}{Histogram of a data sample with the same $\bar{x}$ and different variance (taken from \cite{bierkens2007})}
+        %\captionof{figure}{Histogram of a data sample with the same $\bar{x}$ and different variance (taken from \cite{bierkens2007})}
+        \captionof{figure}{Histogram of a data sample with the same $\bar{x}$ and different variance.}
     \end{block}
 \end{frame}
 
 \begin{frame}{Measure of asymmetry}
     An important property of the histogram or the frequency curve  is its shape with respect to a symmetry axis (e.g. the mode).
-
+    \vspace{-3pt}
     \begin{block}{sample coefficient of skewness}
         The \emph{coefficient of skewness} ($g_1$) measure the asymmetry of the data set with respect to its mean. For a data sample $x_1, x_2, \cdots, x_n$ of size $n$ of a variable $x$, the coefficient is computed as:
         $$
@@ -247,11 +282,12 @@ As $n \to \infty$, the class width tend to decrease and polygon line becomes a c
         $$
         Note that $s$ is the standard deviation and $g_1$ is dimensionless. $g_1$ can be affected by outliers. Observing a histogram, the data set is positively skewed ($g_1 > 0$)  is the longest tail is on the right and negatively skewed ($g_1 < 0$) if the longest tail is on the left. 
 
-        \vspace{-0.1cm}
+        \vspace{-5pt}
         \begin{center}
         \includegraphics[width=0.98\textwidth]{fiBi26.png}
         \vspace{-0.3cm}
-        \captionof{figure}{Histogram of a data sample with the same $s^2$ and different skewness (taken from \cite{bierkens2007})}
+        %\captionof{figure}{Histogram of a data sample with the same $s^2$ and different skewness (taken from \cite{bierkens2007})}
+        \captionof{figure}{Histogram of a data sample with the same $s^2$ and different skewness.}
         \end{center}
         \vspace{-0.3cm}
         A positively skewed histogram implies: mode $<$ median $<$ mean,  while a negatively skewed histogram implies: mean $<$ median $<$ mode.
@@ -266,7 +302,7 @@ As $n \to \infty$, the class width tend to decrease and polygon line becomes a c
         \vspace{-0.3cm}
         \captionof{figure}{Percentiles in the cumulative frequency curve (taken from \cite{bierkens2007})}
         \end{center}
-According to this, the quartile coefficient of asymmetry is:
+        According to this, the \alert{ quartile coefficient of asymmetry} is:
     $$
     g_s = \frac{\left(Q_{0.75} - Q_{0.5}\right) - \left( Q_{0.5} - Q_{0.25}\right)}{Q_{0.75}-Q_{0.25}}
     $$
@@ -278,10 +314,12 @@ According to this, the quartile coefficient of asymmetry is:
 The measure of the relative ascending steepness nearby the mode in the histogram or in the frequency curve is said to be a measure of the peakedness.
     \begin{block}{Sample coefficient of kurtosis}
         The \emph{coefficient of kurtosis} ($g_2$) measure the degree of peakedness of the data set. For a data sample $x_1, x_2, \cdots, x_n$ of size $n$ of a variable $x$, the coefficient is computed as:
+        \vspace{-5pt}
         $$
         g_2 = \frac{\sum_{i=1}^n \left(x_i - \bar{x} \right)^4}{n s^4}
         $$
         Note that $s$ is the standard deviation and $g_2$ is dimensionless. For \emph{Gaussian probability distribution (pdf)}, $g_2$ is equal to 3. So it is common to estimate $g_2$ with respect to a Gaussian pdf, so that, the equation for $g_2$ becomes:
+        \vspace{-5pt}
         $$
         g_2 = \frac{\sum_{i=1}^n \left(x_i - \bar{x} \right)^4}{n s^4} - 3
         $$
@@ -289,7 +327,8 @@ The measure of the relative ascending steepness nearby the mode in the histogram
         \vspace{-0.3cm}
         \includegraphics[width=0.95\textwidth]{fiBi27.png}
         \vspace{-0.3cm}
-        \captionof{figure}{Histogram of a data sample with negative and positive kurtosis (taken from \cite{bierkens2007})}
+        %\captionof{figure}{Histogram of a data sample with negative and positive kurtosis (taken from \cite{bierkens2007})}
+        \captionof{figure}{Histogram of a data sample with negative and positive kurtosis.}
     \end{block}
 \end{frame}
 
@@ -298,7 +337,7 @@ The measure of the relative ascending steepness nearby the mode in the histogram
 Exploratory data analysis is a manner to graphycally represent data  compactely. Usually, this analysis does no obey to any particular purpose or question in mind but to represent the data. Such graphic representation are made based on:
 \begin{itemize}
     \item \emph{Steam-and-Leaf plot}
-    \item \emph{box plot}
+    \item \emph{Box plot}
 \end{itemize}
 Because of their clarity, box plots are usually more used.
 \end{frame}
@@ -308,14 +347,15 @@ Because of their clarity, box plots are usually more used.
     \vspace{-0.2cm}
         \includegraphics[width=0.95\textwidth]{fiBi210.png}
         \vspace{-0.1cm}
-        \captionof{figure}{Box plot structure (taken from \cite{bierkens2007})}
+        %\captionof{figure}{Box plot structure (taken from \cite{bierkens2007})}
+        \captionof{figure}{Box plot structure.}
         Note also that the $\bar{x}$ is somewhere between $Q_{25}$ and $Q_{75}$ and that the plot shows features of the data distribution such as the degree of data dispersion and skeweness. Box plots are useful to detect outliers, so for a vertically oriented box plot outliers are those  values above a distance $1.5Q_{75}$ and below a distance $1.5Q_{25}$. 
 \end{frame}
 
 %--------
 \section{Bivariate statistics}
 \begin{frame}{Sample covariance and correlation coefficients}
-    When two variables are observed  is of interest to establish their relationship and association. A preliminary analysis of the relationship can be made using a \emph{scatter plot} which are pair of points $(x_i, y_i)$ of variables $x$ and $y$ represented in the cartesian plane. The behaviour of the points provide some preliminary hinds hinds about the relationship of $x$ and $y$. A better estimate of this relatioship is assesed by estimating the \emph{sample covariance coefficient} and \emph{sample correlation coefficient}.
+    When two variables are observed  is of interest to establish their relationship and association. A preliminary analysis of the relationship can be made using a \emph{scatter plot} which are pair of points $(x_i, y_i)$ of variables $x$ and $y$ represented in the cartesian plane. The behaviour of the points provide some preliminary hinds about the relationship of $x$ and $y$. A better estimate of this relatioship is assesed by estimating the \emph{sample covariance coefficient} and \emph{sample correlation coefficient}.
 
     \begin{block}{Sample covariance coefficient}
         The sample covariance coefficient $s_{X,Y}$ shows the \emph{linear} relationship between $X$ and $Y$ and it is calculated as:
@@ -340,21 +380,21 @@ Because of their clarity, box plots are usually more used.
 \begin{frame}{Sample covariance and correlation coefficients}
         \includegraphics[width=0.95\textwidth]{fiBi213.png}
         \vspace{-0.1cm}
-        \captionof{figure}{Scatter plots and $r_{X,Y}$ (taken from \cite{bierkens2007})}
+        %\captionof{figure}{Scatter plots and $r_{X,Y}$ (taken from \cite{bierkens2007})}
+        \captionof{figure}{Scatter plots and $r_{X,Y}$.}
 \end{frame}
 
 \begin{frame}{Q-Q plots}
     When one want to compare the probability distribution of two variables $X$ and $Y$, the quantiles of $X$ against the quantiles of $Y$ form the \emph{Q-Q plots}. Both data sets are sorted and the cummulative frecuency curve is estimated for $X$ and $Y$. The values of $X$ and $Y$ that correspond to a value of cumulative frequency are plotted to form the Q-Q plot. When the plot depart from linearity, this indicates other types of differences between the two distributions. 
-    \includegraphics[width=0.95\textwidth]{fiBi213.png}
+    \includegraphics[width=0.70\textwidth]{fi143.png}
         \vspace{-0.1cm}
-        \captionof{figure}{Scatter plots and $r_{X,Y}$ (taken from \cite{bierkens2007})}
 \end{frame}
 
 
 
 
-\begin{frame}[allowframebreaks]{References}
- \bibliographystyle{plainnat}
-    \bibliography{references}
-\end{frame}
+%\begin{frame}[allowframebreaks]{References}
+% \bibliographystyle{plainnat}
+%    \bibliography{references}
+%\end{frame}
 \end{document}

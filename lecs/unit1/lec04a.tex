@@ -166,8 +166,172 @@ where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confiden
 
 \begin{frame}{Estimation of confidence intervals}
     \begin{block}{Confidence interval estimation of the mean when the standard deviation is unknown}
-        Quite often in practice the mean and standard deviation are both unknown. Under such conditions we must modify our approach. We assume normality of the variate $X$ as before, but the consequences of a \emph{nonnormal distribution} are minor for small to moderate departures from normality, if the sample size is large, say, $n > 30$. In this situation we apply the \emph{Student’s t distribution}.
+        Quite often in practice the mean and standard deviation are both unknown. Under such conditions we must modify our approach. We assume normality of the variate $X$ as before, but the consequences of a \emph{nonnormal distribution} are minor for small to moderate departures from normality, if the sample size is large, say, $n > 30$. In this situation we apply the \emph{Student's t distribution}.The T variable represents the mean $\bar{X}$ standardized as $T = \frac{\bar{X}- \mu}{\hat{S}/\sqrt{n}} \sim t_{n-1}$. Note that $T$ has a  \emph{Student’s t distribution} with $\nu = (n-1)$ degrees of freedom. Recall that the \emph{Student's t distribution} \emph{pdf} is:
+        \[
+            f_T (t) = \frac{\Gamma[(\nu +1)/2]}{\sqrt{\pi \nu} \Gamma(\nu/2)} \frac{1}{\left[ (t^2 /\nu) + 1 \right]^{\frac{\nu +1}{2}}} \quad \text{for } -\infty < t < \infty
+            \]
+
+\end{block}
+\begin{minipage}[t]{0.54\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+   Let $\bar{X}$ and $\hat{S}$ be the mean and the standard deviation, respectively,  of a random sample of size $n$ drawn from a \emph{normal distribution} with unknown standard deviation $\sigma$. The $100(1 – \alpha)$ percent central two-sided confidence interval for the population mean $\mu$ is $\left( \bar{X} - t_{n-1, \alpha/2} \frac{\hat{S} }{\sqrt{n}}, \bar{X} + t_{n-1, \alpha/2} \frac{\hat{S}}{\sqrt{n}} \right)$, where $t_{n-1, \alpha/2}$ is  \emph{Student's t variate} with $n-1$ degrees of freedom  and probability of $\alpha/2$ of execeedance. 
+\end{minipage}
+%\hfill
+\begin{minipage}[t]{0.44\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+    \centering
+    \includegraphics[width=\textwidth]{fi532.png}
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}{Estimation of confidence intervals}
+    \begin{block}{Confidence interval for a proportion}
+    Consider a two-sided \emph{Bernoulli} variable that occur with probability $p$ if it is success and $1-p$ if it is failure. Recall that mean and the variance of this variable are $p$ and $p(1-p)$, respectively. If an experiment involving a \emph{Bernoulli} variable is repeated $n$ times, the \emph{standard error} of the estimated proportion of a success is:
+    \[ 
+        \sigma_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
+    \]
+    Note that for a large sample size, for instance, $n>30$, and for $np > 5$ and $n(1-p) > 5$. the sampling distribution is nearly \emph{normal}.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Estimation of confidence intervals}
+\begin{block}{Sampling distribution of differences and sums of statistics}
+    Let $S_1$ and $S_2$ independent statistics from two populations, computed based on sample sizes $n_1$ and $n_2$, respectively. Let the means and the standard errors of the sampling distributions of the two statistics  be $\mu_{S_1}$, $\mu_{S_2}$ and $\sigma_{S_1}$, $\sigma_{S_2}$, respectively. The differences between the statistics (after repeated sampling) from the two populations have a sampling distribution with mean $\mu_{S_1 - S_2} = \mu_{S_1} - \mu_{S_2}$, and standard error $\sigma_{S_1 - S_2} = \sqrt{\sigma_{S_1}^2 + \sigma_{S_2}^2}$. The sampling distribution of the sum of the statistics $S_1 + S_2$ has a mean $\mu_{S_1 + S_2} = \mu_{S_1} + \mu_{S_2}$, and standard error $\sigma_{S_1 + S_2} = \sqrt{\sigma_{S_1}^2 + \sigma_{S_2}^2}$.
+\end{block}
+\vspace{-7pt}
+    \begin{exampleblock}{Confidence limits for differences between two means of the annual rainfalls at two stations}
+        At station 1, annual rainfall has been measured over $n_1 = 50$ years where $\bar{x_1} = 900$ mm and $\hat{s}_1 =80$ mm. At station 2, annual rainfall has been measured over $n_1 = 40$ years where $\bar{x_1} = 825$ mm and $\hat{s}_1 =90$ mm. Because annual rainfalls are the result of a large number of small causes, such an additive effect makes it plausible to assume that the distribution is normal. Thus, the sampling distribution of the difference between the two means is also normal. 
+
+\begin{minipage}[t]{0.48\textwidth}
+        The $(1-\alpha)$ percent confidence limits for the difference between the two means are found using:
+\vspace{-14pt}
+        \[
+        (\bar{x}_1 - \bar{x}_2) \pm z_{\alpha/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+    \]
+    where $z_{\alpha/2}$ is the standard  normal variate  which is exceeded with probability $\alpha/2$.  
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+    Replacing $\hat{s_1}$ for $\sigma_1$ and $\hat{s_2}$ for $\sigma_2$, the 95\% confident limits are:
+\vspace{-7pt}
+    \[
+        75 + 1.96 \sqrt{\frac{80^2}{50} + \frac{90^2}{40}} = 75 \pm 36 mm 
+    \]
+    limits of $(39 mm, 111 mm )$. 
+\end{minipage}
+    \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{Estimation of confidence intervals}
+\begin{block}{Interval estimation for the variance: chi-squared distribution}
+    Consider a set of normally and independently distributed random variates $X_i$ where $i = 1, 2, \cdots, \nu$, with means $\mu_i$ and variances $\sigma_i^2$. If we standardize the $X_i$ by subtracting the mean and dividing by the standard deviation, respectively, to a set  $Z_i$, $i =1, 2, \cdots, \nu$  with zero mean and unit variance. Consider the random variable formed by the sum of squares of the $Z$ variables, say $\chi^2 = Z_1^2 + Z_2^2 + \cdots + Z_{\nu}^2$. The \emph{mgf} of $\chi^2$ is given by:
+    \[
+        M_{\chi^2} (t) = E[e^{t \chi^2}] = \prod_{i=1}^\nu E[e^{t Z_i^2}]
+    \]
+    Regarding that:
+    \[
+        E[e^{t Z_i^2}] = \int_{-\infty}^{\infty} e^{tz^2} \frac{e^{-z^2 /2}}{\sqrt{2\pi}} dz = \frac{1}{\sqrt{1-2t}} \int_{-\infty}^{\infty} \frac{\sqrt{1-2t}}{\sqrt{2\pi}} e^{-(1-2t)z^2 / 2} dz 
+    \]
+the integral on the right-hand side is unity, being a representation of the area under a normal curve with a mean of zero and variance $1/(1-2t)$, so:
+\[
+    M_{\chi^2} (t) = \left[ \frac{1/2}{1/2 -t} \right]^{\nu/2}
+\]
+
 \end{block}
 \end{frame}
+
+\begin{frame}{Estimation of confidence intervals}
+\begin{block}{Interval estimation for the variance: chi-squared distribution}
+
+\begin{minipage}[t]{0.48\textwidth}
+If we compare this \emph{mgf} with the one  for the gamma distribution, the \emph{cdf} of the \emph{chi-squared distribution} with $\nu$ degrees of freedom is:
+\[
+    F(\chi^2) = \frac{1}{2} \int_0^{\chi^2} \frac{(u/2)^{(\nu/2) -1} e^{-u/2}}{\Gamma (\nu/2)} du
+\] 
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+    \centering
+    \includegraphics[width=\textwidth]{fi534.png}
+\end{minipage}
+Considering a random sample $X_1, X_2, \cdots, X_n$ of independent normally distributed variables with common mean $\mu$, variance $\sigma^2$ and sample mean $\hat{X}$. 
+\[
+    \hat{S}^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2
+\]
+is an unbiased estimator of the variance $\sigma^2$. Let us now consider the quantity
+\[
+    \sum_{i=1}^n (X_i - \mu)^2 = \sum_{i=1}^n \left[(X_i - \bar{X}) + (\bar{X} - \mu) \right]^2
+\]
+
+\end{block}
+\end{frame}
+
+\begin{frame}{Estimation of confidence intervals}
+\begin{block}{Interval estimation for the variance: chi-squared distribution}
+because $\sum_{i=1}^n (X_i - \bar{X})=0$, the cross-product in this equation is zero, so:
+\[
+    \sum_{i=1}^n (X_i - \mu)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu)^2
+\]
+Dividing by $\sigma^2$ and substituting $\hat{S}^2$ from the equation above for the second term:
+\[
+    \frac{\sum_{i=1}^n (X_i - \mu)^2 }{\sigma^2}  = \frac{(n-1)\hat{S}^2}{\sigma^2} + \frac{(\bar{X} - \mu)^2}{\sigma^2 /n}
+\]
+If the first term of this equation is distributed as $\chi^2_n$, and according to the \emph{Central Limit Theorem}, the last term is  distributed as $\chi^2_1$. Thus, taking account of the additive property of the gamma and chi-squared variates, we can say that $\frac{(n-1)\hat{S}^2}{\sigma^2}$ has $\chi^2_{n-1}$ distribution, that is,  with $\nu = n-1$ degrees of freedom. This important result is used in finding \emph{confidence limits} for the variance $\sigma^2$ of a \emph{normal population}. The \emph{chi-squared cdf} is given in tables for various values of the degrees of freedom $\nu$. For example, the $(1 – \alpha)$ percent two-sided confidence interval for $\sigma^2$ is found from:
+\[
+    Pr \left[ \chi^2_{n-1, 1- \alpha/2} \leq \frac{(n-1)\hat{S}^2}{\sigma^2} \leq  \chi^2_{n-1, \alpha/2} \right] = 1-\alpha
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Estimation of confidence intervals}
+\begin{block}{Interval estimation for the variance: chi-squared distribution}
+\begin{minipage}[t]{0.60\textwidth}
+    This probability is represented by the area between the two vertical lines of the figure which shows the \emph{pdf}. These values are from left to right the values that a $\chi^2_{n-1}$ variate exceeds with probabilities $(1-\alpha/2)$\% and $\alpha/2$\%, respectively. Taking reciprocal of the variables in the equation, the positions of the \emph{chi-squared} variables need to be  changed, and multiplying by $(n-1)\hat{S}^2$, we obtain:
+\[
+    Pr \left[ \frac{(n-1)\hat{S}^2}{\chi^2_{n-1, \alpha/2}} \leq \sigma^2 \leq \frac{(n-1)\hat{S}^2}{\chi^2_{n-1, 1- \alpha/2}}  \right] = 1-\alpha
+\]
+
+\end{minipage}
+\begin{minipage}[t]{0.38\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+    \centering
+    \includegraphics[width=\textwidth]{fi535.png}
+\end{minipage}
+
+\end{block}
+\end{frame}
+
+
+%-------
+% From Kotte
+\section{Hypothesis testing}
+\begin{frame}{Hypothesis testing}
+    \begin{itemize}
+        \item A second major area of statistical inference is the \alert{testing of hypotheses}, which is closely related to the determination of \emph{confidence limits}. 
+        \item What we are examining concerns the parameters or form of the probability distribution that yields the observations.
+        \item This involves making a declaration or statement called a \alert{hypothesis} about a population.
+        \item The discussion is focused on certain assumptions (regarding, for instance, the mean of the population) without initially making any commitment on assuming them.
+        \item From a philosophical viewpoint, our conception of the actual state of nature may not be correct. However, we have a sample of data that represents the physical reality, and although our initial hypothesis may be somewhat tentative, we can revise the concept each time new information becomes available and thus come closer to the true state of nature.
+        \item The approach we follow is akin to the verification of some of the scientific hypotheses of scientists and engineers. For instance, it is usually feasible to ascertain whether a procedure for treating wastewater makes a change in the quality of the effluent, as measured, for example, by the biochemical oxygen demand. As another example, there may be reason to believe that the distribution of high flows in a river has changed on account of climatic effects or because the flow regime has been altered.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{itemize}
+        \item A random sample is taken from the population and \alert{statistical hypotheses}, called \alert{null} and \alert{alternative}, are declared. Then a statistical test is made.
+        \item If the observations do not support the model or theory postulated, the \emph{null hypothesis} is \alert{rejected} in favor of the alternative one, which may be considered to be true. However, if the observations are in agreement, then the null hypothesis is \alert{not rejected}.
+        \item This does not necessarily mean that it is accepted. It suggests that there is insufficient evidence against the \emph{null hypothesis} in favor of the alternative one.
+        \item Associated with the decision is a \alert{level of significance}, $\alpha$. This is complementary to the probability introduced  for setting confidence limits.
+        \item For instance, an engineer may question whether there has been a significant change, for instance, in a mean rate of traffic flow on a highway or an average strength of a material. On the contrary, such a variation may sometimes be due to sampling differences without any change in the mean or other aspect of the population. It is then said to be \alert{not significant}.
+        \item Hypothesis testing thus concerns procedures for rejecting a statement or not rejecting it and the chances of making incorrect decisions of either kind. It also involves the use of a particular function of the sample measurements.
+        \item If we assume that the observations come from a normal or other specified population, then the test is called \alert{parametric}. In contrast, \alert{nonparametric tests} are not based on such assumptions.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+\end{frame}
+
 
 \end{document}
