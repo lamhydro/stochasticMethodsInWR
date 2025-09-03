@@ -331,7 +331,393 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
 \end{frame}
 
 \begin{frame}{Hypothesis testing}
+
+    \begin{block}{Procedure for testing}
+    \end{block}
+    \vspace{-5pt}
+    The basic steps for hypothesis testing are listed below. Note that two different \emph{hypotheses} are compared.
+    \begin{enumerate}
+        \item \alert{Declare a null hypothesis, $H_0$}:  This is the hypothesis to be tested and it assume that the observed results are due to chance. For instance we may wish to verify whether the initial mean $\mu_1$ of the annual maximun flows at a river gauge station is indeed the same as a projected new mean $\mu_2$ consequent to changes in the flow regime  that may have proved sufficient for a change in the population mean. If $H_0$ is true, any observed difference in the means is merely the consequence of sampling variation from the sample population. This means that the differences are attributed to errors in random sampling. The hypothesis is expressed as: $H_0: \mu_1 - \mu_2 = 0$.
+        \item \alert{Declare the alternate hypothesis, $H_1$}: This is the hypothesis that we want to test. For the previous example, this is $H_1 : \mu_1 - \mu_2 \neq 0$.
+        \item \alert{Specify a test statistic}: In the previous example, the test is based on the difference between the respective observed means $\bar{X}_1$ and $\bar{X}_2$. 
+        \item \alert{Determine the distribution of the test statistic}: The sampling distribution depends on the distribution to which the observations belong. Thus, we may need to make asumptions regarding the underlaying distribution. 
+        \item \alert{Define a rejection/critical region for the test statistic}: For this, it is necessary to preassign a level of significance $\alpha$. 
+        \item \alert{Use the observed data to verify  whether the computed value of the test statistic is within or outside the rejection region}: If this is within the rejection region we say that the difference (for the previous example) is \emph{significant at the} $100\alpha$ \% level.  
+    \end{enumerate}
 \end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+    \begin{block}{Procedure for testing}
+    \end{block}
+    \vspace{-5pt}
+    Some aspects related to the procedure for testing for the given example:
+    \begin{itemize}
+        \item As the \emph{rejection region} covers \emph{both tails} of the \emph{sampling distribution}, this procedure is called a \alert{two-tailed test}.
+        \item If the test were something like wheather $\mu_1 > \mu_2$ \alert{one-tailed test} is requiere as the critical \emph{rejection region} cover only one tail. 
+        \item If \emph{test statistic} and the \emph{rejection region} are defined as $T$ and $R$, respectively, the probability of rejecting $H_0$ is $Pr\left[T \in R | H_0\right] = \alpha$
+        \item Note that the probability $\alpha$ provides the link between the \emph{confidence intervals} and \emph{hypothesis testing}.
+        \item We can say that \emph{rejection} is the same as stating that the \emph{test statistics} is statistically significant.
+        \item Errors:
+            \begin{enumerate}
+                \item \alert{Type I error}: This occurs if a hypothesis is rejected when it should be accepted, regarging that $H_0$ is true. The probability of this is $Pr \left[ \text{Type I error} \right] = Pr\left[T \in R | H_0\right] = \alpha$.
+                \item \alert{Type II error}: This occurs if we fail to reject $H_0$ when it is not true. The probability of this is $Pr \left[ \text{Type II error} \right] = Pr\left[T \in A | H_1\right] = \beta$. Note that $A$ is the accptance region of the test statistic, so that $A$ and $R$ comprise the parameter space $\Omega$ for $T$. 
+            \end{enumerate}
+ In either of the cases, we are wrong in our judgement. Accordingly, we are right in two cases:
+           \begin{enumerate}
+               \item Contrary to \emph{Type I error}, if we correctly fail  to reject $H_0$, the probability is $1- Pr \left[ \text{Type I error} \right] = Pr\left[T \in A | H_0\right] = 1-\alpha$. Note that this is the same probability associated with the \emph{confidence interval}. 
+               \item Contrary to \emph{Type II error}, the probability of correctly rejecting $H_0$ when it is not true is $1- Pr \left[ \text{Type II error} \right] = Pr\left[T \in R | H_1\right] = 1-\beta$
+            \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+    \begin{exampleblock}{Change in  the mean annual maximum flow}
+Annual maximum flows in the Pond Creek catchment area in the eastern United States are listed below in cubic meters per second for two periods of 12 years from 1945 to 1968. It is thought that changes in the flow regime during the middle of this period have modified the distribution of flows resulting in higher maximum flows. This is equivalent to stating that the mean flow has increased from the first period to the second period.
+\setlength{\tabcolsep}{1pt} % global adjustment
+  \begin{tabular}{rcccccccccccc}
+      First period (1945-1956): & 2000 & 1740 & 1460 & 2060 & 1530 & 1590 & 1690 & 1420 & 1330 & 607 & 1380 & 1660 \\
+Second period (1957-1968): & 2290 & 2590 & 3260 & 2490 & 3080 & 2520 & 3360 & 8020 & 4310 & 4380 & 3220 & 4320
+  \end{tabular}
+    \alert{Case 1: Known standard deviation and prior mean}\\
+    \emph{Null hypothesis},$H_0 : \mu_1 = 1539$. This means that the new mean (second period mean) is equal to the past mean (1539 m$^3$/s).\\
+    \emph{Alternate hypothesis},$H_1 : \mu_1 > 1539$. This means that the new mean (second period mean) is greater than the past mean (1539 m$^3$/s).\\
+    \emph{Level of significance}, $\alpha = 0.01$ \\
+    During the first period, the mean and the standard deviation are 1539 m$^3$/s and 372 m$^3$/s, respectively. We assume that these values  represent the population mean $\mu$ and standard deviation $\sigma$ prior to 1957. We also assume that standard deviation does not change. As we want to know whether the mean has increased, we use a \emph{one-tailed test}. 
+    Let $\bar{X}$ the estimate to the mean after 1956 based on a sample size $n=12$. Assuming that the annual maximum flows follow a \emph{normal distribution}, the \emph{standard normal score} is $Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}$. This becomes our \emph{test statistic}. \\
+    
+    \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+
+    \begin{exampleblock}{Change in  the mean annual maximum flow}
+   So for $\alpha = 0.01$ our decision rule is:
+    \begin{enumerate}
+        \item \emph{Reject} $H_0$ if the $z > 2.326$. 2.326 is taken from the \emph{normal distribution cdf} table for $F(x) = 1-\alpha = 0.99$.
+        \item Otherwise \emph{do not reject} $H_0$. 
+    \end{enumerate}
+    Substituting in $Z$ for $\bar{X} = 3653$ m$^3$/s, the $z$ score is 19.7, which is much greater that 2.326. \emph{Decision: $H_0$ is rejected}.
+
+    \alert{Case 2: Known prior mean and unknown but constant standard deviation}\\
+    In practice we do not know the standard deviation. This means that the test will be based on the sample value and thus it is thus appropriate to apply the \emph{t distribution}. As before, we assume that the standard deviation is constant and that the annual maximum flows are \emph{normally distribute}. The \emph{test statistic} is $T = \frac{\bar{X}-\mu}{\sigma/\sqrt{n}}$.\\
+   So for $\alpha = 0.01$ our decision rule is:
+    \begin{enumerate}
+        \item \emph{Reject} $H_0$ if the $t > t_{11,0.01}$, where $t_{11,0.01} =  2.718$. This value is taken from the \emph{t distribution cdf} table for $F(t) = 1-\alpha = 0.99$ and $\nu=n-1=11$. 
+        \item Otherwise \emph{do not reject} $H_0$. 
+    \end{enumerate}
+    Substituting in $T$, the sample $t$ score is 19.7, which is much greater that 2.718. \emph{Decision: $H_0$ is rejected too}.
+    \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    Three cases of interest:
+    \begin{itemize}
+        \item \alert{TESTING THE DIFFERENCE BETWEEN TWO MEANS USING KNOWN VARIANCES}\\
+            If $\bar{X}_1$ and $\bar{X}_2$, say, are two estimated means of $\mu_1$ and $\mu_2$ obtained from two small samples of sizes $n_1$ and $n_2$, respectively, and if the two populations are normal with known variances $\sigma_1^2$ and $\sigma_2^2$, then the random variable:
+            \[
+                Z = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sigma_{\bar{X}_1 - \bar{X}_2}}
+            \]
+            follow a $N \sim (0,1)$. The standard error of the difference between two statistics is defined as $\sigma_{\bar{X}_1 - \bar{X}_2} = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}$.
+
+
+        \item \alert{TESTING THE DIFFERENCE BETWEEN TWO MEANS WHEN THE VARIANCES ARE UNKNOWN BUT EQUAL}\\
+            Let the sample variances be $\hat{S}_1^2$ and $\hat{S}_2^2$. Because both are estimates of the constant variance $\sigma^2$, a pooled estimate can be formed by
+            \[
+                \hat{S}_p^2 = \frac{(n_1 -1)\hat{S}_1^2 + (n_2 -1) \hat{S}_2^2}{n_1 + n_2 -1}
+            \]
+            Then, the random variable:
+            \[
+                T = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\hat{S}_p \sqrt{(1/n_1) + (1/n_2)}} = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{(n_1-1)\hat{S}_1^2 + (n_2-1)\hat{S}_1^2}} \sqrt{\frac{(n_1 + n_2 -2)n_1 n_2}{n_1 + n_2}} 
+            \]
+            has the \emph{t distribution} with $n_1 + n_2 -2$ degrees of freedom.
+
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+   \begin{itemize}
+        \item \alert{TESTING THE DIFFERENCE BETWEEN TWO MEANS WHEN THE VARIANCES ARE UNKNOWN AND UNEQUAL}\\
+There are many instances when it is not correct to assume that the variances corresponding to the means tested are equal. However when the variances are unequal, the statistic does not have a t distribution. In the case of observations taken from normal populations with unknown and unequal variances, the statistic
+\[
+    T' = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\hat{S}_1^2 /n_1 - \hat{S}_2^2 /n_2}} 
+\]
+has an approximate t distribution with
+\[
+    \nu = \frac{\left[ \hat{S}_1^2 /n_1 - \hat{S}_2^2 /n_2 \right]^2}{ (\hat{S}_1^2 /n_1)^2 / (n_1-1) + (\hat{S}_2^2 /n_2)^2 /(n_2 -1) }
+\]
+degrees of freedom.
+    \end{itemize}
+
+    \begin{exampleblock}{Change in  the mean annual maximum flow with unkwnon and unequal variance}
+
+    \emph{Null hypothesis},$H_0 : \mu_1 = \mu_2$. This means that the new mean (second period mean) is equal to the past mean (1539 m$^3$/s).\\
+    \emph{Alternate hypothesis},$H_1 : \mu_1 > \mu_2$. This means that the new mean (second period mean) is greater than the past mean (1539 m$^3$/s).\\
+    \emph{Level of significance}, $\alpha = 0.01$ \\
+    Using the data from the previous example, for a one-tailed test
+\[
+    \bar{x}_1 = 1539 \quad \hat{s}_1 = 372 \quad \bar{x}_2 = 3653 \quad \hat{s}_2 = 1563 \quad n_1 = n_2 = 12
+\]
+
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{exampleblock}{Change in  the mean annual maximum flow with unkwnon and unequal variance}
+
+        \[
+            \nu = \frac{\left[(372^2 / 12) + (1563^2 / 12) \right]^2}{ \left[(372^2 / 12)^2 /11\right] +  \left[(1563^2 / 12)^2 /11\right]} \approx  12
+        \]
+
+        \[
+            T' = \frac{(3653-1539)}{\sqrt{(372^2 / 12) + (1563^2 / 12)}} = 4.56
+        \]
+        From the \emph{t distribution} test table, $t_{12, 0.01} = 2.681$. \emph{Decision: $H_0$ is rejected too}.
+
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{block}{Probabilities of Type I and Type II Errors and the Power Function}
+    \end{block}
+    As we know, the Type I error probability is $\alpha$, while the the Type II error probability depends on $\alpha$, the sample size, the true value of the parameter tested. Consider the two-tailed test used for testing the mean of a $N(\mu, \sigma^2)$ population: \emph{Null hypothesis $H_0: \mu = \mu_0$} and \emph{Alternative hypothesis $H_1: \mu \neq \mu_0$}. Suppose that is correct to reject $H_0$ because the true value of $\mu$ is $\mu_0 +c $, where $c$ is a constant. Accordingly, it is also correct to accept the alternative hypothesis with standardized test statistic $Z \sim (c\sqrt{n}, 1)$, where $n$ is the size of the test sample. Note that the mean has been displaced by $c/(\sigma /\sqrt{n})$
+
+    \centering
+    \includegraphics[width=0.7\textwidth]{fi541.png}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{block}{Probabilities of Type I and Type II Errors and the Power Function}
+    \end{block}
+    The \emph{Type II error} is made when $H_1$ is true, only if $-z_{\alpha/2} \leq Z \leq z_{\alpha/2}$ where $-z_{\alpha/2}$ and $z_{\alpha/2}$ are the values which a standard normal deviate exceeds with probabilities of $(1 - \alpha/2)$ and $\alpha/2$, respectively. The probability  $\beta$ of a \emph{Type II error} is determined after adjusting the specified limits by the mean of the Z variate. Accordingly it is given by:
+    \[
+        \beta = \Phi \left( z_{\alpha/2} - \frac{c\sqrt{n}}{\sigma} \right) - \Phi\left( -z_{\alpha/2} - \frac{c\sqrt{n}}{\sigma} \right) 
+    \]
+
+    where $\Phi(.)$ is the \emph{cdf} of the \emph{standard normal distribution}.
+
+\begin{minipage}[t]{0.58\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+
+   Thus we see that the probability $\beta$ of a \emph{Type II error} is dependent on $\alpha$, $n$, and $c/\sigma$ .Curves representing $\beta$ are called \alert{characteristic curves}. These are shown in the figure for a two-tailed normal test with level of significance $\alpha = 0.05$, sample sizes $n$ from 1 to 100 and $c/\sigma =$ 0.25, 0.50, 0.75, and 1.0. From these curves we see that, for the same sample size $n$, $\beta$ increases as $c/\sigma$ decreases. That is, small differences in the mean are more difficult to detect and lead to a higher probability of incorrect acceptance. Also, as expected, there is an increase in $\beta$ as the sample size $n$ decreases
+\end{minipage}
+\begin{minipage}[t]{0.38\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+
+    \centering
+    \includegraphics[width=0.8\textwidth]{fi542.png}
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{block}{Probabilities of Type I and Type II Errors and the Power Function}
+    \end{block}
+    The complement of $\beta$ is the \alert{power function}. As already stated it is the \emph{probability of rejecting the null hypothesis when it is not true } (which is of course the right thing to do) in favor of the alternative hypothesis. It is equivalent to $\text{Power } = 1 - \beta$. Power curves are shown in the previous figure for a two-tailed normal test with level of significance $\alpha = 0.01$, sample sizes $n$ from 1 to 100 and $c/\sigma = $ 0.25, 0.50, 0.75, and 1.0. Clearly, the power increases with $c/\sigma$ and sample size $n$.
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{block}{Neyman-Pearson lemma}
+    \end{block}
+Here we are concerned with the behavior of observable random variables. For example, if a random sample is taken from a distribution with specific parameters, then a simple hypothesis is one that uniquely defines the distribution from which the sample is taken against an alternative hypothesis.
+
+    Let $R$ be a critical (rejection) region of size $\alpha$, when testing the null hypothesis $H_0 : \theta = \theta_0$ against the alternative hypothesis $H_1 : \theta = \theta_1$. We define a constant $k_{\alpha}$ such that in the region $R$, $(L_0 /L_1 )\leq k_{\alpha}$ , and in the acceptance region $A$, $L_0/ L_1 > k_{\alpha}$, where $L_0 = \prod_{i=1}^n f (x_i | \theta_0 )$ and $L_1 = \prod_{i=1}^n f (x_i | \theta_1 )$ . Then $R$ is the \emph{best critical region (bcr)} of size $\alpha$. Such a test involving a \emph{bcr} is called a \emph{most powerful (mp) test}.
+
+    \begin{exampleblock}{A simple likelihood test on a normal population with unit variance}
+        Let $X_1 , X_2 , \cdots, X_n$ be a random sample from an $N (\mu, 1)$ population. Suppose our objective is to test the $H_0 : \mu = \mu_0$ against the alternative hypothesis $H_1 : \mu = \mu_1 > \mu_0$ . The ratio of the likelihoods can be used to find the \emph{bcr} of size $\alpha$, and the ratio is
+        \[
+            \frac{L_0}{L_1} = \frac{(1/\sqrt{2 \pi})^n e^{\left[-1/2 \sum_{i=1}^n ( X_i - \mu_0 )^2 \right]}}{(1/\sqrt{2 \pi})^n e^{\left[-1/2 \sum_{i=1}^n ( X_i - \mu_1 )^2 \right] }} = e^{\left[ \left(\sum_{i=1}^n X_i \right) (\mu_0 - \mu_1) + \frac{n}{2} \left( \mu_1^2 - \mu_0^2 \right) \right]}
+        \]
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{block}{Neyman-Pearson lemma}
+    \end{block}
+    \begin{exampleblock}{A simple likelihood test on a normal population with unit variance}
+        We define a constant $k_{\alpha}$ , which depends on $\alpha$, as a limiting value of the likelihood ratio, and a critical region $R$ of size $\alpha$ within which
+        \[
+            e^{\left[ \left(\sum_{i=1}^n X_i \right) (\mu_0 - \mu_1) + \frac{n}{2} \left( \mu_1^2 - \mu_0^2 \right) \right]} \leq k_{\alpha}
+        \]
+        Outside $R$,
+
+        \[
+            e^{\left[ \left(\sum_{i=1}^n X_i \right) (\mu_0 - \mu_1) + \frac{n}{2} \left( \mu_1^2 - \mu_0^2 \right) \right]} \geq k_{\alpha}
+        \]
+        Taking logarithms and simplifying, we find for $H_1 : \mu = \mu_1 > \mu_0$ , the \emph{bcr} is defined for
+        \[
+            \bar{X} \geq \frac{1}{2} (\mu_0 + \mu_1) - \frac{\ln k_{\alpha}}{n(\mu_1 - \mu_0)} = c_{\alpha}
+        \]
+
+
+        If the alternate hypothesis is $H_1 : \mu = \mu_1 < \mu_0$ , the \emph{bcr} is defined for
+
+        \[
+            \bar{X} \leq \frac{1}{2} (\mu_0 + \mu_1) + \frac{\ln k_{\alpha}}{n(\mu_0 - \mu_1)} 
+        \]
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Hypothesis testing}
+    \begin{block}{Tests of hypotheses involving the variance}
+    \end{block}
+    In equation 
+
+\[
+    Pr \left[ \chi^2_{n-1, 1- \alpha/2} \leq \frac{(n-1)\hat{S}^2}{\sigma^2} \leq  \chi^2_{n-1, \alpha/2} \right] = 1-\alpha
+\]
+    we noted that a quantity such as $\sum_{i=1}^n (X_i - \bar{X} )^2 /\sigma^2$ has a \emph{chi-squared distribution} with $(n - 1)$ degrees of freedom. However, if the true mean $\mu$ is known, this replaces $\bar{X}$ in the preceding sum of squares and the degrees of freedom are $n$. Thus with the knowledge of the sampling distribution, a hypothesis test can be made on the variance.
+
+    \begin{exampleblock}{A significance test on the change in variance}
+        From a long series of annual river flows, the variance is found to be 49 units. This can be treated as the population variance. However, a new sample of 25 years gives a value $\hat{s}^2 =$ 81 units. So $H_0 : \sigma^2 = 49$, $H_1 : \sigma^2 = 49$ and $\alpha = 0.05$. 
+        The quantity $n \hat{s}^2/\sigma^2$ has a \emph{chi-squared distribution} with $n$ degrees of freedom. From the \emph{chi-squared distribution} for $\chi_{25,0.05}^2 = 37.7$ and $n \hat{s}^2 / \sigma^2 = 25 x 81/49 = 41.3$. \emph{Decision: $H_0$ is rejected}.  
+    \end{exampleblock}
+\end{frame}
+
+%-------
+% From Kotte
+\section{Nonparametric methods}
+\begin{frame}{Nonparametric methods}
+    Some generalities:
+    \begin{itemize}
+        \item The \emph{normal distribution} plays a central role in the theory of statistics and probability and its use is supported by the \emph{Central Limit Theorem}.
+        \item However, there are many instances when one is uncertain of the true form of the \emph{probability distribution} of the variable involved and the available sample is small, say, less than 30.
+        \item It is therefore desirable to have methods that can be applied regardless of distribution. Such procedures are called \alert{distribution-free methods}.
+        \item The term \alert{nonparametric methods} is generally used to describe the wide-ranging procedures. In these methods we are not concerned with the parameters of populations.
+        \item In contrast, \alert{parametric methods} pertain to those techniques where the distribution is known but the values of the parameters are not specified.
+        \item Furthermore, \alert{nonparametric methods} do not require much computational effort and are thus easier to apply. Also, small samples can be used.
+        \item Although the methods are less powerful in detecting \emph{Type I and Type II errors}, the \emph{loss of power} is sometimes minimal and is outweighed because the assumptions are less restrictive.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Nonparametric methods}
+
+    \begin{block}{Sign test applied to the median}
+    \end{block}
+    The \alert{one sample sign test} is applicable when we sample any continuous distribution that has a \emph{median, $M$}. We test the hypothesis that the \emph{median} is equal to a specific value $M_0$. Let $n$ be the number of nonzero differences between the sample values and the assumed median, which is true under the null hypothesis, and let $k$ be the number of positive differences. Then by the \emph{normal approximation} to the \emph{binomial}, the following variate has a \emph{standard normal distribution} under the null hypothesis:
+    \begin{align*}
+        z &= \frac{(k + 1/2)-n/2}{1/2 \sqrt{n}}, \text{ if } k < \frac{n}{2} \\
+        z &= \frac{(k - 1/2)-n/2}{1/2 \sqrt{n}}, \text{ if } k > \frac{n}{2} \\
+    \end{align*}
+    The $z_{\alpha}$ value from the \emph{normal cdf} table is compared with the $z$ score calculated from one of the preceding equations to decide whether the \emph{null hypothesis} should be rejected at a level of significance $\alpha$. Note that the null hypothesis to be testes if $H_0 : M = M_0$, and the alternative hypothesis is one of the following: $H_1 : M < M_0$ or $H_1 : M > M_0$. 
+    %The \alert{nonparametric sign test} is an alternative to the tests on the \emph{mean} using the \emph{normal or the t distribution} as sampling distributions.
+    \end{frame}
+
+\begin{frame}{Nonparametric methods}
+
+    \begin{block}{Wilcoxon signed-rank test for association of paired observations}
+    \end{block}
+    In the \emph{sign test} we make use of only the signs of the differences between the observations and the \emph{median}. The \alert{Wilcoxon signed-rank test} utilizes the magnitudes of the differences and is thus intuitively a more powerful test compared with the much simpler \emph{sign test}. Both procedures can be used in testing differences in \emph{means}.
+    \begin{enumerate}
+        \item We note the magnitudes and the signs of the paired differences from two samples of observations.
+        \item The absolute values of the differences are ranked. Here, the smallest difference is assigned rank 1 and the largest difference gets the highest rank, which is equal to the number of pairs $n$ with nonzero differences.
+        \item If the absolute values of two or more of such differences are equal, we give each a rank equal to the mean of the ranks they would otherwise receive.
+        \item The ranks attributed to positive and negative differences are then summed in separate columns. These sums are denoted $T^+$ and $T^-$ , respectively.
+    \item While $H_0 : \mu_1 = \mu_2$, the$H_1 : \mu_1 < \mu_2$ or $H_1 : \mu_1 > \mu_2$. 
+    \end{enumerate}
+    Under the \emph{null hypothesis} we can use either $T^+$ or $T^-$, the sum of the ranks applied to the absolute values of the positive and negative differences, respectively, between the paire observations for the \emph{test statistic T}. For large sample sizes $n$, $T$ can be approximate by the \emph{standard normal variate} $Z =\frac{T - \mu_T}{\sigma_T} $, where $\mu_T = \frac{n(n+1)}{\sigma_T}$ and $\sigma_T^2 = \frac{n(n+1)(2n+1)}{24}$.
+
+    The $z_{\alpha}$ value from the \emph{normal cdf} table is compared with the $z$ score calculated from   the preceding equation to decide whether the \emph{null hypothesis} should be rejected at a level of significance $\alpha$. Note the approximation is sufficiently accurate for $n \geq 15$.
+    \end{frame}
+
+\begin{frame}{Nonparametric methods}
+    \begin{block}{Kruskal-Wallis test for paired observations in $k$ samples}
+    \end{block}
+    \begin{itemize}
+        \item The test is applied to, say, $k$ independent \emph{random samples} of sizes $n_i$ , $i = 1, 2, \dots , k$, with a total of $n$ observations.
+        \item It is assumed that all samples are \emph{random samples} from their individual populations and that there is independence within the samples and between them.
+        \item The null hypothesis is that the samples come from the same continuous population. The alternate hypothesis is that at least one of the populations tends to produce comparatively larger values than the others.
+        \item Following a procedure similar to that in the \emph{Wilcoxon signed-rank}, the pooled data are ranked from the lowest to the highest as if they belong to one sample.
+
+    \end{itemize}
+    If $R_i$ is the sum of the ranks of the data in the $ith$ sample of size $n_i$ and $n$ is the total sum of the $k$ samples, the normalized test statistic is $H = \frac{12}{n(n+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(n+1)$. Under the \emph{null hypothesis} that the samples come from the same population, $H$ has an approximate \emph{chi-squared distribution} with $(k - 1)$  \emph{degrees of freedom}.
+   \end{frame}
+
+\begin{frame}{Nonparametric methods}
+    \begin{block}{Tests on randomness: runs test}
+    \end{block}
+    \begin{itemize}
+        \item In the applications of statistical methods, it is often assumed that a sample is taken at random and that the values of a sample represent variables that are themselves random.
+        \item A technique based on the \emph{number of runs } shown by a series is applicable as a general test on randomness.
+        \item A \alert{run} is a sequence of variables of a particular kind that is preceded and followed by a sequence of variables of a different kind or by no variables at all.
+        \item For example, \emph{magnitudes greater} than the \emph{median} can be of one kind, in which case \emph{magnitudes below} the \emph{median} will constitute the other kind.
+        \item As an illustration, consider the following series which represents 35 pollutant levels in a stream measured at regular intervals of time denoted by either $A$, \emph{acceptable}, or $U$ , \emph{unacceptable}:
+            \[
+U \, U  \, A  \ U  \ A  \ U  \ U  \ U  \ U  \ U  \ A  \ A  \ U  \ U  \ U  \ U  \ A  \ U  \ A  \ A  \ A  \ A  \ U  \ U  \ A  \ A  \ A  \ A  \ A  \ U  \ A  \ A  \ U  \ U  \ A 
+\]
+\item By the given definition, this comprises 16 runs where, for example, each run of one or more $U$s is preceded and followed by a run of one or more $A$s or no measurements at all.
+\item In such cases, the total number of \emph{runs} relative to the \emph{sample size} provides an indicator of \emph{randomness}. Too few runs suggest a \emph{grouping}, \emph{clustering}, \emph{trend}, or \emph{periodic} behavior, whereas too many runs lead to the suspicion that there are \emph{high-frequency oscillations}. A random series should have neither too few nor too many runs.
+    \end{itemize}
+
+    \end{frame}
+
+\begin{frame}{Nonparametric methods}
+    \begin{block}{Tests on randomness: runs test}
+    \end{block}
+    In a sequence containing $n$ variables of one kind and $m$ variables of another kind, the sampling distribution of the total number of runs, $R$, can be closely approximated by the normal distribution with $\mu_R = 1 + \frac{2nm}{(n+m)}$ and $\text{Var}[R] = \frac{2nm(2nm - n - m)}{(n+m)^2 (n+m-1)}$. The approximation is quite close for  $m, n>9$
+    \begin{exampleblock}{Runs test on annual river flows}
+        Annual flows  for the period 1938-1967 are tabulated below in millimetres of equivalent runoff over the catchment area above the site.
+        \vspace{5pt}
+
+  \begin{tabular}{rrrrrrrrrr} % no | bars, no \hline
+      946 & 1074 & 867 & 1058 & 838 & 837 & 1133 & 815 & 1138 & 869 \\
+      910 & 868 & 927 & 1193 & 969 & 742 & 1386 & 737 & 1113 & 955 \\
+      1143 & 665 & 1187 & 947 & 955 & 891 & 763 & 1288 & 1302 & 1029
+  \end{tabular}
+
+  Our objective is to ascertain whether the population is random using the \emph{runs test}.
+    \emph{Null hypothesis},$H_0$ : The population is random.\\
+    \emph{Alternate hypothesis},$H_1$  : The population is not random.\\
+    \emph{Level of significance}, $\alpha = 0.05$\\
+    The \emph{median} is 951 mm and the \emph{runs} above the \emph{median} are underlined as follows:
+         \vspace{5pt}
+
+  \begin{tabular}{rrrrrrrrrr} % no | bars, no \hline
+      946 & \underline{1074} & 867 & \underline{1058} & 838 & 837 & \underline{1133} & 815 & \underline{1138} & 869 \\
+      910 & 868 & 927 & \underline{1193} & \underline{969} & 742 & \underline{1386} & 737 & \underline{1113} & \underline{955} \\
+      \underline{1143} & 665 & \underline{1187} & 947 & \underline{955} & 891 & 763 & \underline{1288} & \underline{1302} & \underline{1029}
+  \end{tabular}
+
+ 
+    \end{exampleblock}
+ 
+    \end{frame}
+
+
+\begin{frame}{Nonparametric methods}
+
+    \begin{exampleblock}{Runs test on annual river flows}
+  The number of values $n$ \emph{above the median} equal the number of values $m$ \emph{below the median}, 15. The total number of observed \emph{runs} $r = 20$. The test statistic is:
+  \[
+      Z = \frac{(R \pm (1/2) )- \mu_R}{\sqrt{Var[R]}}
+      \]
+      By using a two-tailed test with $\alpha = 0.05$, the \emph{critical region} is $Z$ (positive with $R + 1/2$) $>$ 1.96 and $Z$ (negative with $R - 1/2$) $<$ -1.96, from  the \emph{normal cdf}. Sample estimates of the \emph{mean} and the \emph{variance} of the total number of runs are:
+      \[
+          \mu_R = 1 + \frac{2 x 15 x 15}{30} = 16 \quad \text{and} \quad Var[R] = \frac{2 x 15 x 15(450-30)}{30^2 x 29} = 7.24
+      \]
+      Hence,
+      \[
+          z = \frac{(20 + 1/2) - 16}{\sqrt{7.24}} = 1.49
+      \]
+\emph{Decision: the null hypothesis that the population is random is not rejected}.
+    \end{exampleblock}
+    \end{frame}
+
+\begin{frame}{Nonparametric methods}
+
+    \begin{block}{Spearman’s rank correlation coefficient}
+    \end{block}
+    \alert{Spearman's rank correlation coefficient}; it is often referred to simply as the \emph{rank correlation coefficient}.That is, the data are converted to ranks.  \emph{Spearman's rank correlation coefficient} is estimated as follows for a set of paired data, $(x_i , y_i)$, $i = 1, 2, \cdots, n$, that are ranked separately so that, for each data set, the highest value has rank 1 and rank $n$ is that of the lowest value:
+    \[
+        r_s = 1 - \frac{6\sum_{i=1}^n d_i^2}{n(n^2 -1)}
+    \]
+    where $d_i$ is the difference between the ranks given to $x_i$ and $y_i$. Under the \emph{null hypothesis} of no correlation between the $X$ and $Y$ series, the distribution of $r_s$ can be closely approximated by the \emph{normal distribution} with $\mu_{r_s} = 0$ and $Var[r_s ] = 1/(n-1)$.
+    \end{frame}
+
 
 
 \end{document}

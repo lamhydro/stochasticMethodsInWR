@@ -38,11 +38,12 @@
 \usepackage{caption} % Required for \captionof
 
 % Title Information
-\title{Stochastic methods in water resources}
-\subtitle{Lecture 4: Moments, characteritics function, known probability distributions, bivariate probability distributions}
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 1: Introduction to probability and statistics \\ Lecture 4: Moments, characteritics function, known probability distributions, bivariate probability distributions}
 \author{Luis Alejandro Morales, Ph.D.}
-\institute{Universidad Nacional de Colombia} %// Department of Civil and Agriculture Engineering}
-\date{\today}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
 
 \begin{document}
 
@@ -56,13 +57,13 @@
 \section{Measures of probability distribution}
 \subsection{Expected value}
 \begin{frame}{Expected value}
-    The measures or descriptors of a random variable determine important features of their behaviour and thus describe the \emph{pmfs} and \emph{pdfs}. The descriptors are defined upon the \emph{pmfs} o \emph{pdfs} and are known as the statistics of the random variable. 
+    The measures or descriptors of a random variable determine important features of their behaviour and thus describe the \emph{pmfs} and \emph{pdfs}. The descriptors are defined upon the \emph{pmfs} o \emph{pdfs} and are known as the \emph{statistics} of the random variable. 
     \begin{block}{Expected value}
         If $X$ is a discrete random variable and $g(x)$ is a function of the random variable, the \alert{expected value} of $g(x)$ is:
         \[
             E\left[g(x)\right] = \sum g(x_i) p_X(x_i)
         \]
-        If $X$ is continuos, \alert{expected value} is:
+        If $X$ is continuos, the \alert{expected value} is:
         \[
             E\left[g(x)\right] = \int_{-\infty}^{\infty} g(x) f_X(x)
         \]
@@ -90,18 +91,21 @@ for a continuous variable:
         \]
         where $r$ is an positive number.  The most known moments to describe $pmfs$ or $pdfs$ are the \alert{mean} ($\mu_X$), the \alert{variance} ($s_X = \sigma_X^2$) and the asymmetry  $\gamma$.
     \end{block}
-    \vspace{-6pt}
+    \vspace{-2pt}
     \begin{block}{Mean, $\mu_X$}
         The \alert{mean} is the first moment ($r = 1$) with respect to the origin ($a = 0$). It is measure that describe the central tendecy of the random variable. The \alert{mean} has the same units that $X$. This is defined as:
-\begin{minipage}[t]{0.48\textwidth}
+
+\begin{minipage}[]{0.48\textwidth}
+    \vspace{3pt}
 \centering
 \textbf{Discrete random variable $X$}
 \[
 \mu_X = E \left[ X \right] = \sum_{\text{todo $x_i$}} x_i p_X (x_i)
 \]
 \end{minipage}
-\hfill
-\begin{minipage}[t]{0.48\textwidth}
+%\hfill
+\begin{minipage}[]{0.48\textwidth}
+    \vspace{3pt}
 \centering
 \textbf{Continuous random variable $X$}
 \[
@@ -278,7 +282,7 @@ This indicate that $f_V(v)$ is simetric with respecto to $\mu_V$.
 
 \end{minipage}
 
-The moment of order $m$ can be obtained by deriving $M_X (t)$ with respect to $t$ and evaluating the derivative for $t=0$, so:
+The \emph{moment of order $m$} can be obtained by deriving $M_X (t)$ with respect to $t$ and evaluating the derivative for $t=0$, so:
 \[
     \frac{d^m M_X (t=0)}{d t^m} = \int_{-\infty}^{\infty} x^m f_X (x) dx = E[X^m]
 \]
@@ -472,7 +476,7 @@ where the functions $K_Z (t) = \ln \phi_Z (t)$ and $K_X (t) = \ln \phi_X (t)$ ar
     \[
         K_Z (t) = \sum_{n=1}^{\infty} \frac{(it)^n}{n} \kappa_n
 \]
-where the \alert{cummulants},  $\kappa_n = \frac{1}{i^n} \frac{d^n K_Z (t)}{ds^n}$. The \emph{cumulants} are related to the pdf  moments and viseversa so:
+where the \alert{cummulants},  $\kappa_n = \frac{1}{i^n} \frac{d^n K_Z (t)}{dt^n} \vert_{t=0}$. The \emph{cumulants} are related to the pdf  moments and viseversa so:
 \begin{align*}
     \kappa_1 &= \mu_1 \\
     \kappa_2 &= \mu_2 - \mu_1^2 = \sigma^2 \\
@@ -485,11 +489,11 @@ where the \alert{cummulants},  $\kappa_n = \frac{1}{i^n} \frac{d^n K_Z (t)}{ds^n
 
 \subsection{Estimation of parameters} % From Kotte
 \begin{frame}{Estimation of parameters}
-    \alert{Statistical inference} serves to get an estimate of the experiment parameters based on a random sample from the population. In statistical inference is assumed that the distribution of the population is known. The \alert{estimator} is thus a method to obtain a parameter value based on the sample and can be \emph{bias}. This methods of parameter estimation are known as \alert{point estimation}. In summary, the problem of statistical inference is to find the parameters of a probability distribution (or parametric distribution) that fit the best the sample data. The most known methods (estimators) to perform that are treated here :\emph{the method of moments}, \emph{Method of probability weighted and L-moments} and \emph{Maximum Likelihood}.
+    \alert{Statistical inference} serves to get an \emph{estimate of the experiment parameters} based on a \emph{random sample} from the population. In statistical inference is assumed that the distribution of the population is known. The \alert{estimator} is thus a method to obtain a parameter value based on the sample and can be \emph{bias}. This methods of parameter estimation are known as \alert{point estimation}. In summary, the problem of statistical inference is to find the parameters of a probability distribution (or parametric distribution) that fit the best the sample data. The most known methods (estimators) to perform that are treated here :\emph{the method of moments}, \emph{Method of probability weighted and L-moments} and \emph{Maximum Likelihood}.
 
     \begin{block}{The method of moments}
 
-        The \alert{method of moments} is the most know analytical estimator. Given a \emph{pdf} of the population and applying the concept of moments, one can get analytical expressions for the moments (.e.g $\mu_X$ and $\sigma_X^2$) as function of the pdf parameters. For instance, in the case of a \emph{pdf} with two parameters ($\alpha_1$ y $\alpha_2$), the concept of moments is used to obtain two equations, one for $\mu_X$ and the other for $\sigma_X^2$. An estimate of $\hat{\mu}_X$ and $\hat{\sigma}_X^2$ is calculated based on the sample data. This two estimates are replaced in the two equations to get the \emph{pdf} parameters. One of the problem with the method is that the parameter estimates may be biased, that is, if for $m$ different samples of size $n$, different \emph{pdf} parameters are estimated, the average of the parameter values does not converge to the real value of the parameter. Also, the estimator can be ineficient and an efficient estimator has the smallest variance among all posible estimator.  
+        The \alert{method of moments} is the most known analytical estimator. Given a \emph{pdf} of the population and applying the concept of moments, one can get analytical expressions for the moments (.e.g $\mu_X$ and $\sigma_X^2$) as a function of the  \emph{pdf parameters}. For instance, in the case of a \emph{pdf} with two parameters ($\alpha_1$ y $\alpha_2$), the concept of moments is used to obtain two equations, one for $\mu_X$ and the other for $\sigma_X^2$. An   \emph{estimate} of $\hat{\mu}_X$ and $\hat{\sigma}_X^2$ is calculated based on the  \emph{sample data}. This two estimates are replaced in the two equations to get the \emph{pdf parameters}. One of the problem with the method is that the parameter estimates may be biased, that is, if for $m$ different samples of size $n$, different \emph{pdf parameters} are estimated, the average of the parameter values does not converge to the real value of the parameter. Also, the estimator can be \emph{inefficient} and an \emph{efficient estimator} has the smallest variance among all possible estimator.  
 
     \end{block}
 \end{frame}
@@ -604,7 +608,7 @@ Suppose that we have the following table with the fourteen maximum precipitation
 
 \begin{minipage}{0.50\textwidth}
 \centering
-    \includegraphics[width=\textwidth]{ta321.png}
+    \includegraphics[width=0.98\textwidth]{ta321.png}
 \end{minipage}
  \hfill
 \begin{minipage}{0.48\textwidth}
@@ -670,7 +674,7 @@ Suppose that we have the following table with the fourteen maximum precipitation
         \]
         where $\hat{p}$ is and estimator of $p$. 
     \end{exampleblock}
-    The \emph{maximum likelihood method} is the most implemented method. However, large samples are required to prevent the estimator becomes unbiased. This estimator does not have a low variance in comparison with others. Sometimes the estimators can be obtained analytically so numerical methods are needed.
+    The \emph{maximum likelihood method} is the most implemented method. However, large samples are required to prevent the estimator becomes biased. This estimator does not have a low variance in comparison with others. Sometimes the estimators cannot be obtained analytically so numerical methods are needed.
 \end{frame}
 
 \section{Multiple random variables} % From Kotte
