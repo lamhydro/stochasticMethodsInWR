@@ -40,7 +40,7 @@
 % Title Information
 \title{STOCHASTIC METHODS IN WATER RESOURCES}
 \vspace{25pt}
-\subtitle{Unit 1: Introduction to probability and statistics \\ Lecture 4a: Model estimation and testing}
+\subtitle{Unit 1: Introduction to probability and statistics \\ Lecture 5: Model estimation and testing}
 \author{Luis Alejandro Morales, Ph.D.}
 \institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
 %\date{\today}
@@ -718,6 +718,228 @@ U \, U  \, A  \ U  \ A  \ U  \ U  \ U  \ U  \ U  \ A  \ A  \ U  \ U  \ U  \ U  \
     where $d_i$ is the difference between the ranks given to $x_i$ and $y_i$. Under the \emph{null hypothesis} of no correlation between the $X$ and $Y$ series, the distribution of $r_s$ can be closely approximated by the \emph{normal distribution} with $\mu_{r_s} = 0$ and $Var[r_s ] = 1/(n-1)$.
     \end{frame}
 
+%-------
+% From Kotte
+\section{Goodness-of-fit tests}
+\begin{frame}{Goodness-of-fit tests}
+
+    \begin{block}{Generalities}
+    \end{block}
+        \begin{itemize}
+            \item \emph{Hypothesis-testing} procedures related to the \emph{parameters} of a distribution.
+            \item Another important type of hypothesis concerns the \emph{form of a probability distribution}. It may, for example, be necessary to test whether a \emph{discrete variable} has a \emph{Poisson distribution} or whether a \emph{continuous variable} is \emph{normally distributed}.
+            \item For these purposes, we may compare \emph{observed} and \emph{theoretical cumulative frequencies}.
+            \item To test that, there are some two main types of \alert{goodness-of-fit tests}.
+        \end{itemize}
+
+    \end{frame}
+
+\begin{frame}{Goodness-of-fit tests}
+
+    \begin{block}{Chi-squared goodness-of-fit test}
+    \end{block}
+
+    The \alert{chi-squared test} is a \emph{test of significance} based on the \emph{chi-squared statistic} with \emph{cdf} given by
+    \[
+        F(\chi^2) = \frac{1}{2} \int_0^{\chi^2} \frac{(u/2)^{(\nu/2)-1} e^{-u/2}}{\Gamma(\nu/2)} du
+    \]
+
+    Note that the \emph{statistic} is derived by the sum of squares of \emph{independent standard normal variates} $\chi^2 = Z_1^2 + Z_2^2 + \cdots + Z_n^2$. The main steps are the \emph{ranking of a sample of data}, \emph{division into a number of classes} depending on the magnitudes and the range, and the \emph{fitting of a probability distribution}. The statistic comes from the weighted sum of squared differences between the observed and theoretical frequencies.
+    In the \alert{Chi-squared goodness-of-fit test},  the test statistic is
+    \[
+        X^2 = \sum_{i=1}^l \frac{(O_i - E_i)^2}{E_i}
+    \]
+    where $O_i$ and $E_i$ are the \emph{observed} and \emph{expected} (obtained from a hypothetical probability distribution) frequencies, respectively, for each class $i$ out of a total of $l$ classes into which an ordered sample of $n$ observations is placed. The \emph{sampling distribution} of $X^2$ tends, as $n$ approaches infinity, to a $\chi^2$ distribution, where $\nu = l - k - 1$ represents the \emph{degrees of freedom} and $k$ is the number of parameters estimated from the same sample as used in the test. The test is applicable to \emph{discrete and continuous variables}, with a minimum of 5 values in each class.
+    \end{frame}
+
+\begin{frame}{Goodness-of-fit tests}
+
+    \begin{block}{Chi-squared goodness-of-fit test}
+    \end{block}
+
+    \begin{exampleblock}{Goodness-of-fit of wet runs of rainfall}
+\begin{minipage}[t]{0.54\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+        Whereas period of consecutive rainy days is known as \emph{wet run}, a period of consecutive dry days is known as \emph{dry run}. Suppose that in a weather station, periods of wet and dry runs are extracted from daily rainfall time series between January 1958 and May 1965. It is that the \emph{geometric distribution} provides a close fit to the observed distribution of wet runs. For a formal assessment of these fits, we can use the \emph{chi-squared goodness-of-fit test}.
+
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+   \vspace{0pt} % prevent extra spacing at top
+    \centering
+    \includegraphics[width=\textwidth]{ta415.png}
+\end{minipage}
+
+     \emph{Null hypothesis}, $H_0 :$ The random variable (wet runs) has a geometric distribution with $p = 0.392$.
+
+    \emph{Alternate hypothesis}, $H_1 :$  The random variable does not have the specified distribution.
+
+    \emph{Level of significance}, $\alpha = 0.01$ \\
+
+    Note that there are $l = 10$ classes and $k = 1$ (one parameter), so  gives $v = 10 - 1 - 1 = 8$. According to the values in the table, $X^2$ is 8.49. From the table of the \emph{chi-squared distribution cdf} for $\nu$ degrees of freedom, $\chi_{8,0.05}^2 = 15.5$. \emph{Decision: Because $X^2 < \chi_{8,0.05}^2$ $H_0$ is not rejected}. It is concluded that the \emph{wet runs} have a \emph{geometric distribution} as specified.
+        
+    \end{exampleblock}
+
+   \end{frame}
+
+\begin{frame}{Goodness-of-fit tests}
+    \begin{block}{Kolmogorov-Smirnov goodness-of-fit test}
+    \end{block}
+    The \alert{Kolmogorov-Smirnov goodness-of-fit test} is a \emph{nonparametric test} that relates to the \emph{cdf} rather than the \emph{pdf} of a \emph{continuous variables} only.The \emph{test statistic}, in a \emph{two-sided test}, is the \emph{maximum absolute difference} (that is, usually the vertical distance) between the empirical and hypothetical \emph{cdfs}.
+
+    For a continuous variate X let $x_{(1)}, x_{(2)}, \cdots, x_{(n)},$ represent the ordered (ascending order) statistics of a sample of size $n$. The empirical or sample distribution function $F_n (x)$ is a \emph{step function}. This gives the proportion of values not exceeding $x$ and is defined as:
+    \begin{align*}
+        F_n (x) &= 0, \quad \text{for } x < x_{(1)}\\
+                &= k/n, \quad \text{for } x_{(k)} \leq x\leq x_{(k+1)}; k= 1, 2, \cdots, n-2 \\
+                &= 1, \quad \text{for } x > x_{(n)}
+    \end{align*}
+    Let $F_0 (x)$ denote a completely specified theoretical continuous \emph{cdf}. The \emph{null hypothesis $H_0$ } is that the true \emph{cdf} of $X$ is the same as $F_0 (x)$. That is, under the null hypothesis $\lim_{n \rightarrow \infty} Pr[F_n (x) = F_0 (x)] = 1 $. 
+
+    The  \emph{test criterion} is the maximum absolute difference between $F_n (x)$ and $F_0 (x)$, formally defined as $D_n = \underset{x}{\sup} | F_n (x) - F_0 (x) |$. For large values of $n$,  the limiting distribution of n $D_n$ , is
+
+    \[
+        \lim_{n\rightarrow \infty} \left[ \Pr [ \sqrt{n} D_n \leq z] \right]=\left( \frac{\sqrt{2\pi}}{z} \right) \sum_{k=1}^{\infty} e^{\left[-(2k-1)^2 \frac{\pi^2}{8z^2}\right]}
+    \]
+
+   \end{frame}
+
+\begin{frame}{Goodness-of-fit tests}
+    \begin{block}{Kolmogorov-Smirnov goodness-of-fit test}
+    \end{block}
+
+    Thus, one can can compute that the critical values $D_{n,\alpha}$ for large samples, say, $n > 35$, are $1.3581/\sqrt{n}$ and $1.6276/\sqrt{n}$ for $\alpha = $ 0.05 and 0.01, that is, for probabilities of 0.95 and 0.99 in equation above, respectively. Note that from simulations, note that these results hold closely for the summation of even the first five terms in the equation. For smaller sample sizes, critical values $D_{n,\alpha}$ are given in a table with values of $D_{n,\alpha}$ for the \emph{Kolmogorov-Smirnov goodness-of-fit test}.
+        
+   \end{frame}
+
+\begin{frame}{Goodness-of-fit tests}
+    \begin{block}{Anderson-Darling goodness-of-fit test}
+    \end{block}
+    The \alert{Anderson-Darling test} is devised to give \emph{heavier weighting to the tails} of a distribution where unexpectedly high or low values, called outliers are sometimes located. This is made possible if one divides the difference between the \emph{empirical cdf} $F_n (x)$ and \emph{theoretical cdf} $F_0 (x)$ to be tested by $\sqrt{F_0 (x) [1- F_0 (x)]}$. After squaring, the test statistic becomes 
+    \[
+        A^2 = \int_{\infty}^{\infty} \left[ F_n (x) - F_0 (x) \right]^2 \frac{1}{F_0 (x) [ 1- F_0 (x)]} f_0 (x) dx
+    \]
+    where $f_0 (x)$ is the \emph{hypothetical pdf}. This equation is equivalent to
+    \[
+        A^2 = -n - \sum_{i=1}^n \frac{(2i-1) \left[ \ln F_0(x_{(i)})+\ln(1-F_0 (x_{(n-i+1)})) \right]}{n}
+    \]
+    where $x_{(1)}, x_{(2)}, \cdots, x_{(n)} $ are the observations ordered in ascending order. Because the \emph{cdfs} are in the range 0-1, their logarithms are negative and hence the summation on the righthand side of the equation is negative. The absolute value of the summation is also greater than $n$, thus resulting in a positive value of $A^2$.
+
+    For large values of the test statistic $A^2$, the \emph{ null hypothesis} that $F_n (x)$ and $F_0 (x)$ have the same distribution is rejected. From tabulated values, for large samples the values of the statistic are $A_{0.05}^2 = 2.492$ and $A_{0.01}^2 = 3.857$, for $\alpha = $ 0.05 and 0.01, respectively. These critical values of test statistic are sufficiently accurate for $n>10$.  
+
+        
+   \end{frame}
+
+\begin{frame}{Goodness-of-fit tests}
+    The following are a summary of other tests to verify the fit of a \emph{normal distribution} to an observed distribution. 
+    \begin{block}{Sample skewness $g_1$ and kurtosis $g_2$}
+        For the \emph{null hypothesis} $E(G_1) = 0$ and $E(G_2) = 3$. Also, the \emph{asymptotic variance} of the \emph{skewness} is $Var(G_1) = \frac{6n(n-1)}{(n-2)(n+1)(n+3)}$, which for large samples tends to $Var(G_1) =6/n$. Under the null hypothesis, the distribution of the \emph{sample skewness} $G_1$ is normal whereas that of the \emph{sample kurtosis} $G_2$ is nonnormal.
+
+    \end{block}
+
+    \begin{block}{Shapiro and Wilk's W-statistic}
+        This is the ratio of the sum of the squares of a specified linear combination of all the ordered sample values to the sum of the squared deviations of each of the values from the sample mean $\bar{x}_n$. It is given by
+        \[
+        W = \frac{\sum_{i=1}^{[m]} a_{n, n+1-i} \left[ x_{(n+1-i)} - x_{(i)} \right]^2}{\sum_{i=1}^n [x_i - \bar{x}_n ]^2}  
+        \]
+The highest integer less than $n/2$ becomes the upper limit of summation $[m]$ in the numerator. Note that the weights $a_{n, n+1-i}$ are tabulated by many authors. 
+    \end{block}
+   \end{frame}
+
+%-------
+% From Diaz-Gran
+\section{Detection of outliers}
+\begin{frame}{Detection of outliers}
+
+    \begin{block}{Generalities}
+    \end{block}
+        \begin{itemize}
+            \item \emph{Outliers} are sample data that deviate significantly from the rest. These are \emph{unexpected hight or low values} in comparison to the other data, and these  are not apparently representative of the sample and thus could not come from the same distribution.  
+            \item The elimination of outliers could affect the  \emph{statistical parameters} initially estimated with the original sample, even more, when the sample is small. 
+            \item A first step in detecting  outliers in hydrological data is by plotting the data \emph{histogram}, \emph{Q-Q plot} and \emph{box plots}. A second step is to compute some \emph{statistics} and apply \emph{hypothesis tests}. 
+            \item Two procedures are recommended to deal with \emph{outliers}:
+                \begin{enumerate}
+                    \item Known physical or procedural explanation of the occurrence of the outlier
+                        \begin{itemize}
+                            \item Reject the sample point 
+                            \item Correct the sample point based on physical or procedural knowledge
+                            \item Reject the sample point and replace it with a new observation
+                        \end{itemize}
+                    \item Unknown physical or procedural explanation of the occurrence of the outlier
+                        \begin{itemize}
+                            \item Reject the sample point based on statistical analysis
+                            \item Correct the sample point using statistical knowledge 
+                            \item Reject the data and replace it with a new observation
+                        \end{itemize}
+                \end{enumerate}
+
+            \item Statistical tests can be used to assess the outlier when there is no physical or procedural reasons that cause it. 
+            \item One strategy to know if a sample point is an outlier is to see if after including it, the sample point affect the analysis of interest.
+        \end{itemize}
+   \end{frame}
+
+\begin{frame}{Detection of outliers}
+    \vspace{-5pt}
+    \begin{block}{Statistical test}
+    \end{block}
+    \vspace{-5pt}
+    To detect outliers, we suppose that the sample data comes from a certain \emph{probability distribution}. The following tests suppose that the sample comes from  a \emph{normal distribution}.
+
+    \begin{itemize}
+        \item \alert{Z-score test}\\
+            The test establishes that the sample point $Y_i$ is a potential \emph{outlier} if the absolute value of $Z_i = \frac{Y_i - \bar{Y}}{s_Y}$ is greater than 3. The test establishes how far, in term of $s_Y$, is $Y_i$ according to a \emph{normal distribution}. The maximum $Z_i$ value is $\frac{n-1}{\sqrt{n}}$, which means that the test can be applied to $n\geq 11$, otherwise $Z_{i_{max}} < 3$. The \emph{Z-score} statistic is
+    \vspace{-7pt}
+            \[
+                M_i = \frac{0.6745 (Y_i - \tilde{Y})}{DMA}
+            \]
+            where $\tilde{Y}$ is the median of the data sample, and $DMA$ is the median of the absolute differences between each sample point and $\tilde{Y}$. A sample point is thus considered an \emph{outlier} if $|M_i| > 3.5$.
+        \item \alert{Grubbs test}\\
+            This test detects only one outlier in a data sample that follow approximately a \emph{normal distribution}. The \emph{null hypothesis $H_0$}: there is no outliers in the sample, and the \emph{alternate hypothesis $H_1$}: there is one outlier in the sample. The statistic $G = \frac{\bar{Y}-Y_{min}}{s_Y}$ or $G = \frac{Y_{max}-\bar{Y}}{s_Y}$ is calculated. The  expression of $G$ is implemented whether one want to verify either $Y_{min}$ or $Y_{max}$ of the sample. For a level of significance $\alpha$, $H_0$ is rejected if 
+    \vspace{-9pt}
+            \[
+                G > \frac{n-2}{\sqrt{n}} \left[ \frac{t_{n-2, 0.5\alpha/n}^2 }{n-2 + t_{n-2, 0.5\alpha/n}^2}\right]
+                \]
+
+    \vspace{-3pt}
+                where $n$ is the data sample size and $t_{n-2, 0.5\alpha/n}^2 $ is a critical value of the \emph{t-student distribution}.
+
+       \end{itemize}
+   \end{frame}
+
+\begin{frame}{Detection of outliers}
+    \begin{block}{Statistical test}
+    \end{block}
+    \vspace{-5pt}
+
+    \begin{itemize}
+        \item \alert{Tietjen and Moore test}\\
+            This test serves to detect multiple outliers in a data sample that follows a \emph{normal distribution}. For this test, the \emph{null hypothesis $H_0$}: there are not outliers in the sample,  and the \emph{alternate hypothesis $H_1$}: there are $k$ outliers in the sample. The sample points are ordered from the minimum to the maximum and the following statistic is computed
+            \[
+                L_k = \frac{\sum_{i=1}^{n-k} (Y_i - \bar{y}_k )^2}{\sum_{i=1}^{n}  (Y_i - \bar{Y})^2} \quad \text{or} \quad L_k = \frac{\sum_{i=k+1}^{n} (Y_i - \bar{y}_k )^2}{\sum_{i=1}^{n}  (Y_i - \bar{Y})^2}
+            \]
+            where the equations of $L_k$ serve to verify high or low values, respectively, $\bar{y}_k$ is the average of the sample $k$ with the highest or lowest values. In either case, $H_0$ is rejected if $L_k < L_{c,\alpha}$ where $L_{c, \alpha}$ are get from a table with critical values of the \emph{Tietjen and Moore test} as a function of $\alpha$, $n$ and $k$. 
+
+       \end{itemize}
+   \end{frame}
+
+
 
 
 \end{document}
+
+%-------
+% From Kotte
+%\section{Analysis of variance}
+%\begin{frame}{ Analysis of variance}
+%
+%    \begin{block}{Generalities}
+%
+%        \begin{itemize}
+%            \item The \alert{analysis of the variance} or \alert{ANOVA} is concerned only with the variation in the means through the analysis of sums of squares. 
+%            \item The methods discussed here vary from a \emph{single-factor ANOVA} to the design and analysis of results of experiments involving two or more factors with interactions between them.
+%
+%           \end{itemize}
+%    \end{block}
+%
+%
+%   \end{frame}
+
+
