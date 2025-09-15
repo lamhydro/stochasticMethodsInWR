@@ -1,0 +1,116 @@
+\documentclass[8pt]{beamer}
+\usetheme{default} % Very simple theme
+\usecolortheme{dove} % Minimalist grayscale colors
+\setbeamertemplate{navigation symbols}{} % Remove navigation bar
+
+% Define brand-like colors
+\definecolor{myblue}{RGB}{0, 102, 204}    % Blue for standard blocks
+\definecolor{mygreen}{RGB}{0, 153, 0}     % Green for example blocks
+\definecolor{myred}{RGB}{204, 0, 0}       % Red for alert blocks
+\definecolor{myorange}{RGB}{255, 128, 0} % For \emph
+
+% Accent color for titles, bullets, etc.
+\setbeamercolor{structure}{fg=myblue}
+
+% Block colors
+\setbeamercolor{block title}{bg=myblue, fg=white}
+\setbeamercolor{block body}{bg=blue!5, fg=black}
+
+\setbeamercolor{exampleblock title}{bg=mygreen, fg=white}
+\setbeamercolor{exampleblock body}{bg=green!5, fg=black}
+
+\setbeamercolor{alertblock title}{bg=myred, fg=white}
+\setbeamercolor{alertblock body}{bg=red!5, fg=black}
+\setbeamercolor{alerted text}{fg=myred}
+
+% Optional: color for \example text
+\setbeamercolor{example text}{fg=mygreen}
+
+% Custom emph (orange text instead of italic)
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{myorange}{#1}}
+
+
+\usepackage{graphicx} % Package for images
+\usepackage{amsmath} % Package for images
+\graphicspath{{figs/}} % Path to your figures directory
+\usepackage{array}  % For better column spacing
+\usepackage{caption} % Required for \captionof
+
+% Title Information
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 3: Random functions \\ Lecture 9: Definitions, random function types, stationary random functions}
+\author{Luis Alejandro Morales, Ph.D.}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------
+% From Bierke
+\section{Definitions}
+\begin{frame}{Definitions}
+    \begin{itemize}
+        \item Consider a \emph{hydrological variable} $Z$ that can either varies in space (e.g. hydraulic conductivity) or in time (e.g. surface water level) or in space and time (e.g. growndwater depth). 
+        \item The value of any of these variables is known only in those places where it is observed, and it is unknown in other places. 
+        \item Accordingly, the value of $Z$ is uncertain, to deal with this, instead of using one single functio either in time ($Z(t)$), or space ($Z(\mathbf{x})$) or space and time ($Z(\mathbf{x},t)$), multiple functions are used (see figure for $Z(t)$).  
+        \item Each of these functions have the same probability of representing the true. 
+        \item The family of equally probable functions representing $Z$ is known as an \alert{emsemble} or a \alert{random function}. 
+
+    \end{itemize}
+
+\centering
+\includegraphics[width=0.7\linewidth]{fiBi51.png}  % from Bierk
+
+\end{frame}
+
+\begin{frame}{Definitions}
+    \begin{itemize}
+        \item \alert{Random field}: If $Z$ is a function of space ($\mathbf{x}$), $Z(\mathbf{x})$, $\mathbf{x}= (x,y, z)$. 
+        \item \alert{Random or stochastic process}: If $Z$ is a function of time ($t$), $Z(t)$.
+        \item \alert{Space-time random field}: If $Z$ is a function of space ($\mathbf{x}$) and time ($t$), $Z(\mathbf{x},t)$, $\mathbf{x}= (x,y, z)$.
+   \end{itemize}
+   Here, we are going to focus on \emph{random process} ($Z(t)$). Note that in the figure above, four functions $Z(t)$ (\emph{ensemble members}) are shown and each of them are know as \emph{realizations} and denoted as $z(t)$. The number of \emph{realizations}, depending on the variable's nature, can be finite or infinite.\\ 
+
+   Another way of explaining this concept is to imagine a \emph{random function} as a collection of random variables (one at every location in space or point in time). Observing at the figure above, for each time $t$, a $Z(t)$ is defined. This is why for each $t$, $Z(t)$ is described with a \emph{pdf} $f_Z (z; t)$, which depends not only on the value of $z$ but also on the value of $t$. These \emph{pdf} is estimated based on sample of data taken at particular time (e.g. $t_1$). As shown in the figure, the \emph{pdf}s of the data sample at $t_1$ and $t_2$ are different, and indicate that variance is larger in $t_1$ than in $t_2$ and thus more uncertain. \\
+
+   At each point in time ($t$), $\mu_Z$ is calculated as:
+   \[
+       \mu_Z (t) = E[Z(t)] = \int_{-\infty}^{\infty} z f_Z (z; t) dz
+   \]
+   and $\sigma_Z^2$ is:
+   \[
+       \sigma_Z^2 (t) = E[(Z(t)-\mu_Z (t))^2] = \int_{-\infty}^{\infty} (z-\mu_Z (t))^2 f_Z (z; t) dz
+   \]
+
+\end{frame}
+
+\begin{frame}{Definitions}
+    The \emph{random variables} are usually correlated in time (or in space for spatial random functions). This means that the \emph{covariance} $COV[Z(t_1), Z(t_2)] \neq 0$. Note that the  further apart the points (e.g. $t_1$ and $t_2$) the lower the \emph{covariance}. This is estimated as
+    \begin{align*}
+        COV[Z(t_1), Z(t_2)]  &= E[(Z(t_1)-\mu_Z (t_1))(Z(t_2)-\mu_Z (t_2))] \\
+                             &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (z_1-\mu_{Z}(t_1)) (z_2-\mu_{Z}(t_2)) f_Z (z_1, z_2; t_1, t_2) dz_1 dz_2
+    \end{align*}
+    if $t_1 = t_2$, $COV[Z(t_1), Z(t_2)]  = \sigma_Z^2 (t)$. \\
+
+    For $n$ different locations $t_i$ where $i=1, 2, \cdots, n$, the probability measure that a realization of $Z(t)$ has the values between $z_1 < z(t_1) \leq z_1 + dz_1$, $z_2 < z(t_2) \leq z_2 + dz_2$, $\cdots$, $z_n < z(t_n) \leq z_n + dz_n$. The \emph{associated multivariate pdf} $f_{Z(t_1), Z(t_2),\cdots,Z(t_n)} (z_1, z_2, \cdots, z_n; t_1, t_2, \cdots, t_n)$
+    \begin{align*}
+        &f_{Z(t_1), Z(t_2),\cdots,Z(t_n)} (z_1, z_2, \cdots, z_n; t_1, t_2, \cdots, t_n) = \\ 
+                                                                                        &\lim_{\partial z_1, \cdots, \partial z_n \rightarrow 0} \frac{Pr(z_1 < z(t_1) \leq z_1 + \partial z_1, z_2 < z(t_2) \leq z_2 + \partial z_2, \cdots, z_n < z(t_n) \leq z_n + \partial z_n)}{\partial z_1 \partial z_2 \cdots \partial z_n}
+    \end{align*}
+    The \emph{multivariate pdf} of a \emph{random function} is sometime referred to as \alert{multipoint pdf}, because it relates to random variables at different points or locations. Note that \emph{random function} is fully characterized if the \emph{multivariate pdf} for any set of points is known. 
+
+\end{frame}
+
+
+\begin{frame}{Types of random functions}
+
+\end{frame}
+
+\end{document}

@@ -129,7 +129,7 @@
     \alert{Selection of $T_D$ based on hydrological risk}\\
  \begin{minipage}{0.48\textwidth}
      \begin{itemize}
-         \item The table shows the values of $T_D$ for different values of $R_h$ and $n$. Note that the lesser $R_h$ the higther $T_D$. In contrast, the larger $n$ the highter $T_D$. Remember that when $T_D = n$, $R_h \approx 0.63$, which is quite high. 
+         \item The table shows the values of $T_D$ for different values of $R_h$ and $n$. Note that the lesser $R_h$ the higher $T_D$. In contrast, the larger $n$ the highter $T_D$. Remember that when $T_D = n$, $R_h \approx 0.63$, which is quite high. 
          \item For instance, in the design of a cofferdam and a diversion tunnel, it is common to adopt a streamflow design for a $T_D = 50$yrs, which correspond to $R_h = 0.096$ or 9.6\% for $n = 5$yrs. This contrast, $T_D$ for a \emph{design seismic earthquake}, according to the design codes in Colombia, is equal to 475 yrs, which correspond to $R_h = 0.1$ and $n=50$yrs. 
      \end{itemize}
 \end{minipage}
@@ -149,8 +149,140 @@ Note that when $T_D$ is low, $R_h$ is total (absolute certainty of the occurrenc
 \begin{frame}{Hydrologic design}
    \begin{block}{Definition of design return period ($T_D$)}
    \end{block}
+   \vspace{-5pt}
     \alert{Selection of $T_D$ based on economical analysis}\\
+    The effects of the occurrence of \emph{extreme hydrological events} on  the population and  economy change depending on the event and population characteristics. To establish an optimal $T_D$ is necessary to perform an economical analysis. There are two types: \alert{ the analysis of minimal cost} and \alert{ the analysis of cost-benefits}.
+    \begin{itemize} 
+        \item \emph{\underline{Analysis of minimal cost}}: The higher $T_D$ the higher the cost of the control measures (\emph{capital costs ($C_C$)}) adopted to reduce the risk (e.g. the construction of a most robust structure). The following figure shows
+
+    \centering
+\includegraphics[width=0.8\linewidth]{fiM251.jpeg}  % from Diaz-Gra
+
+    \vspace{-5pt}
+\begin{itemize}
+    \item The figure a, $C_C$ vs $T_D$,  shows that the annual capital cost $Cc$ increase when $T_D$ increase.
+        \item Given a $T_D$, there is a \emph{residual hazard}, which represents the possible inevitable damages or risks. So, the figure b represent the relations of the \emph{expected value of the damage $D_E$} due to a residual hazard and the $T_D$. Note that $D_E$ increase when $T_D$ decrease (more \emph{residual hazard}). 
+        \item The \emph{total cost $C_T$} is thus $C_T = C_C + D_E$. The curve in figure c shows $C_T$ vs $T_D$ (dotted line), from where the optimal $T_D$ is the one that minimize $C_T$. This means that
+            \[
+                \frac{dC_T}{d T_D} +\frac{dC_C}{d T_D} + \frac{dD_E}{d T_D} = 0
+            \]
+\end{itemize}
+    \end{itemize} 
 \end{frame}
+
+\begin{frame}{Hydrologic design}
+   \begin{block}{Definition of design return period ($T_D$)}
+   \end{block}
+
+   \vspace{-5pt}
+  One of the problems is how to make the curve $D_E$ vs $T_D$ (see figure b above). To make it, follows this procedure:
+
+ \begin{minipage}{0.58\textwidth}
+  \begin{itemize}
+      \item Suppose that a flood control structure  is going to be constructed. 
+      \item From hydrological studies, is possible to establish the \emph{frequency curve} ($T_R$ vs $Q$) (see figure a below) and the \emph{calibration curve} of one of the sections of the river (water level ($wl$) vs $Q$) (see figure b below). 
+      \item With formation regarding areas prone to be flooded, it is possible to build the \emph{damage curve} (water level ($wl$) vs damages) (see figure c below). 
+      \item The \emph{frequency curve} (see figure a below) can be transformed into a relations of $Q$ vs the exceedance probability ($1/T_R$) (see figure d below).  
+      \item Based on the curves in figure b and y is possible to make the curve $Q$ vs damages (see figure e) 
+      \item Finally, based on curves in figure d and e is possible to construct the \emph{curve of exceedance probability vs damages} (see figure f). 
+  \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\textwidth}
+    \centering
+\includegraphics[width=1.1\linewidth]{fiM252.jpeg}  % from Diaz-Gra
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}{Hydrologic design}
+   \begin{block}{Definition of design return period ($T_D$)}
+   \end{block}
+
+   The  \emph{curve of exceedance probability vs damages} shows the resulting damage if a flood with a $T_R$ occurs. If the \emph{design streamflow ($Q_D$)} is associated to a $T_D$, the structure would be able to prevent those damages caused by $Q\leq Q_D$, but not for $Q > Q_D$. This means that the \emph{expected value of the damage $D_E$} in a given year is 
+\[
+    D_E (T_D) = \int_{Q_D}^\infty D(q) f_Q (q) dq
+\]
+
+ \begin{minipage}{0.58\textwidth}
+where $D(q)$ is the associated damage to the occurrence of $Q=q$ and $f_Q (q)$ is the \emph{pdf} of the maximum streamflows. Note that $1/T_R$ is equivalent to $1-F_Q(q)$, where $F_Q(q)$ is the \emph{cdf} of $Q$. It is important to mention that $f_Q(q)$ is well known, so $Q_{T_R}$ is certain. This equation represent the are under the curve between 0 and $1/T_D = 1/T_R$. The curve of $D_E$ vs $T_D$ is built using the equation above for different values of $T_D$. The uncertainties associated to the different curves used to build $D_E$ vs $T_D$ are shown in the figure below.
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\textwidth}
+    \centering
+\includegraphics[width=1.1\linewidth]{fiM254.jpeg}  % from Diaz-Gra
+\end{minipage}
+%   equal to the probability of occurrence of a $Q=q$ ($f_Q (q)$) multiply by the associated damage $D(q)$
+\end{frame}
+
+\begin{frame}{Hydrologic design}
+   \begin{block}{Definition of design return period ($T_D$)}
+   \end{block}
+   \begin{itemize}
+       \item \emph{\underline{Analysis of cost-benefits}}: this analysis requires to consider all costs and benefits of the risk management policies in order to:
+           \begin{enumerate}
+               \item stablish the risk scenario (how large are the damages per year)
+                \item determine the potential risk mitigation measures and their costs
+                \item compare the benefits and the costs of reducing risk (are the benefits larger than the costs?)
+                \item compare the relationships between costs and benefits for the different measures (which bring larger net benefits?)
+           \end{enumerate}
+           The \emph{Analysis of cost-benefits} for flood events is made based on the flood type and its characteristics (e.g. water depth, duration, flow speed, rate of water rise, frequency, contamination, etc.). The analysis try to quantify the variety of damages and their associated costs, during and after the occurrence of the extreme event. According to the USA Army Corsps of Engineers, the benefits are clasified as:
+           \begin{enumerate}
+               \item Benefits due to flood mitigation ($B_{IR}$) that reduce economic losses. 
+               \item Benefits due to increments ($B_I$) of activities due to  implemented measures.
+               \item Benefits due to increments of incomes ($B_L$) due to the implemented measures (e.g. can bring more development to the area).
+           \end{enumerate}
+          Accordingly, the economic efficiency due to the implementation of one or multiple mitigation measures for flood events can be estimated as a function of $T_D$ as
+          \vspace{-3pt}
+          \[
+              BN (T_D) = B_{IR} (T_D) + B_{I} (T_D) + B_{L} (T_D) + C(T_D)
+          \]
+          where $BN$ is the \emph{net benefit} and $C$ represents the \emph{total cost} to implement, operate, and maintain the adopted measure(s). $B_{IR} (T_D) = D_E (T_D)|_{without} - D_E (T_D)|_{with} $, this is the difference between the damages without the control measures (current conditions) and the damages with the control measures (estimated using the equation for $D_E (T_D)$).
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Hydrologic design}
+    \begin{block}{Measures to mitigate flood damage}
+   \end{block}
+   \emph{Floods} are perhaps the most common and frequent extreme hydrological events. Some measures to mitigate their effects are presented here that might help in the context of hydrologic design. These measures are classified as:
+   \begin{enumerate}
+       \item \alert{structural}: these seeks to reduce damages by controlling the water flowing into the floodplain using reservoirs to store and delay the inflowing water volumes, increasing the capacity of channels to transport flow volumes, and building dikes and diversions. 
+       \item \alert{non structural}: Community preventing actions oriented towards reducing the susceptibility to damages due to floods, implementation of early warning systems to enhance preparedness and regulation policies related to land usages and relocation. 
+   \end{enumerate}
+\end{frame}
+
+\begin{frame}{Hydrologic design}
+    \begin{block}{Measures to mitigate flood damage}
+   \end{block}
+   Some of these \emph{structural} and \emph{non structural} measures  modify the hydraulic and hydrologic relationships shown in a previous figure. Such modifications are explained below.
+   \begin{itemize}
+       \item \alert{Reservoirs}: As showed in figure a, the presence of a reservoir upstream of the area that might be potentially flooded modify the \emph{$Q$ vs $T_R$} relationship (see the dotted line). So, for instance if $Q_{0_e}$ is the control discharge of the reservoir (the outflow that is regulated or released from a reservoir) and $T_{R_0}$ its return period, which can mean the maximum $Q$ eager to transport the channel or that guarantee no damages downstream. Note that $Q< Q_{0_e}$ are regulated by the reservoir. However, this $Q_{0_e}$ up to a return period $T_{R_1}$, but for $T_R >T_{R_1} $ the reservoir attenuation capacity decrease progressively and to the original \emph{$Q$ vs $T_R$} curve. The effects of the reservoir on the \emph{temporary storage of water } are also shown in figure b. 
+       \item \alert{Diversions}: These structures derive a portion of the flow volume transported by the main channel to reduce the volume that travel toward the area of interest. \emph{Figure c}  shows the effects of a diversion on the \emph{$Q$ vs $T_R$} curve (see dotted line). Again, analysing $Q_{0}$, in this case, $Q_{0_d}$, the there is not diversion if $Q< Q_{0_d}$. However, when $Q> Q_{0_d}$ the excess $Q$ is diverted limiting the channel to transport $Q_{0_d}$. When $Q$ increase the $T_{R_1}$ increase and the capacity of the diversion tends to the maximum capacity, so that, the $Q$ in the main channel will increase above $Q_{0_d}$.
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Hydrologic design}
+   \vspace{-3pt}
+    \begin{block}{Measures to mitigate flood damage}
+   \end{block}
+   \vspace{-5pt}
+   \begin{itemize}
+       \item \alert{Hydraulic modifications of the channel}: The elevations above the channel banks can be reduced if the channel is modify (e.g. dredging and horizontal alignment modification) in order to increase its capacity. These modifications change the water level vs $Q$ curve (see dotted line  in \emph{figure d}). These increments of the channel capacity upstream of the area of interest increase the water volume downstream affecting the area negatively, and modify \emph{$Q$ vs $T_R$} (see dotted line in \emph{figure e}). 
+       \item \alert{Levees}: are used to mitigate flood damage by preventing flooding. Levees modify the \emph{water level vs damage} curve as is shown in the dotted line of \emph{figure f}. Note that $C_1$ is the water level from which damages in the protected area occur with $T_D$. Also, levees change the \emph{water level vs $Q$} curve (see dotted line in \emph{figure g}), because the channel section can convey larger $Q$s. Similarly to the \emph{hydraulic modifications}, levees trigger increases of the $Q$s transported downstream changing the \emph{$Q$ vs $T_R$} curve (see dotted line in \emph{figure h}.    
+       \item \alert{Individual measures against flooding}: These measures include the use of protective barriers and low walls to stop water from entering buildings that often get flooded. These measures modify the \emph{water level vs damage} curve (see dotted line in \emph{figure f}). 
+       \item \alert{Relocation}: It consists of locating exposed and vulnerable structures in areas less susceptible to damage. Note that this modifies the \emph{water level vs damage} curve (see dotted line in \emph{figure i}), which tend to be vertical in case most of the structures are relocated. Relocation involves very high costs so its feasibility could be low. 
+       \item \alert{Land-use planning}: Seek to reduce  future vulnerability. It consist in involving building codes, relocation, and land-use change, etc.
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Hydrologic design}
+   \vspace{-3pt}
+    \begin{block}{Measures to mitigate flood damage}
+   \end{block}
+    \centering
+%\includegraphics[width=1.1\linewidth]{fiM255.jpeg}  % from Diaz-Gra
+\end{frame}
+ 
 
 \end{document}
 

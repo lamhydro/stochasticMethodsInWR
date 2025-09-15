@@ -1503,7 +1503,7 @@ where $t$ is a dummy variable.
 
 \begin{frame}{Continuous probability distributions} 
  \begin{exampleblock}{Maximum flows}
-     Based on a histogram of data of maximum annual river flows between 1930 and 1960, it was assume that the data followed a \emph{gamma pdf}. The parameters were estimated and equal to $k= 1.727$ and $\lambda = 0.00672$ cfs$^{-1}$. According to these values, $\mu_X = \frac{k}{\lambda} = \frac{1.727}{0.00672} = 256.7$ cfs, $\sigma_X  = \frac{\sqrt{k}}{\lambda} = 190$ cfs. Also, the probability that the maximum flow is less than 400 cfs in any year is $F_X (400) = \frac{\Gamma (1.727, \lambda 400)}{\Gamma (1.727)} = \frac{0.71}{0.914} = 0.78$. No that the values to estimate the numerator and denominator are taken from tables of the gamma function. 
+     Based on a histogram of data of maximum annual river flows between 1930 and 1960, it was assume that the data followed a \emph{gamma pdf}. The parameters were estimated and equal to $k= 1.727$ and $\lambda = 0.00672$ cfs$^{-1}$. According to these values, $\mu_X = \frac{k}{\lambda} = \frac{1.727}{0.00672} = 256.7$ cfs, $\sigma_X  = \frac{\sqrt{k}}{\lambda} = 190$ cfs. Also, the probability that the maximum flow is less than 400 cfs in any year is $F_X (400) = \frac{\Gamma (1.727, \lambda 400)}{\Gamma (1.727)} = \frac{0.71}{0.914} = 0.78$. Note that the values to estimate the numerator and denominator are taken from tables of the gamma function. 
     \end{exampleblock}
 \end{frame}
 
@@ -1517,7 +1517,7 @@ f_X (x) =
     0 & \text{otherwise }
 \end{cases}
 \]
-where $\alpha$ and $\beta$ are parameters that $\alpha > 0$ and $\beta > 0$, and:
+where $\alpha$ and $\beta$ are parameters that $\alpha > 0$ and $\beta > 0$, and the \emph{beta function} is:
 \[
     B(\alpha, \beta) = \int_0^1 x^{\alpha -1} (1-x)^{\beta-1} dx = \frac{\Gamma (\alpha) \Gamma (\beta)}{\Gamma (\alpha + \beta)}
 \]
@@ -1712,7 +1712,7 @@ The \alert{Normal or Gauss distribution} originally emerged in the study of \emp
 
 \begin{frame}{Continuous probability distributions} 
     \begin{block}{The \alert{Lognormal} distribution}
-        We know that the addition of large number of small random effects will tend to make the distribution of the aggregate approach normal. In contrast, if the phenomena arises from the multiplicative effect of a large number of uncorrelated factors, the distribution tend to be \alert{Lognormal}, that is, the logarithm of a random variable $X$ becomes normally distributed. Phenomena such as the particle size of sediment samples are \emph{Lognormal}, and the interarrival times of earthquakes. As this distribution of defined for non-negative values is used to describe daily average streamflows, maximum streamflows, and daily, monthly and annual rainfall. If $X$ is a positive random variable, then $Y = \ln (X)$. Accordingly, if $Y$ has $N \sim (\mu_Y , \sigma_{Y^2})$, $X$ has a \emph{Lognormal distribution} $LN \sim (\mu_{\ln(X)}, \sigma_{\ln(X)}^2)$. So the \emph{pdf} is:
+        We know that the addition of large number of small random effects will tend to make the distribution of the aggregate approach normal. In contrast, if the phenomena arises from the multiplicative effect of a large number of uncorrelated factors, the distribution tend to be \alert{Lognormal}, that is, the logarithm of a random variable $X$ becomes normally distributed. Phenomena such as the particle size of sediment samples are \emph{Lognormal}, and the interarrival times of earthquakes. As this distribution is defined for non-negative values is used to describe daily average streamflows, maximum streamflows, and daily, monthly and annual rainfall. If $X$ is a positive random variable, then $Y = \ln (X)$. Accordingly, if $Y$ has $N \sim (\mu_Y , \sigma_{Y^2})$, $X$ has a \emph{Lognormal distribution} $LN \sim (\mu_{\ln(X)}, \sigma_{\ln(X)}^2)$. So the \emph{pdf} is:
         \[
             f_X (x) = \frac{1}{x \sigma_{\ln (X)} \sqrt{2\pi}} e^{\left[ -\frac{1}{2} \left[ \frac{\ln (X) -\mu_{\ln (X)}}{\sigma_{\ln (X)}} \right]^2 \right]}, \, \text{for } 0 \leq x < \infty
             \]

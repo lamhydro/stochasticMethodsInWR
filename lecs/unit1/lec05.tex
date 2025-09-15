@@ -68,7 +68,7 @@
                 \item \alert{Estimate}: is the value yielded by the estimator. 
                  \end{itemize}
              \item Suppose that the population of variable $X$ follows a \emph{Normal distribution} and the distribution parameters $\theta$ are unknown. Thus, a random sample of $X$ of size $n$.
-             \item Parameters $\theta$ can be described by a number or a range; this last include an uncertainty. 
+             \item The parameters $\theta$ can be described by a number or a range; this last include an uncertainty. 
     \end{itemize}
 \end{frame}
 
@@ -78,7 +78,7 @@
 \begin{frame}{Properties of estimators}
     
     \begin{block}{Unbiasedness}
-        Given a sample of observations of a random variable $X$, $X_1, X_2, \cdots, X_n$, the objective is to estimate the value of the parameter $\theta$, which is also a random variable. The idea is to seek for a \emph{estimator} of  $\theta$ that get as closest as possible to the \emph{true value}. This estimator will produce statistics that are distributed following a certain \emph{pdf}. Following this, a \alert{point estimator $\hat{\theta}$}  is an \alert{unbiased estimator} of the population parameter $\theta$ if $E[\hat{\theta}] = \theta$. If the estimator is biased, the $\text{bias} = E[\hat{\theta}] - \theta$.
+        Given that observations are random variables, say  $X_1, X_2, \cdots, X_n$, the objective is to estimate the value of the parameter $\theta$, which is also a random variable. The idea is to seek for a \emph{estimator} of  $\theta$ that get as closest as possible to the \emph{true value}. This estimator will produce statistics that are distributed following a certain \emph{pdf}. Following this, a \alert{point estimator $\hat{\theta}$}  is an \alert{unbiased estimator} of the population parameter $\theta$ if $E[\hat{\theta}] = \theta$. If the estimator is biased, the $\text{bias} = E[\hat{\theta}] - \theta$.
     \end{block}
     
     \begin{exampleblock}{Mean of the sample mean}
@@ -100,8 +100,9 @@
 \begin{frame}{Properties of estimators}
 \begin{block}{Efficiency}
 
-    \vspace{-5pt}
+    \vspace{-2pt}
     \alert{Efficiency} is the relative measure of the variance of the sampling distribution, with the efficiency increasing as the variance decrease. In terms of the \emph{mean square error (mse)} an estimator with the minimum $mse$ among all possible unbiased estimators is called and \alert{efficient estimator}. If $A$ is an estimator of $\theta$, the $mse$ is:
+    \vspace{-9pt}
     \begin{align*}
         E\left[(A-\theta)^2\right] &= E\left[ \left( \left(A - E[A] \right) - \left( \theta - E[A] \right) \right)^2 \right]  \\
                                                                                                                                   &= E[ (A - E[A])^2 ] + (\theta - E[A])^2 \\
@@ -112,11 +113,12 @@
 
     \vspace{-7pt}
 \begin{block}{Sufficiency}
-    So far, properties such as unbiasedness, consistency and the minimum $mse$ are key to select the most suitable estimators. Thus, a \alert{sufficient estimator} provides as much information as possible about a sample of observations of a random variable $X$. Let a sample $X_1, X_2, \cdots, X_n$ be drawn randomly from population having probability distribution with unknown parameters $\theta$. Thus, the statistic $T = f(X_1, X_2, \cdots, X_n)$ is said to be sufficient to estimate $\theta$ if the distribution of $X_1, X_2, \cdots, X_n$ conditional to the statistics $T$ is independent of $\theta$.    
+    \vspace{-2pt}
+    So far, properties such as unbiasedness, consistency and the minimum $mse$ are key to select the most suitable estimators. Thus, a \alert{sufficient estimator} provides as much information as possible about a sample of observations of a random variable $X$. Let a sample $X_1, X_2, \cdots, X_n$ be drawn randomly from a population having a \emph{probability distribution} with unknown parameter $\theta$. Thus, the statistic $T = f(X_1, X_2, \cdots, X_n)$ is said to be sufficient to estimate $\theta$ if the distribution of $X_1, X_2, \cdots, X_n$ conditional to the statistic $T$ is independent of $\theta$.    
     \end{block}
     \vspace{-9pt}
     \begin{exampleblock}{Median and mean}
-        The \emph{median}, taken as a measure of mean density or central tendency, does not contain all the information in a sample. The median is the middle value of the sample; if any other value is changed the mean changes but the median is unaltered.
+        The \emph{median}, taken as a measure of mean density or central tendency, does not contain all the information in a sample. The median is the middle value of the sample; if any other value is changed the mean changes but the median is unaltered. The \emph{median} is thus not a \emph{sufficient} statistic. 
     \end{exampleblock}
 
 \end{frame}
@@ -125,21 +127,21 @@
 % From Kotte
 \section{Estimation of confidence intervals}
 \begin{frame}{Estimation of confidence intervals}
-    The uncertainty of point estimates can be quantified by the relative variances or mean square errors of the estimators. Because of this uncertainty, the next step of inference is \alert{interval estimation}. Two numbers, say, $a$ and $b$, that are expected to include within their range an unknown parameter $\theta$ in a specified percentage of cases after repeated experimentation under identical conditions. That is, in place of one statistic that estimates $\theta$, we find a range specified by two statistics, which includes it at a given level of probability. The end points $a$ and $b$ of this range are known as \alert{confidence limits}, and the interval $(a, b)$ is known as the \alert{confidence interval}. We do not have the precision as for a point estimator but we have confidence (without absolute certainty) that the assertion is right.
+    The \emph{uncertainty} of point estimates can be quantified by the relative \emph{variances} or \emph{mean square errors} of the estimators. Because of this uncertainty, the next step of inference is \alert{interval estimation}. Two numbers, say, $a$ and $b$, that are expected to include within their range an unknown parameter $\theta$ in a specified percentage of cases after repeated experimentation under identical conditions. That is, in place of one statistic that estimates $\theta$, we find a range specified by two statistics, which includes it at a given level of probability. The end points $a$ and $b$ of this range are known as \alert{confidence limits}, and the interval $(a, b)$ is known as the \alert{confidence interval}. We do not have the precision as for a point estimator but we have confidence (without absolute certainty) that the assertion is right.
 
 \begin{block}{Confidence interval estimation of the mean when the standard deviation is known}
-    Let $C_l$ and $C_u$ be the \emph{lower} and \emph{upper} confidence limits that include an unknown but invariable parameter $\theta$. Although there is some uncertainty associated with this statement, we will be right in a proportion, say, $1 – \alpha$, of the samples taken from the same population, on average, when we make the assertion that the given interval includes $\theta$. Thus we can say, by adopting the long-run frequency interpretation of probability,
+    Let $C_l$ and $C_u$ be the \emph{lower} and \emph{upper} \emph{confidence limits} that include an unknown but invariable parameter $\theta$. Although there is some uncertainty associated with this statement, we will be right in a proportion, say, $1 – \alpha$, of the samples taken from the same population, on average, when we make the assertion that the given interval includes $\theta$. Thus we can say, by adopting the long-run frequency interpretation of probability,
 \[
     Pr[C_l  \leq \theta \leq C_u ] = 1 - \alpha
 \]
-where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confident limits $C_l$ and $C_u$ are random variables. Recall that examples of $\hat{\theta}$ are $\bar{X}$ and $\bar{S}^2$. The probability $(1 – \alpha)$ is known as the \emph{confidence level} or \emph{confidence coefficient}. It often takes values such as 0.99, 0.95, and 0.90. The confidence limits $C_l$ and $C_u$ depend on the sampling distribution of $\theta$. The standard deviation of the statistic $\hat{\theta}$ called its \emph{standard error}.
+where $\theta$ is a constant, but the \emph{estimator} $\hat{\theta}$  and the \emph{confident limits} $C_l$ and $C_u$ are random variables (that depends on observations). Recall that examples of $\hat{\theta}$ are $\bar{X}$ and $\bar{S}^2$. The probability $(1 – \alpha)$ is known as the \emph{confidence level} or \emph{confidence coefficient}. It often takes values such as 0.99, 0.95, and 0.90. The \emph{confidence limits} $C_l$ and $C_u$ depend on the sampling distribution of $\theta$. The standard deviation of the statistic $\hat{\theta}$ is called its \emph{standard error}.
 
     \end{block}
 \end{frame}
 
 \begin{frame}{Estimation of confidence intervals}
 \begin{block}{Confidence interval estimation of the mean when the standard deviation is known}
-    In some situations, we may require \emph{one-sided confidence limits}. The \emph{lower and upper one-sided confidence limits} are specified, respectively, by
+    The equation above is used to stablish \emph{two-sided confidence limits}. In some situations, we may require \emph{one-sided confidence limits}. The \emph{lower and upper one-sided confidence limits} are specified, respectively, by
     \[
         Pr[C_l \leq \theta] = 1 - \alpha \quad \text{for } 0 < \alpha < 1
     \]
@@ -152,7 +154,7 @@ where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confiden
 
 \begin{minipage}[t]{0.54\textwidth}
    \vspace{0pt} % prevent extra spacing at top
-    Let $\bar{X}$ be the mean of a random sample of size $n$ drawn from a population with known standard deviation $\sigma$. The $100(1 – \alpha)$ percent central two-sided confidence interval for the population mean $\mu$ is $\left( \bar{X} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}}, \bar{X} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \right)$, where $z_{\alpha/2}$ is a standard normal variate that is exceeded with probability $\alpha/2$, $Z = \frac{\bar{X}- \mu}{\sigma/\sqrt{n}} \quad N \sim (0,1)$. The one-sided upper and lower $100(1 – \alpha)$ percent confidence limits for the population mean $\mu$ are, $\bar{X} + z_{\alpha} \frac{\sigma}{\sqrt{n}} $ and $\bar{X} - z_{\alpha} \frac{\sigma}{\sqrt{n}} $, respectively. 
+   Let $\bar{X}$ be the mean of a random sample of size $n$ drawn from a population with known standard deviation $\sigma$, and \emph{standard error} $\sigma_{\bar{X}}= \sigma/\sqrt{n}$. The $100(1 – \alpha)$ percent central \emph{two-sided confidence interval} for the population mean $\mu$ is $\left( \bar{X} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}}, \bar{X} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \right)$, where $z_{\alpha/2}$ is a standard normal variate that is exceeded with probability $\alpha/2$, $Z = \frac{\bar{X}- \mu}{\sigma/\sqrt{n}} \quad N \sim (0,1)$. The one-sided upper and lower $100(1 – \alpha)$ percent \emph{confidence limits} for the population mean $\mu$ are, $\bar{X} + z_{\alpha} \frac{\sigma}{\sqrt{n}} $ and $\bar{X} - z_{\alpha} \frac{\sigma}{\sqrt{n}} $, respectively. 
 \end{minipage}
 %\hfill
 \begin{minipage}[t]{0.44\textwidth}
@@ -166,7 +168,7 @@ where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confiden
 
 \begin{frame}{Estimation of confidence intervals}
     \begin{block}{Confidence interval estimation of the mean when the standard deviation is unknown}
-        Quite often in practice the mean and standard deviation are both unknown. Under such conditions we must modify our approach. We assume normality of the variate $X$ as before, but the consequences of a \emph{nonnormal distribution} are minor for small to moderate departures from normality, if the sample size is large, say, $n > 30$. In this situation we apply the \emph{Student's t distribution}.The T variable represents the mean $\bar{X}$ standardized as $T = \frac{\bar{X}- \mu}{\hat{S}/\sqrt{n}} \sim t_{n-1}$. Note that $T$ has a  \emph{Student’s t distribution} with $\nu = (n-1)$ degrees of freedom. Recall that the \emph{Student's t distribution} \emph{pdf} is:
+        Quite often in practice the \emph{mean} and \emph{standard deviation} are both unknown. Under such conditions we must modify our approach. We assume normality of the variate $X$ as before, but the consequences of a \emph{nonnormal distribution} are minor for small to moderate departures from normality, if the sample size is large, say, $n > 30$. In this situation we apply the \emph{Student's t distribution}.The T variable represents the mean $\bar{X}$ standardized as $T = \frac{\bar{X}- \mu}{\hat{S}/\sqrt{n}} \sim t_{n-1}$. Note that $T$ has a  \emph{Student’s t distribution} with $\nu = (n-1)$ degrees of freedom. Recall that the \emph{Student's t distribution} \emph{pdf} is:
         \[
             f_T (t) = \frac{\Gamma[(\nu +1)/2]}{\sqrt{\pi \nu} \Gamma(\nu/2)} \frac{1}{\left[ (t^2 /\nu) + 1 \right]^{\frac{\nu +1}{2}}} \quad \text{for } -\infty < t < \infty
             \]
@@ -174,7 +176,7 @@ where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confiden
 \end{block}
 \begin{minipage}[t]{0.54\textwidth}
    \vspace{0pt} % prevent extra spacing at top
-   Let $\bar{X}$ and $\hat{S}$ be the mean and the standard deviation, respectively,  of a random sample of size $n$ drawn from a \emph{normal distribution} with unknown standard deviation $\sigma$. The $100(1 – \alpha)$ percent central two-sided confidence interval for the population mean $\mu$ is $\left( \bar{X} - t_{n-1, \alpha/2} \frac{\hat{S} }{\sqrt{n}}, \bar{X} + t_{n-1, \alpha/2} \frac{\hat{S}}{\sqrt{n}} \right)$, where $t_{n-1, \alpha/2}$ is  \emph{Student's t variate} with $n-1$ degrees of freedom  and probability of $\alpha/2$ of execeedance. 
+   Let $\bar{X}$ and $\hat{S}$ be the \emph{mean} and the \emph{standard deviation}, respectively,  of a random sample of size $n$ drawn from a \emph{normal distribution} with unknown standard deviation $\sigma$. The $100(1 – \alpha)$ percent central \emph{two-sided confidence interval} for the population mean $\mu$ is $\left( \bar{X} - t_{n-1, \alpha/2} \frac{\hat{S} }{\sqrt{n}}, \bar{X} + t_{n-1, \alpha/2} \frac{\hat{S}}{\sqrt{n}} \right)$, where $t_{n-1, \alpha/2}$ is  \emph{Student's t variate} with $n-1$ degrees of freedom  and probability of $\alpha/2$ of execeedance. 
 \end{minipage}
 %\hfill
 \begin{minipage}[t]{0.44\textwidth}
@@ -187,18 +189,18 @@ where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confiden
 
 \begin{frame}{Estimation of confidence intervals}
     \begin{block}{Confidence interval for a proportion}
-    Consider a two-sided \emph{Bernoulli} variable that occur with probability $p$ if it is success and $1-p$ if it is failure. Recall that mean and the variance of this variable are $p$ and $p(1-p)$, respectively. If an experiment involving a \emph{Bernoulli} variable is repeated $n$ times, the \emph{standard error} of the estimated proportion of a success is:
+        Consider a variable that follows a \emph{Bernoulli distribution}  that occur with probability $p$ if it is \emph{success} and $1-p$ if it is \emph{failure}. Recall that mean and the variance of this variable are $p$ and $p(1-p)$, respectively. If an experiment involving a \emph{Bernoulli} variable is repeated $n$ times, the \emph{standard error} of the estimated proportion of a success is:
     \[ 
         \sigma_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
     \]
-    Note that for a large sample size, for instance, $n>30$, and for $np > 5$ and $n(1-p) > 5$. the sampling distribution is nearly \emph{normal}.
+    Note that for a large sample size, for instance, $n>30$, and for $np > 5$ and $n(1-p) > 5$, the sampling distribution is nearly \emph{normal}.
 \end{block}
 
 \end{frame}
 
 \begin{frame}{Estimation of confidence intervals}
 \begin{block}{Sampling distribution of differences and sums of statistics}
-    Let $S_1$ and $S_2$ independent statistics from two populations, computed based on sample sizes $n_1$ and $n_2$, respectively. Let the means and the standard errors of the sampling distributions of the two statistics  be $\mu_{S_1}$, $\mu_{S_2}$ and $\sigma_{S_1}$, $\sigma_{S_2}$, respectively. The differences between the statistics (after repeated sampling) from the two populations have a sampling distribution with mean $\mu_{S_1 - S_2} = \mu_{S_1} - \mu_{S_2}$, and standard error $\sigma_{S_1 - S_2} = \sqrt{\sigma_{S_1}^2 + \sigma_{S_2}^2}$. The sampling distribution of the sum of the statistics $S_1 + S_2$ has a mean $\mu_{S_1 + S_2} = \mu_{S_1} + \mu_{S_2}$, and standard error $\sigma_{S_1 + S_2} = \sqrt{\sigma_{S_1}^2 + \sigma_{S_2}^2}$.
+    Let $S_1$ and $S_2$ independent \emph{statistics} from two populations, computed based on sample sizes $n_1$ and $n_2$, respectively. Let the \emph{means} and the \emph{standard errors} of the sampling distributions of the two statistics  be $\mu_{S_1}$, $\mu_{S_2}$ and $\sigma_{S_1}$, $\sigma_{S_2}$, respectively. The differences between the statistics (after repeated sampling) from the two populations have a sampling distribution with mean $\mu_{S_1 - S_2} = \mu_{S_1} - \mu_{S_2}$, and standard error $\sigma_{S_1 - S_2} = \sqrt{\sigma_{S_1}^2 + \sigma_{S_2}^2}$. The sampling distribution of the sum of the statistics $S_1 + S_2$ has a mean $\mu_{S_1 + S_2} = \mu_{S_1} + \mu_{S_2}$, and standard error $\sigma_{S_1 + S_2} = \sqrt{\sigma_{S_1}^2 + \sigma_{S_2}^2}$.
 \end{block}
 \vspace{-7pt}
     \begin{exampleblock}{Confidence limits for differences between two means of the annual rainfalls at two stations}
@@ -212,8 +214,8 @@ where $\theta$ is a constant, but the estimator $\hat{\theta}$  and the confiden
     \]
     where $z_{\alpha/2}$ is the standard  normal variate  which is exceeded with probability $\alpha/2$.  
 \end{minipage}
-\begin{minipage}[t]{0.48\textwidth}
-    Replacing $\hat{s_1}$ for $\sigma_1$ and $\hat{s_2}$ for $\sigma_2$, the 95\% confident limits are:
+\begin{minipage}[t]{0.45\textwidth}
+    Replacing $\hat{s_1}$ for $\sigma_1$ and $\hat{s_2}$ for $\sigma_2$, and $\alpha = 0.05$, the 95\% confident limits are:
 \vspace{-7pt}
     \[
         75 + 1.96 \sqrt{\frac{80^2}{50} + \frac{90^2}{40}} = 75 \pm 36 mm 
@@ -256,7 +258,7 @@ If we compare this \emph{mgf} with the one  for the gamma distribution, the \emp
     \centering
     \includegraphics[width=\textwidth]{fi534.png}
 \end{minipage}
-Considering a random sample $X_1, X_2, \cdots, X_n$ of independent normally distributed variables with common mean $\mu$, variance $\sigma^2$ and sample mean $\hat{X}$. 
+Considering a random sample $X_1, X_2, \cdots, X_n$ of independent normally distributed variables with common mean $\mu$, variance $\sigma^2$ and sample mean $\bar{X}$. 
 \[
     \hat{S}^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2
 \]
@@ -288,7 +290,7 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
 \begin{frame}{Estimation of confidence intervals}
 \begin{block}{Interval estimation for the variance: chi-squared distribution}
 \begin{minipage}[t]{0.60\textwidth}
-    This probability is represented by the area between the two vertical lines of the figure which shows the \emph{pdf}. These values are from left to right the values that a $\chi^2_{n-1}$ variate exceeds with probabilities $(1-\alpha/2)$\% and $\alpha/2$\%, respectively. Taking reciprocal of the variables in the equation, the positions of the \emph{chi-squared} variables need to be  changed, and multiplying by $(n-1)\hat{S}^2$, we obtain:
+    This probability is represented by the area between the two vertical lines of the figure which shows the \emph{pdf}. The chi-squared values in equation above are, from left to right, the values that a $\chi^2_{n-1}$ variate exceeds with probabilities $(1-\alpha/2)$\% and $\alpha/2$\%, respectively. Taking reciprocal of the variables in the equation, the positions of the \emph{chi-squared} variables need to be  changed, and multiplying by $(n-1)\hat{S}^2$, we obtain:
 \[
     Pr \left[ \frac{(n-1)\hat{S}^2}{\chi^2_{n-1, \alpha/2}} \leq \sigma^2 \leq \frac{(n-1)\hat{S}^2}{\chi^2_{n-1, 1- \alpha/2}}  \right] = 1-\alpha
 \]
@@ -337,10 +339,10 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
     \vspace{-5pt}
     The basic steps for hypothesis testing are listed below. Note that two different \emph{hypotheses} are compared.
     \begin{enumerate}
-        \item \alert{Declare a null hypothesis, $H_0$}:  This is the hypothesis to be tested and it assume that the observed results are due to chance. For instance we may wish to verify whether the initial mean $\mu_1$ of the annual maximun flows at a river gauge station is indeed the same as a projected new mean $\mu_2$ consequent to changes in the flow regime  that may have proved sufficient for a change in the population mean. If $H_0$ is true, any observed difference in the means is merely the consequence of sampling variation from the sample population. This means that the differences are attributed to errors in random sampling. The hypothesis is expressed as: $H_0: \mu_1 - \mu_2 = 0$.
-        \item \alert{Declare the alternate hypothesis, $H_1$}: This is the hypothesis that we want to test. For the previous example, this is $H_1 : \mu_1 - \mu_2 \neq 0$.
+        \item \alert{Declare a null hypothesis, $H_0$}:  This is the hypothesis to be tested and it assume that the observed results are due to chance. For instance we may wish to verify whether the initial mean $\mu_1$ of the annual maximum flows at a river gauge station is indeed the same as a projected new mean $\mu_2$ consequent to changes in the flow regime  that may have proved sufficient for a change in the population mean. If $H_0$ is true, any observed difference in the means is merely the consequence of sampling variation from the sample population. This means that the differences are attributed to errors in random sampling. The hypothesis is expressed as: $H_0: \mu_1 - \mu_2 = 0$.
+        \item \alert{Declare the alternate hypothesis, $H_1$}: This is the hypothesis that we really want to test. For the previous example, this is $H_1 : \mu_1 - \mu_2 \neq 0$.
         \item \alert{Specify a test statistic}: In the previous example, the test is based on the difference between the respective observed means $\bar{X}_1$ and $\bar{X}_2$. 
-        \item \alert{Determine the distribution of the test statistic}: The sampling distribution depends on the distribution to which the observations belong. Thus, we may need to make asumptions regarding the underlaying distribution. 
+        \item \alert{Determine the distribution of the test statistic}: The sampling distribution depends on the distribution to which the observations belong. Thus, we may need to make assumptions regarding the underlying distribution. 
         \item \alert{Define a rejection/critical region for the test statistic}: For this, it is necessary to preassign a level of significance $\alpha$. 
         \item \alert{Use the observed data to verify  whether the computed value of the test statistic is within or outside the rejection region}: If this is within the rejection region we say that the difference (for the previous example) is \emph{significant at the} $100\alpha$ \% level.  
     \end{enumerate}
@@ -354,14 +356,14 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
     Some aspects related to the procedure for testing for the given example:
     \begin{itemize}
         \item As the \emph{rejection region} covers \emph{both tails} of the \emph{sampling distribution}, this procedure is called a \alert{two-tailed test}.
-        \item If the test were something like wheather $\mu_1 > \mu_2$ \alert{one-tailed test} is requiere as the critical \emph{rejection region} cover only one tail. 
+        \item If the test were something like whether $\mu_1 > \mu_2$ \alert{one-tailed test} is requiered as the critical \emph{rejection region} cover only one tail. 
         \item If \emph{test statistic} and the \emph{rejection region} are defined as $T$ and $R$, respectively, the probability of rejecting $H_0$ is $Pr\left[T \in R | H_0\right] = \alpha$
         \item Note that the probability $\alpha$ provides the link between the \emph{confidence intervals} and \emph{hypothesis testing}.
         \item We can say that \emph{rejection} is the same as stating that the \emph{test statistics} is statistically significant.
         \item Errors:
             \begin{enumerate}
-                \item \alert{Type I error}: This occurs if a hypothesis is rejected when it should be accepted, regarging that $H_0$ is true. The probability of this is $Pr \left[ \text{Type I error} \right] = Pr\left[T \in R | H_0\right] = \alpha$.
-                \item \alert{Type II error}: This occurs if we fail to reject $H_0$ when it is not true. The probability of this is $Pr \left[ \text{Type II error} \right] = Pr\left[T \in A | H_1\right] = \beta$. Note that $A$ is the accptance region of the test statistic, so that $A$ and $R$ comprise the parameter space $\Omega$ for $T$. 
+                \item \alert{Type I error}: This occurs if a hypothesis is rejected when it should be accepted, regarding that $H_0$ is true. The probability of this is $Pr \left[ \text{Type I error} \right] = Pr\left[T \in R | H_0\right] = \alpha$.
+                \item \alert{Type II error}: This occurs if we fail to reject $H_0$ when it is not true. The probability of this is $Pr \left[ \text{Type II error} \right] = Pr\left[T \in A | H_1\right] = \beta$. Note that $A$ is the acceptance region of the test statistic, so that $A$ and $R$ comprise the parameter space $\Omega$ for $T$. 
             \end{enumerate}
  In either of the cases, we are wrong in our judgement. Accordingly, we are right in two cases:
            \begin{enumerate}
