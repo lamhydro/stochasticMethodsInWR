@@ -314,9 +314,9 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
         \item A second major area of statistical inference is the \alert{testing of hypotheses}, which is closely related to the determination of \emph{confidence limits}. 
         \item What we are examining concerns the parameters or form of the probability distribution that yields the observations.
         \item This involves making a declaration or statement called a \alert{hypothesis} about a population.
-        \item The discussion is focused on certain assumptions (regarding, for instance, the mean of the population) without initially making any commitment on assuming them.
-        \item From a philosophical viewpoint, our conception of the actual state of nature may not be correct. However, we have a sample of data that represents the physical reality, and although our initial hypothesis may be somewhat tentative, we can revise the concept each time new information becomes available and thus come closer to the true state of nature.
-        \item The approach we follow is akin to the verification of some of the scientific hypotheses of scientists and engineers. For instance, it is usually feasible to ascertain whether a procedure for treating wastewater makes a change in the quality of the effluent, as measured, for example, by the biochemical oxygen demand. As another example, there may be reason to believe that the distribution of high flows in a river has changed on account of climatic effects or because the flow regime has been altered.
+        \item The discussion is focused on certain \emph{assumptions} (regarding, for instance, the mean of the population) without initially making any commitment on assuming them.
+        \item From a philosophical viewpoint, our \emph{conception} of the actual state of nature may \emph{not be correct}. However, we have a sample of data that represents the physical reality, and although our initial hypothesis may be somewhat tentative, we can \emph{revise} the concept each time \emph{new information} becomes available and thus come closer to the \emph{true state} of nature.
+        \item The approach we follow is akin to the \emph{verification} of some of the scientific \emph{hypotheses} of scientists and engineers. For instance, it is usually feasible to ascertain whether a procedure for treating wastewater makes a change in the quality of the effluent, as measured, for example, by the biochemical oxygen demand. As another example, there may be reason to believe that the distribution of high flows in a river has changed on account of climatic effects or because the flow regime has been altered.
     \end{itemize}
 \end{frame}
 
@@ -359,7 +359,7 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
         \item If the test were something like whether $\mu_1 > \mu_2$ \alert{one-tailed test} is requiered as the critical \emph{rejection region} cover only one tail. 
         \item If \emph{test statistic} and the \emph{rejection region} are defined as $T$ and $R$, respectively, the probability of rejecting $H_0$ is $Pr\left[T \in R | H_0\right] = \alpha$
         \item Note that the probability $\alpha$ provides the link between the \emph{confidence intervals} and \emph{hypothesis testing}.
-        \item We can say that \emph{rejection} is the same as stating that the \emph{test statistics} is statistically significant.
+        \item We can say that \emph{rejection} is the same as stating that the \emph{test statistics} is \emph{statistically significant}.
         \item Errors:
             \begin{enumerate}
                 \item \alert{Type I error}: This occurs if a hypothesis is rejected when it should be accepted, regarding that $H_0$ is true. The probability of this is $Pr \left[ \text{Type I error} \right] = Pr\left[T \in R | H_0\right] = \alpha$.
@@ -376,7 +376,7 @@ If the first term of this equation is distributed as $\chi^2_n$, and according t
 \begin{frame}{Hypothesis testing}
 
     \begin{exampleblock}{Change in  the mean annual maximum flow}
-Annual maximum flows in the Pond Creek catchment area in the eastern United States are listed below in cubic meters per second for two periods of 12 years from 1945 to 1968. It is thought that changes in the flow regime during the middle of this period have modified the distribution of flows resulting in higher maximum flows. This is equivalent to stating that the mean flow has increased from the first period to the second period.
+Annual maximum flows in  a river  are listed below in cubic meters per second for two periods of 12 years from 1945 to 1968. It is thought that changes in the flow regime during the middle of this period have modified the distribution of flows resulting in higher maximum flows. This is equivalent to stating that the mean flow has increased from the first period to the second period.
 \setlength{\tabcolsep}{1pt} % global adjustment
   \begin{tabular}{rcccccccccccc}
       First period (1945-1956): & 2000 & 1740 & 1460 & 2060 & 1530 & 1590 & 1690 & 1420 & 1330 & 607 & 1380 & 1660 \\
@@ -444,11 +444,11 @@ Second period (1957-1968): & 2290 & 2590 & 3260 & 2490 & 3080 & 2520 & 3360 & 80
 \begin{frame}{Hypothesis testing}
    \begin{itemize}
         \item \alert{TESTING THE DIFFERENCE BETWEEN TWO MEANS WHEN THE VARIANCES ARE UNKNOWN AND UNEQUAL}\\
-There are many instances when it is not correct to assume that the variances corresponding to the means tested are equal. However when the variances are unequal, the statistic does not have a t distribution. In the case of observations taken from normal populations with unknown and unequal variances, the statistic
+            There are many instances when it is not correct to assume that the variances corresponding to the means tested are equal. However when the variances are unequal, the statistic does not have a \emph{t distribution}. In the case of observations taken from normal populations with unknown and unequal variances, the statistic
 \[
     T' = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\hat{S}_1^2 /n_1 - \hat{S}_2^2 /n_2}} 
 \]
-has an approximate t distribution with
+has an approximate \emph{t distribution} with
 \[
     \nu = \frac{\left[ \hat{S}_1^2 /n_1 - \hat{S}_2^2 /n_2 \right]^2}{ (\hat{S}_1^2 /n_1)^2 / (n_1-1) + (\hat{S}_2^2 /n_2)^2 /(n_2 -1) }
 \]
@@ -575,7 +575,7 @@ Here we are concerned with the behavior of observable random variables. For exam
     we noted that a quantity such as $\sum_{i=1}^n (X_i - \bar{X} )^2 /\sigma^2$ has a \emph{chi-squared distribution} with $(n - 1)$ degrees of freedom. However, if the true mean $\mu$ is known, this replaces $\bar{X}$ in the preceding sum of squares and the degrees of freedom are $n$. Thus with the knowledge of the sampling distribution, a hypothesis test can be made on the variance.
 
     \begin{exampleblock}{A significance test on the change in variance}
-        From a long series of annual river flows, the variance is found to be 49 units. This can be treated as the population variance. However, a new sample of 25 years gives a value $\hat{s}^2 =$ 81 units. So $H_0 : \sigma^2 = 49$, $H_1 : \sigma^2 = 49$ and $\alpha = 0.05$. 
+        From a long series of annual river flows, the variance is found to be 49 units. This can be treated as the population variance. However, a new sample of 25 years gives a value $\hat{s}^2 =$ 81 units. So $H_0 : \sigma^2 = 49$, $H_1 : \sigma^2 > 49$ and $\alpha = 0.05$. 
         The quantity $n \hat{s}^2/\sigma^2$ has a \emph{chi-squared distribution} with $n$ degrees of freedom. From the \emph{chi-squared distribution} for $\chi_{25,0.05}^2 = 37.7$ and $n \hat{s}^2 / \sigma^2 = 25 x 81/49 = 41.3$. \emph{Decision: $H_0$ is rejected}.  
     \end{exampleblock}
 \end{frame}
@@ -602,8 +602,8 @@ Here we are concerned with the behavior of observable random variables. For exam
     \end{block}
     The \alert{one sample sign test} is applicable when we sample any continuous distribution that has a \emph{median, $M$}. We test the hypothesis that the \emph{median} is equal to a specific value $M_0$. Let $n$ be the number of nonzero differences between the sample values and the assumed median, which is true under the null hypothesis, and let $k$ be the number of positive differences. Then by the \emph{normal approximation} to the \emph{binomial}, the following variate has a \emph{standard normal distribution} under the null hypothesis:
     \begin{align*}
-        z &= \frac{(k + 1/2)-n/2}{1/2 \sqrt{n}}, \text{ if } k < \frac{n}{2} \\
-        z &= \frac{(k - 1/2)-n/2}{1/2 \sqrt{n}}, \text{ if } k > \frac{n}{2} \\
+        Z &= \frac{(k + 1/2)-n/2}{\frac{\sqrt{n}}{2}}, \text{ if } k < \frac{n}{2} \\
+        Z &= \frac{(k - 1/2)-n/2}{ \frac{\sqrt{n}}{2}}, \text{ if } k > \frac{n}{2} \\
     \end{align*}
     The $z_{\alpha}$ value from the \emph{normal cdf} table is compared with the $z$ score calculated from one of the preceding equations to decide whether the \emph{null hypothesis} should be rejected at a level of significance $\alpha$. Note that the null hypothesis to be testes if $H_0 : M = M_0$, and the alternative hypothesis is one of the following: $H_1 : M < M_0$ or $H_1 : M > M_0$. 
     %The \alert{nonparametric sign test} is an alternative to the tests on the \emph{mean} using the \emph{normal or the t distribution} as sampling distributions.
@@ -619,9 +619,9 @@ Here we are concerned with the behavior of observable random variables. For exam
         \item The absolute values of the differences are ranked. Here, the smallest difference is assigned rank 1 and the largest difference gets the highest rank, which is equal to the number of pairs $n$ with nonzero differences.
         \item If the absolute values of two or more of such differences are equal, we give each a rank equal to the mean of the ranks they would otherwise receive.
         \item The ranks attributed to positive and negative differences are then summed in separate columns. These sums are denoted $T^+$ and $T^-$ , respectively.
-    \item While $H_0 : \mu_1 = \mu_2$, the$H_1 : \mu_1 < \mu_2$ or $H_1 : \mu_1 > \mu_2$. 
+    \item While $H_0 : \mu_1 = \mu_2$, $H_1 : \mu_1 < \mu_2$ or $H_1 : \mu_1 > \mu_2$. 
     \end{enumerate}
-    Under the \emph{null hypothesis} we can use either $T^+$ or $T^-$, the sum of the ranks applied to the absolute values of the positive and negative differences, respectively, between the paire observations for the \emph{test statistic T}. For large sample sizes $n$, $T$ can be approximate by the \emph{standard normal variate} $Z =\frac{T - \mu_T}{\sigma_T} $, where $\mu_T = \frac{n(n+1)}{\sigma_T}$ and $\sigma_T^2 = \frac{n(n+1)(2n+1)}{24}$.
+    Under the \emph{null hypothesis} we can use either $T^+$ or $T^-$, the sum of the ranks applied to the absolute values of the positive and negative differences, respectively, between the paire observations for the \emph{test statistic T}. For large sample sizes $n$, $T$ can be approximate by the \emph{standard normal variate} $Z =\frac{T - \mu_T}{\sigma_T} $, where $\mu_T = \frac{n(n+1)}{4}$ and $\sigma_T^2 = \frac{n(n+1)(2n+1)}{24}$.
 
     The $z_{\alpha}$ value from the \emph{normal cdf} table is compared with the $z$ score calculated from   the preceding equation to decide whether the \emph{null hypothesis} should be rejected at a level of significance $\alpha$. Note the approximation is sufficiently accurate for $n \geq 15$.
     \end{frame}
@@ -636,7 +636,7 @@ Here we are concerned with the behavior of observable random variables. For exam
         \item Following a procedure similar to that in the \emph{Wilcoxon signed-rank}, the pooled data are ranked from the lowest to the highest as if they belong to one sample.
 
     \end{itemize}
-    If $R_i$ is the sum of the ranks of the data in the $ith$ sample of size $n_i$ and $n$ is the total sum of the $k$ samples, the normalized test statistic is $H = \frac{12}{n(n+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(n+1)$. Under the \emph{null hypothesis} that the samples come from the same population, $H$ has an approximate \emph{chi-squared distribution} with $(k - 1)$  \emph{degrees of freedom}.
+    If $R_i$ is the sum of the ranks of the data in the $ith$ sample of size $n_i$ and $n$ is the total sum of the $k$ samples, the normalized test statistic is $H = \frac{12}{n(n+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(n+1)$. Under the \emph{null hypothesis} that the samples come from the same population, $H$ has an approximate \emph{chi-squared distribution} with $(k - 1)$  \emph{degrees of freedom}. This large values of $H$ (with respect to $\chi_{k-1,\alpha}^2$) lead to \emph{rejection} of $H_0$
    \end{frame}
 
 \begin{frame}{Nonparametric methods}
@@ -695,7 +695,7 @@ U \, U  \, A  \ U  \ A  \ U  \ U  \ U  \ U  \ U  \ A  \ A  \ U  \ U  \ U  \ U  \
     \begin{exampleblock}{Runs test on annual river flows}
   The number of values $n$ \emph{above the median} equal the number of values $m$ \emph{below the median}, 15. The total number of observed \emph{runs} $r = 20$. The test statistic is:
   \[
-      Z = \frac{(R \pm (1/2) )- \mu_R}{\sqrt{Var[R]}}
+      Z = \frac{(r \pm (1/2) )- \mu_R}{\sqrt{Var[R]}}
       \]
       By using a two-tailed test with $\alpha = 0.05$, the \emph{critical region} is $Z$ (positive with $R + 1/2$) $>$ 1.96 and $Z$ (negative with $R - 1/2$) $<$ -1.96, from  the \emph{normal cdf}. Sample estimates of the \emph{mean} and the \emph{variance} of the total number of runs are:
       \[

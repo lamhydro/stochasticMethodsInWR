@@ -108,9 +108,115 @@
 
 \end{frame}
 
+%-------
+% From Bierke
+\section{Types of random functions}
+\begin{frame}{Types of random functions}
+    \emph{Random functions} can be classified as \emph{continuous} whether the \emph{random variable} is continuous (e.g. maximum annual river flows) or \emph{discrete} whether the \emph{random variable} is discrete (e.g. number of annual rainy days). Other way to classify a random function is based its domain (see figure). In the case of a \emph{continuous random function}, this can be defined at:
+    \begin{enumerate}
+
+        \item \emph{all locations} in time, space or space-time: $Z(t)$, $Z(\mathbf{x})$ or $Z(\mathbf{x},t)$.
+        \item \emph{discrete points} in time, space or space-time, where $Z(k\Delta t)$ ($k=1,2,\cdots,K$) is referred to as a \alert{random time series}, and $Z(i\Delta x, j\Delta y)$ ($i=1,2,\cdots, I$; $j=1,2,\cdots, J$) as a \alert{lattice process}.
+        \item \emph{random times} or \emph{random locations} is space and time: $Z(T)$, $Z(\mathbf{X})$ or $Z(\mathbf{X},T)$. This process is called \alert{compound point process}. Note that the occurrence of the points at random coordinates in space and time is called a \alert{point process}. If the occurrence of such a point is associated with the occurrence of a random variable (e.g. the occurrence of a thunder storm cell at a certain location in space with a random intensity of rainfall) it is called a compound point process.
+    \end{enumerate}
+
+    The same distinction can be made for discrete-valued random functions: $D(t)$, $D(k\Delta t)$ or $D(T)$; $D(\mathbf{x})$, $D(i\Delta x, j\Delta y)$ or $D(\mathbf{X})$. 
+
+\end{frame}
 
 \begin{frame}{Types of random functions}
 
+    \begin{center}
+\includegraphics[width=0.9\linewidth]{fiBi52.png}  % from Bierk
+    \end{center}
+
+This figure shows the different types of \emph{random functions} based on the way they are defined on the functional domain: a) random time series, b) lattice process, c) continuous-time random function and d) compound point process. 
 \end{frame}
+
+%-------
+% From Bierke
+\section{Stationary random functions}
+\begin{frame}{Stationary random functions}
+    \begin{block}{Strict stationary random functions}
+    \end{block}
+    An special type of random functions are the \alert{strict stationary random functions}. A \emph{strict stationary random functions} isa random function for which its \emph{multivariate pdf} is invariant under translation. This means that for any set of $N$ locations and for any translations in time $\Delta t$, we have
+    \begin{align*}
+        f(z_1, z_2, \cdots, z_N ; t_1, t_2, \cdots, t_N ) &= \\
+                                                          &f(z_1, z_2, \cdots, z_N ; t_1 +\Delta t, t_2+\Delta t, \cdots, t_N +\Delta t)  \quad \forall t_i, \Delta t
+    \end{align*}
+
+
+\begin{minipage}[]{0.48\textwidth}
+    This assume that a configuration of points on the time axis can move backward and forward in time and the \emph{multivariate pdf} does not change. For the spatial domain, \emph{strict stationarity} means spatial no changes in the \emph{pdf} if points are translated but no rotated. For instance a \emph{strict random function} in 2D (see figure) the two sets of locations in the left-hand figure have the same \emph{multivariate pdf}, while the locations in the right-hand figure necessarily does not. If the \emph{multivariate pdf} of the \emph{random function} is invariant under rotation, this is called a \alert{statistically isotropic random function}.     
+\end{minipage}
+%\hfill
+\begin{minipage}[]{0.48\textwidth}
+    \centering
+\includegraphics[width=\linewidth]{fiBi53.png}  % from Bierk
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}{Stationary random functions}
+    \begin{block}{Ergodic random functions}
+    \end{block}
+    \begin{itemize}
+        \item To estimate the statistical properties of a \emph{random function}, a large number of realizations must be drew. 
+        \item This is the case, for instance, of throwing a dice, from where one can generate multiple realizations. 
+        \item In reality this is not possible because we only have one realization: \emph{reality}. This means that all relevant statistics of the \emph{random function} are estimated from a single realization. 
+        \item In general, \alert{ergodicity} deal with \emph{stationarity} in \emph{random functions}. 
+        \item To analyse \emph{ergodicity}, statistical properties such as the \emph{mean}, the \emph{standard deviation} and the \emph{covariance} are examined.  
+        \item \emph{Stationarity} tells that all these properties are invariant no matter where you are (e.g. in time). 
+        \item For instance, for multiple realizations at point $t_1$ of $Z(t)$, the normal procedure to compute  $\mu_Z (t_1)$ would be to average these realizations. However, this is impossible because in reality we only have one realization.
+        \item If the \emph{random function} is stationary the \emph{pdf} $f_Z (z; t)$ at any location (in time) is the same and thus the statistical properties. 
+        \item This also means that within any single realisation we have at every location a sample from the same \emph{pdf} $f_Z (z;t)$. 
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Stationary random functions}
+    \begin{block}{Ergodic random functions}
+    \end{block}
+    \begin{itemize}
+        \item So, the \emph{mean} can also be estimated if we take a sufficient number of samples from a single realisation, such as our \emph{reality} (see figure below)
+
+            \begin{center}
+\includegraphics[width=\linewidth]{fiBi54.png}  % from Bierk
+            \end{center}
+        \item This property of a \emph{random function}, i.e. being able to estimate statistical properties of a random function from a large number of samples of a \emph{single realisation} is called \alert{ergodicity}.
+        \item So for a \emph{random function} is \alert{ergodic} if it is \emph{stationary}.
+        \item Also for a \emph{random function} to be \emph{ergodic},  the samples from the single realisation should be taken from a large enough period of time or, in the spatial case, large enough area. 
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Stationary random functions}
+    \begin{block}{Ergodic random functions}
+    \end{block}
+    A formal definition of \emph{ergodicity} of a \emph{random function} in its \emph{mean}
+    \[
+    \lim_{T\rightarrow \infty} \frac{1}{T} \int_T z(t) dt = \int_{-\infty}^{\infty} z f_Z (z;t) dz = \mu_Z
+\]
+where $T$ is an interval of time. This equation means that  the integral over the probability distribution (the ensemble) for a given $t$ (term on the left)  can be replaced by a temporal (or spatial or spatio-temporal) integral of a very large interval $T$ (or area or volume) (term on the right) to estimate $\mu_Z$. 
+volume).
+
+Similarly, \emph{ergodicity} of a \emph{random function} in its \emph{mean} is defined as
+\begin{align*}
+    \lim_{T\rightarrow \infty} \frac{1}{T^2} \int_T z(t) z(t+\tau) dt &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (z_1 -\mu_Z) (z_2 -\mu_Z)  f(z_1, z_2;t, t+\tau) dz_1 dz_2  \\
+    &= COV[Z(T), Z(t+\tau)] \quad \quad \forall \tau
+\end{align*}
+where $\tau$ is delta time. 
+
+\end{frame}
+
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Second order stationary random functions}
+    \end{block}
+    A weaker form of \emph{stationarity} is second order \emph{stationarity}. This means that  the bivariate (or two-point) \emph{probability distribution} is invariant under translation 
+    \[
+    f(z_1, z_2; t_1, t_2) = f(z_1, z_2; t_1 + \tau, t_2+\tau) \quad \quad \forall t_1 , t_2, \tau 
+\]
+\end{frame}
+ 
 
 \end{document}
