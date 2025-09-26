@@ -730,7 +730,7 @@ U \, U  \, A  \ U  \ A  \ U  \ U  \ U  \ U  \ U  \ A  \ A  \ U  \ U  \ U  \ U  \
         \begin{itemize}
             \item \emph{Hypothesis-testing} procedures related to the \emph{parameters} of a distribution.
             \item Another important type of hypothesis concerns the \emph{form of a probability distribution}. It may, for example, be necessary to test whether a \emph{discrete variable} has a \emph{Poisson distribution} or whether a \emph{continuous variable} is \emph{normally distributed}.
-            \item For these purposes, we may compare \emph{observed} and \emph{theoretical cumulative frequencies}.
+            \item For these purposes, we may compare either \emph{observed} and \emph{theoretical frequencies} that fall into specified classes, or we can compare observed or theoretical \emph{cumulative frequencies}.
             \item To test that, there are some two main types of \alert{goodness-of-fit tests}.
         \end{itemize}
 
@@ -887,7 +887,7 @@ The highest integer less than $n/2$ becomes the upper limit of summation $[m]$ i
 
     \begin{itemize}
         \item \alert{Z-score test}\\
-            The test establishes that the sample point $Y_i$ is a potential \emph{outlier} if the absolute value of $Z_i = \frac{Y_i - \bar{Y}}{s_Y}$ is greater than 3. The test establishes how far, in term of $s_Y$, is $Y_i$ according to a \emph{normal distribution}. The maximum $Z_i$ value is $\frac{n-1}{\sqrt{n}}$, which means that the test can be applied to $n\geq 11$, otherwise $Z_{i_{max}} < 3$. The \emph{Z-score} statistic is
+            The test establishes that the sample point $Y_i$ is a potential \emph{outlier} if the absolute value of $Z_i = \frac{Y_i - \bar{Y}}{s_Y}$ is greater than 3. The test establishes how far, in term of $s_Y$, is $Y_i$ according to a \emph{normal distribution}. The maximum $Z_i$ value is $\frac{n-1}{\sqrt{n}}$, thus the test can be applied to $n\geq 11$, otherwise $Z_{i_{max}} < 3$. The \emph{Z-score} statistic is
     \vspace{-7pt}
             \[
                 M_i = \frac{0.6745 (Y_i - \tilde{Y})}{DMA}

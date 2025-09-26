@@ -216,7 +216,96 @@ where $\tau$ is delta time.
     \[
     f(z_1, z_2; t_1, t_2) = f(z_1, z_2; t_1 + \tau, t_2+\tau) \quad \quad \forall t_1 , t_2, \tau 
 \]
+In practice, one require only \emph{ergodicity} and thus \emph{stationarity} for the \emph{mean}, \emph{varianza} and \emph{covariance}. An \emph{milder stationarity} is even considered and called \alert{weak sense stationarity}. For \emph{wide sense stationary random functions}
+\begin{align*}
+    \mu_Z (t) &= \mu_Z \quad \text{constant and $t$ or $\mathbf{x}$ independent}\\
+    \sigma_Z (t) &= \sigma_Z \quad \text{constant and $t$ or $\mathbf{x}$ independent}\\
+    COV[Z(t_1) Z(t_2)] &= C_Z(t_2 - t_1) = C_Z (\tau) \quad \text{depends on $\tau$ (separation in time or space)}
+\end{align*}
+The \alert{covariance function} is a graph that describe the covariance and depends on $\tau$ (\alert{lag}). The covariance function start when $t_1 = t_2$ (variance of both variables) and when $\tau$ increase the function tends to zero. This means that a random variable is not correlated for larger $\tau$.
+
+In the case of \emph{random space functions} the \emph{weak sense stationarity} means that $COV [Z(\mathbf{x}_1), Z(\mathbf{x}_2)] = C_Z (\mathbf{x}_2 - \mathbf{x}_1) = C_Z (\mathbf{h})$, where $\mathbf{h} = \mathbf{x}_2 - \mathbf{x}_1$. In case of a \emph{isotropic} random function $COV [Z(\mathbf{x}_1), Z(\mathbf{x}_2)] = C_Z (|\mathbf{x}_2 - \mathbf{x}_1|) = C_Z (\mathbf{|h|}) = C_Z (h)$, where $|\mathbf{h}|=h$ is the \emph{norm} of the difference vector. 
 \end{frame}
  
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Second order stationary random functions}
+    \end{block}
+    When the \emph{covariance function} is divided by the \emph{variance} $\sigma_Z^2$, this becomes the \alert{correlation function} either $\rho_Z(\tau) = C_Z(\tau)/\sigma_Z^2$ or $\rho_Z(\mathbf{h}) = C_Z (\mathbf{h})/\sigma_Z^2$. When the data is regularly spaced either in time or space, the \emph{covariance function} is:
+    \[
+        \hat{C}_Z(k\Delta t) =  \frac{1}{n-k} \sum_{k=1}^{n-k} (z_i - \hat{\mu}_Z ) (z_{i+k} - \hat{\mu}_Z )
+    \]
+    where $k\Delta t$ is the lag (in units of time or space) and $\Delta t$ is the distance (in time or space) between observations. Frequently the estimator $\hat{C}_Z (k\Delta t)$ is used in the analysis of time series. In the case of irregularly positioned data in space, the \emph{covariance function} is
+    \[
+        \hat{C}_Z(\mathbf{h}) =  \frac{1}{n(\mathbf{h})} \sum_{i=1}^{n(\mathbf{h})} (z(\mathbf{x_i}) - \hat{\mu}_Z ) (z(\mathbf{x_i}+ \mathbf{h} \pm \mathbf{\Delta h}) - \hat{\mu}_Z ) 
+    \]
+where $\mathbf{h}$ is the lag (a vector in space), $\Delta \mathbf{h}$ is a lag-tolerance  which is needed to group a number of data-pairs together  to get stable estimates for a given lag and $n(\mathbf{h})$ are the number of data pairs that are a distance $\mathbf{h} \pm \Delta \mathbf{h}$ apart. 
+
+\end{frame}
+
+ \begin{frame}{Stationary random functions}
+     \begin{exampleblock}{Correlation function: maximum annual streamflow}
+\begin{minipage}[]{0.48\textwidth}
+    \centering
+\includegraphics[width=\linewidth]{fiBi56a.png}  % from Bierk
+\end{minipage}
+\begin{minipage}[]{0.48\textwidth}
+    \centering
+\includegraphics[width=\linewidth]{fiBi56b.png}  % from Bierk
+\end{minipage}
+     \end{exampleblock}
+     \begin{itemize}
+         \item The correlation plot, shows the \emph{estimated} and the \emph{fitted} correlation functions. According to these plots the data is uncorrelated.
+         \item This uncorrelated behaviour of lagged data points is a characteristics of \alert{white noise}, which are pure random processes, where the data points are uncorrelated no matter $\tau$. 
+         \item \emph{White noise} follow a \emph{normal distribution}, so that, one can produce synthetic e.g. annual maximum streamflows after sampling the process. It would produce a time series with the same statistical properties of the original one.  
+     \end{itemize}
+\end{frame}
+
+ \begin{frame}{Stationary random functions}
+     \begin{exampleblock}{Correlation function: daily water table depth (1994-1995)}
+\begin{minipage}[]{0.48\textwidth}
+    \centering
+\includegraphics[width=\linewidth]{fiBi56d.png}  % from Bierk
+\end{minipage}
+\begin{minipage}[]{0.48\textwidth}
+    \centering
+\includegraphics[width=\linewidth]{fiBi56e.png}  % from Bierk
+\end{minipage}
+     \end{exampleblock}
+     \begin{itemize}
+         \item The correlation plot, shows the \emph{estimated} and the \emph{fitted} correlation functions. According to these plots the correlation decrease exponentially as $\tau$ increase. 
+         \item Again,  one can produce synthetic e.g. daily water  levels after sampling the process at the same discrete times. It would produce a time series with the same statistical properties of the original one.  
+     \end{itemize}
+\end{frame}
+
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Second order stationary random functions}
+    \end{block}
+
+    The following table shows some models for modelling the \emph{covariance function} for \emph{isotropic random functions} and  \emph{wide sense stationary process}. 
+
+    \begin{center}
+  \begin{tabular}{|l|c|}
+    Exponential covariance & $C_Z (h) = \sigma_Z^2 e^{-h/a}$ for $h\geq 0$, $a>0$ \\ 
+    Gaussian covariance         & $C_Z (h) =  \sigma_Z^2  e^{-h^2/a^2}$  for $h\geq 0$, $a>0$ \\ 
+    Spherical covariance         & \[ C_Z (h) = \left\{ \begin{array}{l}  \sigma_Z^2 \left[ 1 - \frac{3}{2}\left(\frac{h}{a}\right) + \frac{1}{2}\left(\frac{h}{a}\right)^3 \right]   \text{, if } h< a  \\ 0 = \text{, if } h\geq a, h\geq 0, a>0 \end{array} \right. \] \\ 
+    Hole effect (wave) model & $C_Z (h) = \sigma_Z^2 \frac{b\sin (h/a)}{h}$ for $h\geq 0$, $a>0$ \\ 
+    White noise model &  \[ \rho_Z (h) = \left\{ \begin{array}{l}  1 \text{, if } h=0  \\ 0 = \text{, if } h>0 \end{array} \right. \] \\ 
+
+  \end{tabular}
+    \end{center}
+    Note that the \emph{white noise model} has infinity variance, so it is not \emph{wide sense stationary}. 
+     \begin{block}{Relations between various forms of stationarity}
+    \end{block}
+    If a \emph{random function} is \emph{wide sense stationary} and its \emph{multivariate pdf} is a \emph{Gaussian distribution}, It is also second order stationary and also a strict sense \emph{stationary random function}. More important, a wide sense stationary random function that is multivariate Gaussian (and thus also strict stationary) is completely characterised by only a few statistics:  a constant \emph{mean} $\mu_Z (t) = \mu_Z$  and a \emph{covariance  function} $C_Z (t_2 - t_1)$ that only depends on the separation distance. 
+
+
+\end{frame}
+
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Intrinsic random functions}
+         For an intrinsic random function we require (we show the spatial form here) $E[Z(\mathbf{x_2}) - Z(\mathbf{x_1}) ] = 0$ $\forall \mathbf{x_2}, \mathbf{x_1}$
+    \end{block}
+\end{frame}
+
 
 \end{document}

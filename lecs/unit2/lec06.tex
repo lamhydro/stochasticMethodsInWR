@@ -40,7 +40,7 @@
 % Title Information
 \title{STOCHASTIC METHODS IN WATER RESOURCES}
 \vspace{25pt}
-\subtitle{Unit 2: Hydrological statistics and extremes \\ Lecture 5: Definitions and analysis of extreme values}
+\subtitle{Unit 2: Hydrological statistics and extremes \\ Lecture 6: Definitions and analysis of extreme values}
 \author{Luis Alejandro Morales, Ph.D.}
 \institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
 %\date{\today}
@@ -61,17 +61,17 @@
         \item Engineers must deal with different types of risks derived from natural and anthropogenic actions. 
         \item Extremes events, such as \emph{floods}, \emph{droughts} and \emph{landslides} can trigger human, economical and environmental losses. 
         \item This means that civil and environmental  engineering design must consider the occurrence of extremes events, even these seldom arise. 
-        \item The analysis of extreme events is made based on historical data, usually recorded at daily time scales, of streamflow, rainfall, water levels, temperature, wind, etc. from where probability distribution of extremes are obtained. 
-        \item However, because of the length of  records, usually the number of extreme values is low and  thus the precision of the estimation of the probability distribution decrease.    
+        \item The analysis of extreme events is made based on historical data, usually recorded at daily time scales, of \emph{streamflow}, \emph{rainfall}, \emph{water levels}, \emph{temperature}, \emph{wind}, etc. from where \emph{probability distribution of extremes} are obtained. 
+        \item However, because of the \emph{length of  records}, usually the number of extreme values is \emph{low} and  thus the \emph{precision} of the estimation of the probability distribution \emph{decrease}.    
     \end{itemize}
 \end{frame}
 
 \subsection{Hazard, vulnerability and risk}
 \begin{frame}{Hazard, vulnerability and risk}
-    Extreme hydrological event triggers  negative effect on economy, environment and population. To understand the these effects is necessary to define the following concepts in the study of extremes. 
+    Extreme hydrological event triggers  \emph{negative effect} on \emph{economy}, \emph{environment} and \emph{population}. To understand the these effects is necessary to define the following concepts in the study of extremes. 
 
     \begin{block}{Hazart ($A$)}
-        \alert{Hazard} is the probability that either a natural or anthropogenic event is potentially harmful. Hazards are related to atmospheric, hydrologic, geologic, geothecnical and fires phenomenons that due to their location, severity and frequency are potentially dangerous. For instance, high streamflow is a natural hazard that threat surrounding population. Hazard can be estimated as:
+        \alert{Hazard} is the \emph{probability} that either a \emph{natural} or \emph{anthropogenic} event is \emph{potentially harmful}. \emph{Hazards} are related to atmospheric, hydrologic, geologic, geotechnical and fires phenomenons that due to their \emph{location}, \emph{severity} and \emph{frequency} are \emph{potentially dangerous}. For instance, \emph{high streamflow} is a \emph{natural hazard} that threat surrounding population. Hazard can be estimated as:
         \[
             A = P[H \geq h]
         \]
@@ -79,33 +79,34 @@
 
     \end{block}
     \begin{block}{Vulnerability ($V$)}
-        \alert{Vulnerability} is the susceptibility of an exposed element to being affected by a hazard. It depends on the degree of exposure ($E$) of the element to the hazard and on its resistance or resilience ($R$) to withstand and absorb the impacts of that hazard.
+        \alert{Vulnerability} is the \emph{susceptibility} of an \emph{exposed element} to being \emph{affected} by a \emph{hazard}. It depends on the \emph{degree of exposure ($E$)} of the element to the hazard and on its resistance or resilience ($R$) to withstand and absorb the impacts of that hazard.
     \end{block}
 
 \end{frame}
 
 \begin{frame}{Hazard, vulnerability and risk}
     \begin{block}{Risk}
-        \alert{Risk} is defined as the probability of damage of an exposed element upon a hazard. Risk is thus equivalent to the union of a hazard and its vulnerability as shown in the following equation:
+        \alert{Risk} is defined as the \emph{probability of damage} of an \emph{exposed element} upon a \emph{hazard}. \emph{Risk} is thus equivalent to the union of a hazard and its vulnerability as shown in the following equation:
         \[ 
-            R = A\otimes V = A \otimes \frac{E}{R}
+            R = A\cup V = A \cup \frac{E}{R}
         \]
-        where the $\otimes$ represent a \emph{tensor product}. This equation shows that to decrease risk, one need to reduce hazard or exposure and increase resilience.  There are some hazard that are difficult to reduce such as earthquakes but it is possible to increase the resistance (e.g. anti-earthquake constructions). If the negative effects are represented by the disadvantage scenario $S$, and if this scenario leads to severe consequences $C$ due to the hazard, then the risk can be estimated as the probability of $S\cap C$, which is a measure of both the probability and the severity of the negative effects. That is:
+        %where the $\otimes$ represent a \emph{tensor product}.
+        This equation shows that to \emph{decrease risk}, one need to \emph{reduce hazard} or \emph{exposure} and \emph{increase resilience}.  There are some hazard that are difficult to reduce such as earthquakes but it is possible to increase the resistance (e.g. anti-earthquake constructions). If the \emph{negative effects} are represented by the \alert{disadvantage scenario $S$}, and if this scenario leads to \alert{severe consequences $C$} due to the hazard, then the \emph{risk} can be estimated as the \emph{probability of $S\cap C$}, which is a measure of both the \emph{probability} and the \emph{severity} of the \emph{negative effects}. That is:
         \[
             R = P[S\cap C] = P[S] P[C|S] 
         \]
-        where $R$ is the probability of the negative scenario and its severity, $P[S]$ is the probability of the current scenario $S$ and $P[C|S]$ is the conditional probability of the severity given the occurrence of $S$. Note that in hydrological systems $P[S] = A$. 
+        where \emph{$R$ is the probability of the negative scenario and its severity}, \emph{$P[S]$ is the probability of the current scenario $S$} and \emph{$P[C|S]$ is the conditional probability of the severity given the occurrence of $S$}. Note that in hydrological systems $P[S] = A$. 
     \end{block}
 
 \end{frame}
 
 \begin{frame}{Hazard, vulnerability and risk}
     \begin{block}{Risk}
-       Risk can also be estimated as the magnitude of the failure condition as the expected value of the losses ($L$), the measure of the adverse consequences, as:
+        \emph{Risk} can also be estimated as the \emph{magnitude of the failure condition} as the \emph{expected value of the losses ($L$)}, the \emph{measure of the adverse consequences}, as:
         \[
             R = E[L] = \sum_{i=1}^n L_i P[L_i]
         \]
-        where $i=1,\cdots, n$ are the loss scenarios, $L_i$ is the loss associated to the ith scenario, and $P[L_i]$ is the probability associated to the occurrence or $L_i$. For instance, in the case of flood, $L_1$ can represent  minor losses, $L_2$  moderate losses and $L_3$  severe losses. Each level of loss is associated to an scenario e.g. the return period of a flood, and scenarios are mutually exclusive and collectively exhaustive. The probability of each level of loss ($L_i$) is given by:
+        where $i=1,\cdots, n$ are the loss scenarios, \emph{$L_i$ is the loss associated to the ith scenario}, and \emph{$P[L_i]$ is the probability associated to the occurrence or $L_i$}. For instance, in the case of flood, $L_1$ can represent  minor losses, $L_2$  moderate losses and $L_3$  severe losses. Each level of loss is associated to an scenario e.g. the return period of a flood, and scenarios are mutually exclusive and collectively exhaustive. The probability of each level of loss ($L_i$) is given by:
         \vspace{-5pt}
         \[
             P[L_i] = \sum_{j=1}^{m} P[L_i | S_j] P[S_j]
@@ -113,9 +114,9 @@
         where $m$ is the number of scenarios, and $P[L_i | S_j]$ is the probability of a level of loss $L_i$ given the occurrence of scenario $S_j$. Risk can thus be estimated as:
         \vspace{-5pt}
         \[
-            R = E[L] \sum_{i=1}^n \left( \sum_{j=1}^m P[L_i | S_j] P[S_j] \right) L_i 
+            R = E[L] = \sum_{i=1}^n \left( \sum_{j=1}^m P[L_i | S_j] P[S_j] \right) L_i 
         \] 
-        Note that the scenarios $S_j$ must be defined following the study case (e.g. floods, droughts), and can describe different magnitudes of the same study case. 
+        Note that the scenarios $S_j$ must be defined following the study case (e.g. floods, droughts), and can \emph{describe different magnitudes} of the same study case. 
 
     \end{block}
 
@@ -125,7 +126,7 @@
 \subsection{Return period}
 \begin{frame}{Return period}
     \begin{block}{Return period}
-        The concept of \alert{return period}  is important to the analysis of extreme events. To define it is important remember the concept of independent events where two events $A$ and $B$ are statistically independent when the ocurrence of $B$ does not affect the ocurrence of $A$ and viceversa. This means that $P[A | B] = P[A]$ and $P[B | A] = P[B]$. Note that statistically independent events can be analysed independently of the order of occurrence. 
+        The concept of \alert{return period}  is important to the \emph{analysis of extreme events}. To define it is important remember the concept of \emph{independent events} where two events $A$ and $B$ are statistically independent when the occurrence of $B$ does not affect the occurrence of $A$ and vice-versa. This means that $P[A | B] = P[A]$ and $P[B | A] = P[B]$. Note that \emph{statistically independent events} can be analysed independently of the order of occurrence. 
         To understand this concept, the following example is analysed. 
  \begin{exampleblock}{Return period in reservoir} % from Diaz-Gra
      Consider a reservoir designed to control floods, where the main outflow structure is sized based on the allowable downstream flood discharge. Under normal conditions, water flows through the structure and the reservoir does not store any volume. When the incoming streamflow exceeds the structure’s design capacity, only a fraction of the flow passes through the structure while the remaining portion is stored, attenuating the flood peak. The reservoir is also equipped with a spillway that evacuates flow when the water level exceeds an admissible limit. For this reason, the design flow for the spillway corresponds to a relatively infrequent event. Suppose that the reservoir’s performance is analyzed over a 50-year period, which is the useful life of the system. For the analysis, the highest annual inflows are considered to determine whether they exceed the spillway capacity. This problem can be analysed after supposing the occurrence of \emph{Bernoully trials}, so that, the data can be described using a \emph{Binomial distribution} considering that each flow event is independent and with probability $p$ that the maximum annual flow exceed the spillway capacity.  
@@ -141,7 +142,7 @@
      \[
          \left( \begin{array}{c} 50 \\ 5 \end{array} \right) 0.01^5 (1-0.01)^{45} = 0.000135
      \]
-     This show that the probability is quite low. However, when the number of year is reduced from five to two, the probability increases to 0.0756. So that, the probability of the system failure during its useful life increases as the number of years of possible occurrence decrease. Also, while the probability of no occurrence of floods during the system's useful like that surpasses the spillway capacity is 0.6050, the complement $1-0.6050 = 0.3950$ indicate the probability of hydrological risk of the system. 
+     This show that the probability is quite low. However, when the number of year is reduced from five to two, the probability increases to 0.0756. So that, the probability of the system failure during its useful life increases as the number of years of possible occurrence decrease. Also, while the probability of no occurrence of floods during the system's useful live that surpasses the spillway capacity is 0.6050, the complement $1-0.6050 = 0.3950$ indicate the probability of hydrological risk of the system. 
  \end{exampleblock}
     \end{block}
 \end{frame}
@@ -210,9 +211,9 @@ For instance, an structure with a service life of 25 years and an acceptable hyd
     The frequency analysis of extreme hydrological events seeks to estimate hazards and in particular to answer the following questions:
     \begin{itemize}
         \item What is the \emph{return period} of, for instance, a flood occurred in the XXXX year at the YY location where the water lever rise to ZZ m? 
-        \item What the water level in the river XX at the YY location for a NN return period? This question can be considered as the inverse of the aforementioned question.
+        \item What is the water level in the river XX at the YY location for a NN return period? This question can be considered as the inverse of the aforementioned question.
     \end{itemize}
-    The frequency analysis can be shown graphically through the \alert{frequency curve}. An example of the frequency curve for the weekly average minimum streamflows are shown in the figure.
+    The \emph{frequency analysis} is represented graphically by the \alert{frequency curve}. An example of the frequency curve for the weekly average minimum streamflows are shown in the figure (frequency curve of minimum weakly average streamflows). 
 
 \centering
 \includegraphics[width=0.95\linewidth]{fiM23.jpeg}  % from Diaz-Gra
@@ -223,18 +224,37 @@ For instance, an structure with a service life of 25 years and an acceptable hyd
 The characteristics needed to the analysis of extreme hydrological events are described below:
 \begin{itemize}
 \item Use historical time series of records assuming that the data is \emph{stationary}, which means that the data \emph{pdf} does not change in time. Note that this assumption is partially denied because \emph{climate change} introduce non-stationary traits to the data (e.g. long term trends). 
-\item The hydrological variable must be \emph{relevant} for the porpoise of the analysis. For instance, if an engineers is designing a bridge over a river, water level and flow speed are data needed for the design.   
-\item The amount of data must be sufficient to the frequency analysis. As in the analysis of extreme events the number of data extracted from the data set is usually low, it is recommended to implement probability distribution with few parameters. These data must be \emph{independent and homogeneous} (from the same probability distribution). The minimum number of extreme values to perform an frequency analysis must be between 15 and 30. The larger the number the lesser the uncertainty in the estimation of the frequency curve.  
-\item The data must come from the same gage in order avoid a mixing of errors. 
-\item The data must represent or come from a homogeneous hydrological regime. This means that is not correct to mix within the same period, for instance, natural flows with regulated ones. 
+\item The hydrological variable must be \emph{relevant} for the porpoise of the analysis. For instance, if an engineers is \emph{designing a bridge} over a river, \emph{water level} and \emph{flow speed} are data needed for the design.   
+\item The amount of data must be sufficient to the frequency analysis. As in the analysis of extreme events the number of data extracted from the data set is usually low, it is recommended to implement \emph{probability distribution} with \emph{few parameters}. These data must be \emph{independent and homogeneous} (from the same probability distribution). 
+\item The \emph{minimum number} of extreme values to perform an \emph{frequency analysis} must be \emph{between 15 and 30}. The larger the number the lesser the uncertainty in the estimation of the frequency curve.  
+\item The \emph{data} must come from the \emph{same gage} in order avoid a \emph{mixing of errors}. 
+\item The \emph{data} must represent or come from a \emph{homogeneous hydrological regime}. This means that is not correct to mix within the same period, for instance, \emph{natural} flows with \emph{regulated} ones. 
 \end{itemize}
 \end{frame}
 
 \begin{frame}{The data needed for the analysis}
     \begin{block}{Series}
-    \alert{Series} are usually a time dependent sequence of data. From the series, the extreme data extracted can be classified as: 1) \emph{data blocks of maximum/minimum} and 2) \emph{maximum/minimum data over/under a certain threshold}. While the first type is extreme data extracted from a block (subset) of data, the second type is data that is over or under a predefined threshold. The most common first type data set is the \emph{annual series}. Annual series are formed after extracting the  maximum/minimum values of the raw time series for each year, where one year is one block. It is also needed to prove that the values extracted for each year are independent. This means that they must be separated enough in time so that no physical relationship (catchment time concentration) between values is possible.  An example of annual series is the maximum annual instantaneous discharge in a river gauge station. Semesterly series can also be formed when independence and homogeneity are guaranteed. In this case, the return period is estimated in semesters. Note that the smaller the block the larger the difficulty to guarantee independence and homogeneity. 
-    In the case of the series formed after extracting maximum/minimum data over/under a certain threshold, the number of data per block can be greater than 1. For instance there must be more than one value of an specific year. Because is difficult to establish a return period from these series, this one serves to define a series of excess, that must be constituted by $n_y$ (number of years) values. In this series, the largest $n_y$ values are selected. In the case of \emph{bimodal} streamflow regimes, the semesterly series make sense, so the chosen of the block must obey the physical functioning of the natural system. 
     \end{block}
+        \begin{itemize}
+            \item \alert{Series} are usually a \emph{time dependent} sequence of data. 
+            \item From the series, the extreme data extracted can be classified as: 1) \emph{data blocks of maximum/minimum} and 2) \emph{maximum/minimum data over/under a certain threshold}. 
+            \item While the first type is extreme data extracted from a block (subset) of data, the second type is data that is over or under a predefined threshold. 
+            \item The most common first type data set is the \emph{annual series}. Annual series are formed after extracting the  \emph{maximum/minimum} values of the raw time series for each year, where one year is one block. 
+            \item It is also needed to prove that the \emph{values} extracted for each year are \emph{independent}. This means that they must be separated enough in time so that no physical relationship (catchment time concentration) between values is possible.  
+            \item An example of annual series is the maximum annual instantaneous discharge in a river gauge station. 
+            \item \emph{Semesterly series} can also be formed when \emph{independence} and \emph{homogeneity} are guaranteed. In this case, the \emph{return period} is estimated in semesters. Note that the smaller the block the larger the difficulty to guarantee independence and homogeneity. 
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{The data needed for the analysis}
+    \begin{block}{Series}
+    \end{block}
+        \begin{itemize}
+ 
+            \item In the case of the series formed after extracting \emph{maximum/minimum} data over/under a certain \emph{threshold} (\alert{Peaks-over-threshold}), the number of data per block can be greater than 1. For instance there must be more than one value of an specific year.
+            \item Because is difficult to establish a return period from these series, this one serves to define a series of excess, that must be constituted by $n_y$ (number of years) values. In this series, the largest $n_y$ values are selected. 
+            \item In the case of \emph{bimodal} streamflow regimes, the \emph{semesterly} series make sense, so the chosen of the block must obey the \emph{physical functioning} of the natural system. 
+        \end{itemize}
 \end{frame}
 
 \begin{frame}{The data needed for the analysis}
@@ -243,17 +263,26 @@ The characteristics needed to the analysis of extreme hydrological events are de
 \end{frame}
 
 \begin{frame}{The data needed for the analysis}
+\vspace{-2pt}
 \centering
 \includegraphics[width=\linewidth]{taM23.jpg}  % from Diaz-Gra
+\vspace{-20pt}
+\begin{itemize}
+    \item The table contains the maximum instantaneous streamflow in each month from 1973 to 2015 ($n_a =43$ years) at Estaci\'on Banco, Magdalena River. 
+    \item The bold data points are the annual maximum streamflows. For this case, the minimum distance between two consecutive annual maximum values is 4 months, much greater than travel time in the basin. 
+    \item The \emph{underline} data points correspond to those points greater than the minimum of the annual series. Note that points must be distant at least two months for guarantying independence. In total (bold + underlined) sum 103 points. This constitute a \alert{partial series}.   
+    \item From the \emph{partial series} is possible to extract the $n_a$ maximum streamflow that constitute the \alert{excendences series} (see asterisk data points).
+\end{itemize}
 \end{frame}
 
 \begin{frame}{The data needed for the analysis}
     \begin{block}{Hypothesis test for series}
-        As we have told before data in any type of series must be \emph{independent and homogeneous}. The \emph{Kendall test} to verify that the data is stationary or not, check that whether $\mu$ is constant (\emph{null hypothesis} $H_0$)  or not (\emph{non null hypothesis} $H_1$). To apply the test is needed to estimate:
+   \end{block}
+   As we have told before, data in any type of series must be \emph{independent and homogeneous}. The \emph{Kendall test} serves to verify whether the data is \emph{stationary} or not, (whether $\mu$ is constant (\emph{null hypothesis} $H_0$)  or not (\emph{non null hypothesis} $H_1$)). To apply the test is needed to estimate:
         \[
             S = \sum_{i=1}^{n-1} \sum_{j=i+1}^n sgn(x_j - x_i)
         \]
-        where $x$ represent the hydrological variable, $sgn$ is the sign function where $sgn(a) = 1 \text{ if } a>0$, $sgn(a) = 0 \text{ if } a=0$ and $sgn(a) = -1 \text{ if } a<0$. Once $S$ is calculated, $K$ is calculated as:
+        where $x$ represent the chronologically sorted hydrological series, $sgn$ is the sign function where $sgn(a) = 1 \text{ if } a>0$, $sgn(a) = 0 \text{ if } a=0$ and $sgn(a) = -1 \text{ if } a<0$. Once $S$ is calculated, $K$ is calculated as:
  \[
 K =
 \begin{cases}
@@ -262,27 +291,28 @@ K =
     \frac{S+1}{\sqrt{n(n-1) (2n+5)/18}} & \text{for } S < 0
 \end{cases}
 \]
-where $K$ follow a \emph{normal distribution} with $N(0,1)$. Accordingly, $H_0$ is accepted if $-z_{\alpha/2} \leq K \leq z_{-\alpha/2}$, where $z_{\alpha/2}$ is the value of $K$ that follow $N(0,1)$ which is exceeded with probability $\alpha/2$, where $\alpha$ is the significance. 
-   \end{block}
+where $K$ follow a \emph{standard normal distribution} with $N(0,1)$. Accordingly, $H_0$ is accepted if $-z_{\alpha/2} \leq K \leq z_{-\alpha/2}$, where $z_{\alpha/2}$ is the value of the standard normal variable $Z$ that follow $N(0,1)$ which is exceeded with probability $\alpha/2$, where $\alpha$ is the significance level.  
 \end{frame}
 
 
 \subsection{Conceptual framework for  frequency analysis}
 \begin{frame}{Conceptual framework for  frequency analysis}
     \begin{block}{Generalities}
+   \end{block}
 
-        For a annual series is of interest to estimate the \emph{return period} ($T_R$) for a specific value $q$; for instance the $T_R$ for a extreme discharge occurred in a given year. As $T_R$ is the inverse of the probability $p$ that a value $q$ being equal or exceeded for maximum value series, and being equal or below for minimum value series, this means that $p$ must be estimated for a event of interest (minimum or maximum). There are different equations to estimate $p$ where the results among the equations are similar for short $T_R$ and they differ for long $T_R$. A general equation to estimate the probability $p$ is:
+        Once the e.g. annual series is set up, it is interesting to estimate the \emph{return period} ($T_R$) for a specific value $q$; for instance the $T_R$ for a extreme discharge occurred in a given year. Note that $T_R$ is the inverse of the probability $p$, which is the probability that $q$ being equal or exceeded in any year (annual maximum time series), or not been exceeded  any year (annual minimum time series). This means that $p$ can be estimated for a event of interest (minimum or maximum). There are different equations to estimate $p$ where the results among the equations are similar for short $T_R$ and they differ for long $T_R$. A general equation to estimate the probability $p$ is:
         \[
             p_i = \frac{i-0.439}{n+0.526}
         \]
         where $i$ is the order of data; maximum values are sorted in descending order and minimum values are sorted in ascending order. 
-        It is also of interest to estimate the extreme value $q$ for a given $T_R$. This $T_R$ in many cases (e.g. $T_R = 100$ yrs) is larger than the time series length. For this, the data need to be fit to a probability distribution to extrapolate up to the $T_R$ of interest. To do this, for a series of annual maximum streamflows $Q$, note that $p = P[Q > q] = 1 - F_Q (q)$, where $F_Q (q)$ is the fitted \emph{cdf} of $Q$ annual extreme values. For a series of annual minimum streamflow $p = P[Q<q] = F_Q (q)$. 
-   \end{block}
+
+        It is also of interest to estimate the extreme value $q$ for a given $T_R$. This $T_R$ in many cases (e.g. $T_R = 100$ yrs) is larger than the time series length. For this, the data need to be fit to a probability distribution to extrapolate up to the $T_R$ of interest. Once for instance the \emph{pdf} and the \emph{cdf} of the annual maximum streamflow series $Q$ is ready is posible to estimate  $p = P[Q > q] = 1 - F_Q (q)$, where $F_Q (q)$ is the fitted \emph{cdf} of $Q$ annual extreme values. For a series of annual minimum streamflow $p = P[Q<q] = F_Q (q)$. 
 \end{frame}
 
 \begin{frame}{Conceptual framework for  frequency analysis}
     \begin{block}{Probability distributions for the frequency analysis}
-        Suppose a set of independent random variables $X_1, X_2, \cdots, X_n$  with a common \emph{cdf} $F_X (x)$, where $x$ is an observed value and $n$ is the number of values, usually, equally spaced, for instance, one year. Additionally, $X_{max} = max[X_1 , X_2 , \cdots, X_n ]$, and $F_{X_{max}} (x_{max})$ is given by the joint probability that $X_i \leq x_{max}$, that is:
+  \end{block}
+        Suppose a set of independent random variables $X_1, X_2, \cdots, X_n$  with a common \emph{cdf} $F_X (x)$, where $x$ is an observed value and $n$ is the number of values, usually, equally spaced, for instance, one year. Additionally, $X_{max} = max[X_1 , X_2 , \cdots, X_n ]$, and $F_{X_{max}} (x_{max})$ is given by the joint probability that $X_i \leq x_{max}$ ($i=1,2,\cdots,n$), that is:
         \begin{align*}
             P[X_{max} \leq x_{max}] &= P[X_1 \leq x_{max}, X_2 \leq x_{max}, \cdots, X_n \leq x_{max}] \\
                                     &=F_{X_1, X_2, \cdots, X_n} (x_{max}, x_{max},\cdots, x_{max})
@@ -291,7 +321,7 @@ where $K$ follow a \emph{normal distribution} with $N(0,1)$. Accordingly, $H_0$ 
         \[
             F_{X_{max}} (x_{max}) = \prod_{k=1}^n P[X_k \leq x_{max} ] = \prod_{k=1}^n F_{X_k} (x_{max}) = \left[  F_{X} (x_{max}) \right]^n
         \]
-        If $n \rightarrow \infty$ and if $X_{max}$ is standardized and converted into $Y$, the probability distribution must be one of the following types:
+        If $n \rightarrow \infty$ and if $X_{max}$ is standardized and converted into $Y$, the \emph{limit distribution} must be one of the following types:
         \[
             \text{Type I:} \quad F_Y (y) = e^{-e^{-y}}, \text{ for } -\infty < y < \infty 
         \]
@@ -309,12 +339,12 @@ where $K$ follow a \emph{normal distribution} with $N(0,1)$. Accordingly, $H_0$ 
     &1 \text{ for } y \geq 0   \\
 \end{cases}
 \]
-  \end{block}
 \end{frame}
 
 \begin{frame}{Conceptual framework for  frequency analysis}
     \begin{block}{Probability distributions for the frequency analysis}
-        This types can be the following probability distributions:
+  \end{block}
+  Because the $X_{max}$ data are located in the \emph{tail}, the \emph{limit distribution} depends on the behaviour of the tail of the $F_X (x)$ distribution. This types can be the following probability distributions:
         \begin{itemize}
             \item \emph{Type I:} Exponential, Gamma, Weibull, Normal, Lognormal, Logistic and Gumbel type I.
             \item \emph{Type II:} Pareto, t-student, Cauchy, Loggamma, Frechet type II
@@ -322,59 +352,67 @@ where $K$ follow a \emph{normal distribution} with $N(0,1)$. Accordingly, $H_0$ 
         \end{itemize}
         Note that the \emph{type I} distributions are not bounded and do not serve to represent maximum and minimum values, while the \emph{type II} distribution are bounded in the inferior limit and are suitable to fit maximum values. In the case of \emph{type III} distributions, these are bounded in the superior limit and are suitable for minimum values. 
  Some of these distribution converge slowly to the limit distribution and are thus unsuitable for the analysis of extreme events. In consequence, there are other distributions or modifications to some of the distributions mentioned that can be implemented for the analysis of extremes. 
-  \end{block}
 \end{frame}
 
 \begin{frame}{Conceptual framework for  frequency analysis}
-    \begin{block}{Frequency equation}
-        The \alert{frequency equation} is given by:
+ \begin{minipage}{0.57\textwidth}
+   \begin{block}{Frequency equation}
+        An alternative way to perform frequency analysis for extreme values is using the \alert{frequency equation} to get \emph{frequency curves}. The frequency equation is given by:
         \[
             x_T = \mu_X + K_T \sigma_X
         \] 
-        where $x_T$ is the magnitude of the event with a return period $T$, $\mu_X$ and $\sigma_X$ are the mean and the standard deviation of the distribution, respectively, and $K_T$ are the \alert{frequency factor} that depends of the return period and the specific probability distribution. The equations to estimate the frequency factor are found probability textbooks. Note that $\mu_X$ and $\sigma_X$ need to be estimated based in the \emph{pdf} parameters estimated based on the annual series.
+        where $x_T$ is the magnitude of the event with a return period $T$, $\mu_X$ and $\sigma_X$ are the mean and the standard deviation of the distribution, respectively, and $K_T$ are the \alert{frequency factor} that depends of the return period and the specific probability distribution. The equations to estimate the frequency factor are found probability textbooks. Note that $\mu_X$ and $\sigma_X$ need to be estimated based on the distribution parameters estimated based on the annual series.
 
  \end{block}
+
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[width=\linewidth]{taM219.jpeg}  % from Diaz-Gra
+\end{minipage}
+
 \end{frame}
 
 \begin{frame}{Conceptual framework for  frequency analysis}
     \begin{block}{Estimation of the confidence limits}
+\end{block}
         It is important to point out that the magnitude $x_T$ of the extreme event with a return period $T$ is a random variable that follow a \emph{pdf}. For an   ascending sorted annual series $x_{1:n} \leq x_{2:n} \leq \cdots \leq x_{n:n}$, the \emph{pdf} of $X_{k:n}$ is:
         \[
             f_{X_{k:n}} (x) = \left( \begin{array}{c} n \\ k \end{array} \right) (k)  \left[ F_X (x) \right]^{k-1} \left[ 1 - F_X (x) \right]^{n-k} f_X (x)
             \]
-            where $f_X (x)$ and $F_X (x)$ are the fitted \emph{pdf} and \emph{cdf}, respectively, based on the annual series. Note that the \emph{pdf} of $X_{k:n}$ has the same characteristics of the \emph{pdf} fitted to the annual series and a position of order $k$. Accordingly, the \emph{fdp} of $X_T$ is:
+            where $f_X (x)$ and $F_X (x)$ are the fitted \emph{pdf} and \emph{cdf}, respectively, based on the annual series. Note that the \emph{pdf} of $X_{k:n}$ is defined by the characteristics of the \emph{pdf} fitted to the annual series and by the position of order $k$. Accordingly, the \emph{pdf} of $X_T$ is:
         \[
             f_{X_T } (x_T) = \left( \begin{array}{c} n \\ m \end{array} \right) (m)  \left[ F_X (x_T) \right]^{m-1} \left[ 1 - F_X (x_T) \right]^{n-m} f_X (x_T)
             \]
-            where $m$ is the integer fraction of $nr$ and $r = 1 -\frac{1}{T}$. So if $f_{X_T} (x_T)$ is known, the confidence limits can be estimated. For instance, to the 90\% of confidence, the inferior and the superior limits must satisfy  that $F_{X_T} (x_{T_inf}) = 0.05$ and $F_{X_T} (x_{T_sup}) = 0.95$.                 
-\end{block}
+            where $m$ is the integer fraction of $nr$ and $r = 1 -\frac{1}{T}$. So if $f_{X_T} (x_T)$ is known, the confidence limits can be estimated. For instance, to the 90\% of confidence, the inferior and the superior limits must satisfy  that $F_{X_T} (x_{T_{inf}}) = 0.05$ and $F_{X_T} (x_{T_{sup}}) = 0.95$.                 
 
 \end{frame}
 
 \begin{frame}{Conceptual framework for  frequency analysis}
-        \vspace{-5pt}
     \begin{block}{Estimation of the confidence limits} 
-        These \emph{pdf} equations correspond to the \emph{Beta distribution}. This is actually the incomplete Beta function standardized by the Beta function. The exact confidence intervals can be estimated numerically solving this equations:
-        \vspace{-8pt}
+\end{block}
+For these \emph{pdf}s, it was found that the  \emph{cdf} correspond to  \emph{Beta distribution}. This is actually the \emph{incomplete Beta function} standardized by the \emph{Beta function}. The exact confidence limits $100(1-\alpha)\%$ associated to the quantile $P$ are given by $[F^{-1}(P_{inf}), F^{-1}(P_{sup})]$. So $P_{inf}$ and $P_{sup}$ can be computed numerically solving these equations:
             \begin{align*}
                 I[P; n' P_{inf}, n' (1-P_{inf})] &= 1-\alpha/2 \\
                 I[P; n' P_{sup}, n' (1-P_{sup})] &= \alpha/2 \\
             \end{align*}
-        \vspace{-8pt}
             where:
-        \vspace{-8pt}
             \[
                 I(z; a,b) = \frac{\Gamma(a + b)}{\Gamma(a+1) \Gamma (b)} z^a (1-z)^b + \frac{\Gamma(a + b + 1)}{\Gamma(a+1) \Gamma (b)} \int_0^z t^a (1-t)^{b-1} dt
             \]
-            and $n' = (n+1)$. Note that int the equation for $I[]$, $z = P$, $a = n' P_{inf}$ or $a = n' P_{sup}$, and $b = n' (1-P_{inf})$ or $b = n' (1-P_{sup})$. The problems is to find the values of $a$ and $b$ using the two equations for a given value of $\alpha$ $P$. Suppose that one want to estimate the confidence limits for a 90\% confidence for the value from the frequency curve that correspond to a return period of $T=50$ years. The equations above are solved for $\alpha = 1-0.9 = 0.1$ and $P = 1 - \frac{1}{T} = 1- 1/50 = 0.98$.
-            Note that traditionally, the confidence limits for $x_T$ have estimated assuming that $X_T$ follow a \emph{Normal distribution}, so the confidence limits can be estimated approximately as:
-        \vspace{-12pt}
+            and $n' = (n+1)$. Note that in the equation for $I[]$, $z = P$, $a = n' P_{inf}$ or $a = n' P_{sup}$, and $b = n' (1-P_{inf})$ or $b = n' (1-P_{sup})$. The problems is to find the values of $a$ and $b$ using the two equations for given values of $\alpha$ and $P$. Suppose that one want to estimate the confidence limits for a 90\% confidence for the value from the frequency curve that correspond to a return period of $T=50$ years. The equations above are solved for $\alpha = 1-0.9 = 0.1$ and $P = 1 - \frac{1}{T} = 1- 1/50 = 0.98$. For the frequency analysis of minimum values $P = \frac{1}{T}$. 
+
+\end{frame}
+\begin{frame}{Conceptual framework for  frequency analysis}
+    \begin{block}{Estimation of the confidence limits} 
+\end{block}
+            Note that traditionally, the confidence limits for $x_T$ have been estimated assuming that $X_T$ follow a \emph{Normal distribution}, so the confidence limits can be estimated approximately as:
             \begin{align*}
                 x_{T_{inf}} &= x_T - z_{\alpha/2} s_T \\
                 x_{T_{sup}} &= x_T + z_{\alpha/2} s_T 
             \end{align*}
-            where $\alpha$ is the level of significance, $z_{\alpha/2}$ is the value of the standardized variable which is exceeded with probability $\alpha/2$, and $s_T$ is the estimate of the standard deviation of the event with a return period $T$. Note that $s_T$ is usually estimated using the Moments or the Maximum-likelihood methods.
-\end{block}
+            where $\alpha$ is the level of significance, $z_{\alpha/2}$ is the value of the Normal standardized variable which is exceeded with probability $\alpha/2$, and $s_T$ is the estimate of the standard deviation of the event with a return period $T$. Note that $s_T$ is usually estimated using the Moments or the Maximum-likelihood methods.
 
 \end{frame}
 
@@ -386,7 +424,7 @@ where $K$ follow a \emph{normal distribution} with $N(0,1)$. Accordingly, $H_0$ 
 \includegraphics[width=0.5\linewidth]{taM26.jpeg}  % from Diaz-Gra
      \end{center}
 
-     Note that the equations given before are solved for: $n=43$ (\# of years), $\alpha = 0.1$, and various values of $T$. The equations are solved to find the values for $P_{inf}$ and $P_{sup}$ given in the table. The confidence limits can then be estimated using the fitted \emph{cdf} as $x_{T_{inf}} = F^{-1} (P_{inf})$ and $x_{T_{sup}} = F^{-1} (P_{sup})$.
+     Note that the equations given before are solved for: $n=43$ (\# of years), $\alpha = 0.1$, and various values of $T$. The equations are solved to find the values for $P_{inf}$ and $P_{sup}$ for various $T$ and are given in the table. The confidence limits for the values of $T$ can then be estimated using the fitted \emph{cdf} $F_{X} (x)$ to find $x_{T_{inf}} = F^{-1} (P_{inf})$ and $x_{T_{sup}} = F^{-1} (P_{sup})$.
  \end{exampleblock}
 
 \end{frame}

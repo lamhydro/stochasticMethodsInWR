@@ -1,0 +1,81 @@
+\documentclass[10pt, a4paper]{exam}
+\usepackage{graphicx}
+\usepackage[a4paper, total={7in, 9.5in}]{geometry}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\renewcommand\ULthickness{1.0pt}   
+\setlength\ULdepth{1.3ex}
+
+\begin{document}
+
+
+	\noindent
+	\begin{minipage}[l]{0.1\textwidth}
+		\noindent
+		\includegraphics[width=2.8\textwidth]{ESCUDO.png}
+	\end{minipage}
+\hfill
+\begin{minipage}[c]{0.8\textwidth}
+	\begin{center}
+		{\large  Departamento de Ingeniería civil y Agrícola\par
+		\large	Facultad de Ingeniería	\par
+	% \large \textbf{Taller propiedades de los fluidos}	\par
+    \large \textbf{HOMEWORK 1\\Introduction to probability and statistics \\ and analysis of extreme events}	\par
+} Luis Alejandro Morales Ph.D
+	\end{center}
+\end{minipage}
+\par
+\vspace{0.2in}
+\noindent
+    \uline{M\'etodos Estoc\'asticos en Recursos Hidr\'aulicos [2025858]	\hfill 2025-II}
+\par 
+\vspace{0.15in}
+\noindent
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Important notes}
+\begin{itemize}
+    \item The computational processing must be made in the \texttt{R programming language}.  
+    \item The report must be  written concisely in \TeX, \texttt{markdown} (\texttt{R} report format) or \texttt{MS Word}. It must contain the plots and the analysis based on the results.
+    \item The report must be named as \texttt{FirstSurnameSecondSurname\_hwk1\_SMWR\_2025\_II.pdf} \\ (\texttt{MoralesMarin\_hwk1\_SMWR\_II.pdf}). This must be sent to lmoralesm@unal.edu.co with the asunto \texttt{hwk1\_SMWR}
+\end{itemize}
+
+
+
+
+\section{Part I: Introduction to probability and statistics  }
+\begin{enumerate}
+
+    \item \label{s11} From the \emph{IDEAM}, \emph{CAR}, \emph{IDIGER} or other national or regional agencies, obtain a \emph{time series (TS)} of \emph{hourly precipitation} in $mm$ in any place in Colombia.  The series must have at least 15 yrs of continuous hourly records. 
+
+    \item \label{s12} From the hourly $TS$, build a series of the following data: 1)  duration (hours) of rainfall events, 2) intensity (mm of rainfall) of the continuous event and 3) time (hours) between rainfall events. 
+
+\item \label{s13} Accumulate the hourly $TS$ to \emph{daily}, \emph{monthly} and \emph{annual} precipitation.
+
+\item Estimate the \emph{mean}, the \emph{variance}, the \emph{skewness}, the \emph{kurtosis} and the \emph{interquartile range} for the original $TS$ and the $TS$ build in \ref{s12} and \ref{s13}.  Organize the results in tables and perform the analysis of the results.
+
+\item For each of the $TS$ in \ref{s12} and \ref{s13}, make the following plots: the \emph{series}, the \emph{histogram} and \emph{cumulative histogram}. Analyze and discuss the results.
+
+\item For each of the series in \ref{s12} and \ref{s13}: estimate the \emph{pdf}  and the \emph{cdf} using at least two different methods (e.g. \emph{method of moments} and \emph{method of maximum likelihood}). Apply \emph{goodness-of-fit tests} to choose the best \emph{pdf}/ \emph{cdf} that describe the data; made $Q-Q$ plots.  Plot the chosen \emph{pdf}s and \emph{cdf}s and  organize the distribution parameters in tables. Analyse and discuss the results. 
+
+\item Estimate the \emph{confidence intervals} for the \emph{mean} and for the \emph{variance} of the $TS$ in \ref{s12} and \ref{s13}.  
+
+\item Estimate the join \emph{pdf} between the \emph{precipitation intensity} and \emph{duration} and plot it. Estimate the \emph{correlation} between both variables. Analyze and discuss the results.
+
+\end{enumerate}
+
+\section{Part II: Frequency analysis of extremes}
+\begin{enumerate}
+    \item Using the monthly precipitation $TS$, choose the maximum ($P_{max}$) and the minimum ($P_{min}$) annual precipitations. 
+
+    \item From the observed data, estimate the \emph{frequency curve} $P_{max/min}$ vs $T$ (return period) for both time series.  
+
+    \item Estimate the theoretical \emph{frequency curves} for both $TS$ by fitting a \emph{pdf} /\emph{cdf} to the data. Apply \emph{goodness-of-fit tests} to choose the best \emph{pdf}/ \emph{cdf} that describe the data; made $Q-Q$ plots.  Plot the chosen \emph{pdf}s and \emph{cdf}s and  organize the distribution parameters in tables. Analyse and discuss the results. 
+
+    \item Estimate the $P_{max}$ and $P_{min}$ for the following return periods: $T = 10, 20, \cdots, 200$ years. Estimate the confidence intervals for each $P_{max}$ and $P_{min}$. 
+\end{enumerate}
+    
+\end{document}
+
+
+
