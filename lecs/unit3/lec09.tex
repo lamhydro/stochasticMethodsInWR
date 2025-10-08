@@ -57,11 +57,11 @@
 \section{Definitions}
 \begin{frame}{Definitions}
     \begin{itemize}
-        \item Consider a \emph{hydrological variable} $Z$ that can either varies in space (e.g. hydraulic conductivity) or in time (e.g. surface water level) or in space and time (e.g. growndwater depth). 
+        \item Consider a \emph{hydrological variable} $Z$ that can either varies in space (e.g. hydraulic conductivity) or in time (e.g. surface water level) or in space and time (e.g. Groundwater depth). 
         \item The value of any of these variables is known only in those places where it is observed, and it is unknown in other places. 
-        \item Accordingly, the value of $Z$ is uncertain, to deal with this, instead of using one single functio either in time ($Z(t)$), or space ($Z(\mathbf{x})$) or space and time ($Z(\mathbf{x},t)$), multiple functions are used (see figure for $Z(t)$).  
+        \item Accordingly, the value of $Z$ is uncertain, to deal with this, instead of using one single function either in time ($Z(t)$), or space ($Z(\mathbf{x})$) or space and time ($Z(\mathbf{x},t)$), multiple functions are used (see figure for $Z(t)$).  
         \item Each of these functions have the same probability of representing the true. 
-        \item The family of equally probable functions representing $Z$ is known as an \alert{emsemble} or a \alert{random function}. 
+        \item The family of equally probable functions representing $Z$ is known as an \alert{ensemble} or a \alert{random function}. 
 
     \end{itemize}
 
@@ -76,9 +76,9 @@
         \item \alert{Random or stochastic process}: If $Z$ is a function of time ($t$), $Z(t)$.
         \item \alert{Space-time random field}: If $Z$ is a function of space ($\mathbf{x}$) and time ($t$), $Z(\mathbf{x},t)$, $\mathbf{x}= (x,y, z)$.
    \end{itemize}
-   Here, we are going to focus on \emph{random process} ($Z(t)$). Note that in the figure above, four functions $Z(t)$ (\emph{ensemble members}) are shown and each of them are know as \emph{realizations} and denoted as $z(t)$. The number of \emph{realizations}, depending on the variable's nature, can be finite or infinite.\\ 
+   Here, we are going to focus on \emph{random process} ($Z(t)$). Note that in the figure above, four functions $Z(t)$ (\emph{ensemble members}) are shown and each of them are know as \emph{realizations} and denoted as $z(t)$. The number of \emph{realizations}, depending on the variable's nature, can be finite or infinite.
 
-   Another way of explaining this concept is to imagine a \emph{random function} as a collection of random variables (one at every location in space or point in time). Observing at the figure above, for each time $t$, a $Z(t)$ is defined. This is why for each $t$, $Z(t)$ is described with a \emph{pdf} $f_Z (z; t)$, which depends not only on the value of $z$ but also on the value of $t$. These \emph{pdf} is estimated based on sample of data taken at particular time (e.g. $t_1$). As shown in the figure, the \emph{pdf}s of the data sample at $t_1$ and $t_2$ are different, and indicate that variance is larger in $t_1$ than in $t_2$ and thus more uncertain. \\
+   Another way of explaining this concept is to imagine a \emph{random function} as a collection of \emph{random variables} (one at every location in space or point in time). Observing at the figure above, for each time $t$, a $Z(t)$ is defined. This is why for each $t$, $Z(t)$ is described with a \emph{pdf} $f_Z (z; t)$, which depends not only on the value of $z$ but also on the value of $t$. These \emph{pdf}s are estimated based on samples of data taken at particular times (e.g. $t_1$). As shown in the figure, the \emph{pdf}s of the data sample at $t_1$ and $t_2$ are different, and indicate that variance is larger in $t_1$ than in $t_2$ and thus more uncertain.
 
    At each point in time ($t$), $\mu_Z$ is calculated as:
    \[
@@ -104,7 +104,7 @@
         &f_{Z(t_1), Z(t_2),\cdots,Z(t_n)} (z_1, z_2, \cdots, z_n; t_1, t_2, \cdots, t_n) = \\ 
                                                                                         &\lim_{\partial z_1, \cdots, \partial z_n \rightarrow 0} \frac{Pr(z_1 < z(t_1) \leq z_1 + \partial z_1, z_2 < z(t_2) \leq z_2 + \partial z_2, \cdots, z_n < z(t_n) \leq z_n + \partial z_n)}{\partial z_1 \partial z_2 \cdots \partial z_n}
     \end{align*}
-    The \emph{multivariate pdf} of a \emph{random function} is sometime referred to as \alert{multipoint pdf}, because it relates to random variables at different points or locations. Note that \emph{random function} is fully characterized if the \emph{multivariate pdf} for any set of points is known. 
+    The \emph{multivariate pdf} of a \emph{random function} is sometime referred to as \alert{multipoint pdf}, because it relates to random variables at different points or locations. Note that a \emph{random function} is fully characterized if the \emph{multivariate pdf} for any set of points is known. 
 
 \end{frame}
 
@@ -139,7 +139,7 @@ This figure shows the different types of \emph{random functions} based on the wa
 \begin{frame}{Stationary random functions}
     \begin{block}{Strict stationary random functions}
     \end{block}
-    An special type of random functions are the \alert{strict stationary random functions}. A \emph{strict stationary random functions} isa random function for which its \emph{multivariate pdf} is invariant under translation. This means that for any set of $N$ locations and for any translations in time $\Delta t$, we have
+    An special type of random functions are the \alert{strict stationary random functions}. A \emph{strict stationary random functions} is a random function for which its \emph{multivariate pdf} is invariant under translation. This means that for any set of $N$ locations and for any translations in time $\Delta t$, we have
     \begin{align*}
         f(z_1, z_2, \cdots, z_N ; t_1, t_2, \cdots, t_N ) &= \\
                                                           &f(z_1, z_2, \cdots, z_N ; t_1 +\Delta t, t_2+\Delta t, \cdots, t_N +\Delta t)  \quad \forall t_i, \Delta t
@@ -147,7 +147,7 @@ This figure shows the different types of \emph{random functions} based on the wa
 
 
 \begin{minipage}[]{0.48\textwidth}
-    This assume that a configuration of points on the time axis can move backward and forward in time and the \emph{multivariate pdf} does not change. For the spatial domain, \emph{strict stationarity} means spatial no changes in the \emph{pdf} if points are translated but no rotated. For instance a \emph{strict random function} in 2D (see figure) the two sets of locations in the left-hand figure have the same \emph{multivariate pdf}, while the locations in the right-hand figure necessarily does not. If the \emph{multivariate pdf} of the \emph{random function} is invariant under rotation, this is called a \alert{statistically isotropic random function}.     
+    This assume that a configuration of points on the time axis can move backward and forward in time and the \emph{multivariate pdf} does not change. For the spatial domain, \emph{strict stationarity} means no spatial changes in the \emph{pdf} if points are translated but no rotated. For instance a \emph{strict random function} in 2D (see figure) the two sets of locations in the left-hand figure have the same \emph{multivariate pdf}, while the locations in the right-hand figure necessarily does not. If the \emph{multivariate pdf} of the \emph{random function} is invariant under rotation, this is called a \alert{statistically isotropic random function}.     
 \end{minipage}
 %\hfill
 \begin{minipage}[]{0.48\textwidth}
@@ -197,10 +197,9 @@ This figure shows the different types of \emph{random functions} based on the wa
     \[
     \lim_{T\rightarrow \infty} \frac{1}{T} \int_T z(t) dt = \int_{-\infty}^{\infty} z f_Z (z;t) dz = \mu_Z
 \]
-where $T$ is an interval of time. This equation means that  the integral over the probability distribution (the ensemble) for a given $t$ (term on the left)  can be replaced by a temporal (or spatial or spatio-temporal) integral of a very large interval $T$ (or area or volume) (term on the right) to estimate $\mu_Z$. 
-volume).
+where $T$ is an interval of time. This equation means that  the integral over the probability distribution (the ensemble) for a given $t$ (term on the left)  can be replaced by a temporal (or spatial or spatio-temporal) integral of a very large interval $T$ (or area or volume) (term on the right) to estimate $\mu_Z$.
 
-Similarly, \emph{ergodicity} of a \emph{random function} in its \emph{mean} is defined as
+Similarly, \emph{ergodicity} of a \emph{random function} in its \emph{covariance} is defined as
 \begin{align*}
     \lim_{T\rightarrow \infty} \frac{1}{T^2} \int_T z(t) z(t+\tau) dt &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (z_1 -\mu_Z) (z_2 -\mu_Z)  f(z_1, z_2;t, t+\tau) dz_1 dz_2  \\
     &= COV[Z(T), Z(t+\tau)] \quad \quad \forall \tau
@@ -216,7 +215,7 @@ where $\tau$ is delta time.
     \[
     f(z_1, z_2; t_1, t_2) = f(z_1, z_2; t_1 + \tau, t_2+\tau) \quad \quad \forall t_1 , t_2, \tau 
 \]
-In practice, one require only \emph{ergodicity} and thus \emph{stationarity} for the \emph{mean}, \emph{varianza} and \emph{covariance}. An \emph{milder stationarity} is even considered and called \alert{weak sense stationarity}. For \emph{wide sense stationary random functions}
+In practice, one require only \emph{ergodicity} and thus \emph{stationarity} for the \emph{mean}, \emph{variance} and \emph{covariance}. An \emph{milder stationarity} is even considered and called \alert{wide/weak sense stationarity}. For \emph{wide sense stationary random functions}
 \begin{align*}
     \mu_Z (t) &= \mu_Z \quad \text{constant and $t$ or $\mathbf{x}$ independent}\\
     \sigma_Z (t) &= \sigma_Z \quad \text{constant and $t$ or $\mathbf{x}$ independent}\\
@@ -286,11 +285,10 @@ where $\mathbf{h}$ is the lag (a vector in space), $\Delta \mathbf{h}$ is a lag-
     \begin{center}
   \begin{tabular}{|l|c|}
     Exponential covariance & $C_Z (h) = \sigma_Z^2 e^{-h/a}$ for $h\geq 0$, $a>0$ \\ 
-    Gaussian covariance         & $C_Z (h) =  \sigma_Z^2  e^{-h^2/a^2}$  for $h\geq 0$, $a>0$ \\ 
-    Spherical covariance         & \[ C_Z (h) = \left\{ \begin{array}{l}  \sigma_Z^2 \left[ 1 - \frac{3}{2}\left(\frac{h}{a}\right) + \frac{1}{2}\left(\frac{h}{a}\right)^3 \right]   \text{, if } h< a  \\ 0 = \text{, if } h\geq a, h\geq 0, a>0 \end{array} \right. \] \\ 
+    Gaussian covariance         & $C_Z (h) =  \sigma_Z^2  e^{-h^2 / a^2}$  for $h\geq 0$, $a>0$ \\ 
+    Spherical covariance         & $ C_Z (h) = \left\{ \begin{array}{l}  \sigma_Z^2 \left[ 1 - \frac{3}{2}\left(\frac{h}{a}\right) + \frac{1}{2}\left(\frac{h}{a}\right)^3 \right]   \text{, if } h< a  \\ 0 = \text{, if } h\geq a, h\geq 0, a>0 \end{array} \right. $ \\ 
     Hole effect (wave) model & $C_Z (h) = \sigma_Z^2 \frac{b\sin (h/a)}{h}$ for $h\geq 0$, $a>0$ \\ 
-    White noise model &  \[ \rho_Z (h) = \left\{ \begin{array}{l}  1 \text{, if } h=0  \\ 0 = \text{, if } h>0 \end{array} \right. \] \\ 
-
+    White noise model &  $ \rho_Z (h) = \left\{ \begin{array}{l}  1 \text{, if } h=0  \\ 0 = \text{, if } h>0 \end{array} \right. $ \\ 
   \end{tabular}
     \end{center}
     Note that the \emph{white noise model} has infinity variance, so it is not \emph{wide sense stationary}. 
@@ -298,14 +296,97 @@ where $\mathbf{h}$ is the lag (a vector in space), $\Delta \mathbf{h}$ is a lag-
     \end{block}
     If a \emph{random function} is \emph{wide sense stationary} and its \emph{multivariate pdf} is a \emph{Gaussian distribution}, It is also second order stationary and also a strict sense \emph{stationary random function}. More important, a wide sense stationary random function that is multivariate Gaussian (and thus also strict stationary) is completely characterised by only a few statistics:  a constant \emph{mean} $\mu_Z (t) = \mu_Z$  and a \emph{covariance  function} $C_Z (t_2 - t_1)$ that only depends on the separation distance. 
 
+\end{frame}
+
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Intrinsic random functions}
+    \end{block}
+         An \alert{Intrinsic random function} is a form of an \emph{stationary random function}. For an intrinsic random function, we require (we show the spatial form here) that $E[Z(\mathbf{x_2}) - Z(\mathbf{x_1}) ] = 0$ $\forall \mathbf{x_2}, \mathbf{x_1}$ and $E[Z(\mathbf{x_2}) - Z(\mathbf{x_1}) ]^2 = 2\gamma_Z (\mathbf{x_2} - \mathbf{x_1}) $ $\forall \mathbf{x_2}, \mathbf{x_1}$. This means that the \emph{mean} is constant and the \emph{expected cuadratic difference} is a function of the \emph{lag vector} $\mathbf{h} = \mathbf{x_2} - \mathbf{x_1}$, where the function $\gamma_Z (\mathbf{x_2} - \mathbf{x_1}) $ is the \alert{semivariogram}, which is defined as 
+        \[ 
+         \gamma_Z (\mathbf{x_2}, \mathbf{x_1}) = \gamma_Z (\mathbf{x_2} - \mathbf{x_1}) = 1/2 E[Z(\mathbf{x_2}) - Z(\mathbf{x_1}) ]^2 
+     \]
+
+         The \alert{semivariogram} can be estimated from observations as: 
+         \[
+         \hat{\gamma}_Z (\mathbf{h}) = \frac{1}{2 n(\mathbf{h})} \sum_{i=1}^{n(\mathbf{h})} \left[ z(\mathbf{x_i}) -z(\mathbf{x_i} + \mathbf{h} \pm \Delta \mathbf{h}) \right]^2
+         \]
 
 \end{frame}
 
  \begin{frame}{Stationary random functions}
      \begin{block}{Intrinsic random functions}
-         For an intrinsic random function we require (we show the spatial form here) $E[Z(\mathbf{x_2}) - Z(\mathbf{x_1}) ] = 0$ $\forall \mathbf{x_2}, \mathbf{x_1}$
     \end{block}
+    Continuous  \emph{semivariograms} such the ones shown in the table can be fitted to the estimated \emph{semivariogram} $\hat{\gamma}_Z (\mathbf{h})$.
+    \begin{center}
+        \includegraphics[width=\linewidth]{taBi52.png}  % from Bierk
+    \end{center}
+    where $c= \sigma_Z^2$ the variance of the stationary process. 
+\end{frame}
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Intrinsic random functions}
+    \end{block}
+    Note that for an stationary random function, the \emph{semivariogram} and the \emph{covariance} functions are related as $\gamma_Z (\mathbf{x_2} - \mathbf{x_1}) = \sigma_Z^2 - C_Z (\mathbf{x_2}-\mathbf{x_1})$ (see the figure). 
+    \begin{center}
+        \includegraphics[width=\linewidth]{fiBi57.png}  % from Bierk
+    \end{center}
+    Note that when the $C_Z \rightarrow 0$ for large $\mathbf{h} = \mathbf{x_2}-\mathbf{x_1}$, $\gamma_Z$ reach a plateau (the \alert{zill}) which is equal to the \emph{variance} $\sigma_Z^2$. The distance at which this ocurrs is called the \alert{range} of the \emph{semivariogram}; beyond this distances, values on the random functions are no longer correlated. 
 \end{frame}
 
+ \begin{frame}{Stationary random functions}
+     \begin{block}{Integral scale and scale of fluctuation}
+    \end{block}
+    The \alert{integral scale} or \alert{correlation scale} is a measure of the degree of correlation for stationary random processes and it is defined as the area under de correlation function
+    \[
+        I_{Z(t)} = \int_0^{\infty} \rho(\tau) d\tau
+    \]
+
+    For the \emph{exponential}, \emph{Gaussian} and \emph{spherical} correlation functions the integral scales are equal to $a$, $\frac{a\sqrt{\pi}}{2}$ and $\frac{3}{8}a$, respectively. Given that the correlation functions of \emph{wide sense  stationary processes} are even functions ($\rho(\tau) = \rho(-\tau)$), another measure of correlation is the \alert{scale of fluctuation} defined as:
+    \[
+        \theta = \int_{-\infty}^{\infty} \rho(\tau) d\tau = 2 I_{Z(t)}
+        \] 
+        For random function in 2D and 3D, the \emph{integral scales} are:
+        \[
+            I_{Z(\mathbf{x})} = \left[\frac{4}{\pi} \int_0^{\infty} \int_0^{\infty} \rho(h_1, h_2) dh_1 dh_2 \right]^{1/2} 
+        \]
+        \[
+            I_{Z(\mathbf{x})} = \left[\frac{6}{\pi} \int_0^{\infty} \int_0^{\infty} \int_0^{\infty} \rho(h_1, h_2, h_3) dh_1 dh_2 dh_3 \right]^{1/3}
+        \]
+    \end{frame}
+
+%-------
+% From Bierke
+    \section{Conditional random functions}
+
+ \begin{frame}{Conditional random functions}
+     \begin{block}{Conditional random functions}
+    \end{block}
+    Suppose that we have a \emph{stationary random function} in time that is observed at a number of locations. Suppose for a moment that these observations are true (no errors at all). The figure shows multiple realizations of a \emph{continuous time random function} that is observed at four location with no errors. 
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{fiBi58.png}  % from Bierk
+    \end{center}
+    \end{frame}
+
+ \begin{frame}{Conditional random functions}
+     \begin{block}{Conditional random functions}
+    \end{block}
+    \begin{itemize}
+        \item Note that the realization are free to vary and differ between locations but are \emph{conditioned} by these points, which is noticeable when comparing the \emph{pdf}s at two locations $t_1$ and $t_2$. 
+        \item It can be seen that uncertainty is larger further from an observation ($t_1$) than close to an observation ($t_2$).
+        \item This is intuitively correct because an observation is able to reduce uncertainty for a limited interval proportional to the integral scale of the random function. 
+\item At a distance larger than the range, the random values are no longer correlated with the random variable at the observation location and the uncertainty is as large (the variance of the pdf is a large) as that of the random function without observations.
+   \end{itemize}
+    \end{frame}
+
+ \begin{frame}{Conditional random functions}
+     \begin{block}{Conditional random functions}
+    \end{block}
+    \begin{itemize}
+ \item The random function that is observed at a number of locations and/or times is called a \emph{conditional random function} and the probability distributions at locations $t_1$ and $t_2$ \emph{conditional probability density functions (cpdfs)}: $f_Z \left(z;t_1 | y_1, \cdots, y_m \right)$ and $f_Z \left(z;t_2 | y_1, \cdots, y_m\right) $, where $y_1, \cdots, y_m$ are the observations. 
+\item The complete conditional random function is defined by the \emph{conditional multivariate pdf}: $f \left(z_1, z_2, \cdots, z_N ;t_1, t_2, \cdots, t_N | y_1, \cdots, y_m \right)$.
+\item An alternative way of obtaining all the required statistics of the \emph{conditional random function} is called \alert{stochastic simulation}.
+\item The \emph{conditional distribution} of $Z(s_1,t)$, or its \emph{mean} value (see dashed line) and \emph{variance}, can also be obtained directly through \emph{geostatistical prediction} or \emph{kriging}  and \emph{state-space prediction methods} such as the \emph{Kalman filter}.
+ 
+    \end{itemize}
+    \end{frame}
 
 \end{document}
