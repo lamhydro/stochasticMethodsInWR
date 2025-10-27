@@ -57,7 +57,7 @@
 \section{Spectral representation of random functions}
 \begin{frame}{Spectral representation of random functions: Definitions}
     \begin{itemize}
-    \item \emph{Correlation functions} of a \emph{time series}, when analyzed for longer period exhibit a \emph{periodic behaviour} e.g. \emph{Hole effect model} (see tables in lecture 9).
+    \item \emph{Correlation functions} of a \emph{time series}, when analyzed for a longer period exhibit a \emph{periodic behaviour} e.g. \emph{Hole effect model} (see tables in lecture 9).
     \item For instance, the figures below show a time series of daily average streamflows and its \emph{correlation function}.
 
 \begin{minipage}[l]{0.46\textwidth}
@@ -69,8 +69,8 @@
 \end{minipage}
 \item A clear periodic behaviour is observed in the \emph{correlation function} which is also apparent in the time series. 
 \item Such periodicity is  caused because evaporation, which is driven by radiation and temperature, has a clear seasonal character, specially, at higher and lower latitudes and temperate climates. 
-\item In conclusion, most hydrological time series show a \emph{seasonal variation}. This means that to analyse these models with \emph{stationary random functions} requires that this \emph{ seasonality is removed}.
-\item The occurrence of \emph{seasonality } has also triggered the use of \alert{spectral methods} in stochastic modelling, although it must be stressed that spectral methods are also very suitable for analysing stationary random functions.
+\item In conclusion, most hydrological time series show a \emph{seasonal variation}. This means that to analyse these models with \emph{stationary random functions} requires that \emph{seasonality} must be \emph{removed}.
+\item The occurrence of \emph{seasonality } has also triggered the use of \alert{spectral methods} in stochastic modelling, although it must be stressed that spectral methods are also very suitable for analysing \emph{stationary random functions}.
     \end{itemize}
 \end{frame}
 
@@ -159,9 +159,9 @@ The following figure shows typical realisations of the random functions involved
 \begin{frame}{Formal spectral representation}
     A more formal representation of the \emph{spectral density} is used in the literature based on \emph{complex calculus}. Here the random function $Z(t)$ is defined as the \emph{real part $Re{.}$}   of a \emph{complex random function} $Z^* (t)$.   
 \[
-    Z(t) = Re{Z^* (t)} = Re \left\{ \mu_Z + \sum_{k=-K}^{K} X_k e^{i\omega_k t} \right\} A \xrightarrow[K \rightarrow \infty]{} Re\left\{ \mu_Z + \int_{-\infty}^{\infty} e^{i\omega t} dX (\omega) \right\} 
+    Z(t) = Re\{Z^* (t)\} = Re \left\{ \mu_Z + \sum_{k=-K}^{K} X_k e^{i\omega_k t} \right\} \xrightarrow[K \rightarrow \infty]{} Re\left\{ \mu_Z + \int_{-\infty}^{\infty} e^{i\omega t} dX (\omega) \right\} 
 \]
-where $\omega_k = \frac{1}{2} (2k-1) \Delta \omega$ is the frequency, and $X_k$ a \emph{complex random number} representing the \emph{amplitude}.  This equation means that the \emph{complex random process} is decomposed into a large number of complex harmonic functions $e^{i\omega t} = \cos(\omega t) + i\sin(\omega t)$ with  \emph{random complex amplitude}. According to this representation, the \emph{Wiener-Khinchine} equations are
+where $\omega_k = \frac{1}{2} (2k-1) \Delta \omega$ is the frequency, and $X_k$ a \emph{random complex number} representing the \emph{amplitude}.  This equation means that the \emph{complex random process} is decomposed into a large number of complex harmonic functions $e^{i\omega t} = \cos(\omega t) + i\sin(\omega t)$ with  \emph{random complex amplitude}. According to this representation, the \emph{Wiener-Khinchine} equations are
     \begin{align*}
         C_Z (\tau) &= \int_{-\infty}^{\infty} S_Z(\omega) e^{i\omega \tau}  d\omega \\
         S_Z (\omega) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} C_Z(\tau)^{i\omega \tau} d\tau \\
@@ -278,7 +278,7 @@ The table below gives a number of \emph{correlation functions} and their \emph{v
   Gaussian correlation function & $\rho_z (\tau) =  e^{-\tau^2 /a^2 }$  for $\tau \geq 0$, $a>0$ & $V(T) = \left(\frac{a}{T}\right)^2 \left[\sqrt{\pi} Erf\left(\frac{T}{a}\right) -1  + e^{-T^2/a^2}\right]$ $\theta = a\sqrt{\pi}$  
   \end{tabular}
     \end{center}
-    where $\tau = |t_1 - t_1|$. 
+    where $\tau = |t_2 - t_1|$. 
 
 \end{frame}
 
@@ -286,6 +286,56 @@ The table below gives a number of \emph{correlation functions} and their \emph{v
     If we analysed the \emph{variance function} when $T \rightarrow \infty$, $\lim_{T\rightarrow \infty} V_Z (T) \rightarrow \frac{\theta}{T}$, where $\theta$ is the \alert{scale of fluctuation}. The \emph{scale of fluctuation} is also given for the three correlation models given in the table above. The \emph{scale of fluctuation} was already introduced earlier as a measure of \emph{spatial correlation} of the \emph{random function} and can also be calculated using the \emph{correlation function } or the \emph{spectral density}. 
 
     $V_Z (T) \rightarrow \frac{\theta}{T}$ states that for larger averaging intervals the variance reduction through averaging is inversely proportional to the \emph{scale of fluctuation}: the larger the \emph{scale of fluctuation} the larger $T$ should be to achieve a given variance reduction.
+
+    The \emph{covariance} of the averaged  process is given by
+    \[
+        C_Z (T, \tau^2) =\frac{1}{T^2} \int_0^{T} \int_0^{\tau + T} C_Z (t_1, t_2) dt_1 dt_2
+    \]
+    This equation is usually solved by the implementation of \emph{numerical integration}. 
+
+    In the case of \emph{2D random fields} (in space where $\mathbf{x} = {x,y}$), the local average process is over an area $A=L_1 L_2$ and is defined as
+    \[
+        Z_T (x_1, x_2) =\frac{1}{L_1 L_2} \int_{x_1 - L_1/2 }^{x_1 + L_1/2} \int_{x_2 - L_2/2 }^{x_2 + L_2/2} Z(u_1, u_2) du_1 du_2
+    \]
+     
 \end{frame}
 
+\begin{frame}{Local averaging of stationary random functions}
+    The \emph{variance function} is given by
+    \[
+        V_Z (L_1, L_2) =\frac{1}{L_1 L_2} \int_{0}^{L_1} \int_{0}^{ L_2} \left(1- \frac{h_1}{L_1} \right) \left(1- \frac{h_2}{L_2} \right) \rho_Z (h_1, h_2) dh_1 dh_2
+    \]
+    The limit of the \emph{variance function} defines the spatial \alert{scale of fluctuation} or \alert{characteristic area}
+    \[
+        \lim_{L_1, L_2 \rightarrow \infty} V_Z (L_1, L_2) \rightarrow \frac{\alpha}{L_1 L_2}
+    \]
+    where
+    \[
+        \alpha = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \rho_Z (u_1, u_2) du_1 du_2
+    \]
+    The \emph{characteristic area $\alpha$} can also be obtained through the spectral representation  by setting $\omega_1 = \omega_2 = 0$ in the \emph{Wiener-Khinchine relation}, so
+    \[
+        s_Z (0,0) = \frac{S_Z (0,0)}{\sigma_Z^2} = \frac{1}{4\pi^2}\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}  \rho_Z (h_1, h_2) dh_1 dh_2
+    \] 
+
+    combining the two last equations
+    \[
+        \alpha = 4 \pi^2 s_z(0,0)
+    \]
+
+\end{frame}
+
+\begin{frame}{Local averaging of stationary random functions}
+    The \emph{covariance} of the \emph{averaged random field} in 2D is given by
+    \[
+        C_Z (L_1, L_2; h_1, h_2) = \frac{1}{(L_1 L_2)^2} \int_{0}^{L_1}\int_{0}^{L_2}\int_{h_1}^{L_1 + h_1}\int_{h_2}^{L_2 + h_2} C_Z ( x_1, y_1, x_2, y_2) dx_1 dy_1 dx_2 dy_2
+    \]
+
+    The \emph{covariance} of the \emph{spatially averaged random function} is frequently used in \emph{geostatistical mapping}, where its values are approximated with \emph{numerical integration}. In vector notation where $\mathbf{x_1} = (x_1, y_1)^T$, $\mathbf{x_2} = (x_2, y_2)^T$, $\mathbf{h} = (h_1, h_2)^T$ and $A= L_1 L_2$
+    \[
+        C_Z (A, \mathbf{h}) = \frac{1}{A^2} \int_A \int_{A+\mathbf{h}} C_Z (\mathbf{x_1}, \mathbf{x_2}) d\mathbf{x_1} d\mathbf{x_2} 
+    \]
+
+
+\end{frame}
 \end{document}

@@ -1,0 +1,322 @@
+\documentclass[8pt]{beamer}
+\usetheme{default} % Very simple theme
+\usecolortheme{dove} % Minimalist grayscale colors
+\setbeamertemplate{navigation symbols}{} % Remove navigation bar
+
+% Define brand-like colors
+\definecolor{myblue}{RGB}{0, 102, 204}    % Blue for standard blocks
+\definecolor{mygreen}{RGB}{0, 153, 0}     % Green for example blocks
+\definecolor{myred}{RGB}{204, 0, 0}       % Red for alert blocks
+\definecolor{myorange}{RGB}{255, 128, 0} % For \emph
+
+% Accent color for titles, bullets, etc.
+\setbeamercolor{structure}{fg=myblue}
+
+% Block colors
+\setbeamercolor{block title}{bg=myblue, fg=white}
+\setbeamercolor{block body}{bg=blue!5, fg=black}
+
+\setbeamercolor{exampleblock title}{bg=mygreen, fg=white}
+\setbeamercolor{exampleblock body}{bg=green!5, fg=black}
+
+\setbeamercolor{alertblock title}{bg=myred, fg=white}
+\setbeamercolor{alertblock body}{bg=red!5, fg=black}
+\setbeamercolor{alerted text}{fg=myred}
+
+% Optional: color for \example text
+\setbeamercolor{example text}{fg=mygreen}
+
+% Custom emph (orange text instead of italic)
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{myorange}{#1}}
+
+
+\usepackage{graphicx} % Package for images
+\usepackage{amsmath} % Package for images
+\graphicspath{{figs/}} % Path to your figures directory
+\usepackage{array}  % For better column spacing
+\usepackage{caption} % Required for \captionof
+
+% Title Information
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 4: Time series analysis \\ Lecture 11: Univariate, linear stochastic models}
+\author{Luis Alejandro Morales, Ph.D.}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------
+% From Kotte (Stochastic WR tech)
+\section{Application to non-normal series}
+\begin{frame}{Application to non-normal series}
+    \begin{block}{Generalities}
+    \end{block}
+    \begin{itemize}
+        \item The models discussed previously are assumed to be applied to temporal discrete series, that are transformed to \emph{second-order stationarity}.
+        \item This implies that the distribution of the \emph{random component} is \emph{normal}. 
+        \item In the case of \emph{annual series}, this approximation would generally suffice.
+        \item However, modifications may be necessary for coping with \emph{monthly} and/or \emph{daily} series.
+        \item If the $\xi_t$ is \emph{non-normally distributed} with \emph{skewness} $\gamma_{\xi}$, then the skewness $\gamma_{\eta}$ to be incorporated in the random component $\eta_t$ depends on the model and its parameters.
+        \item An alternative procedure is to \emph{transform} observed values so that the distributions are \emph{normal}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Application to non-normal series}
+    \begin{block}{Preservation of skewness in Markov model}
+    \end{block}
+    The model is of the form
+    \begin{equation}
+        \xi_t = \phi_{1,1} \xi_{t-1} + \eta_t
+        \label{e446a}
+    \end{equation}
+    where $\phi_{1,1} = \rho_1$ is the \emph{lag-one autocorrelation coefficient}. By cubing both sides and taking expectations
+\begin{equation}
+    E[\xi_t^3]  = E[\rho_1^3 \xi_{t-1}^3 + 3\rho_1^2 \xi_{t-1}^2 \eta_t + 3\rho_1 \xi_{t-1}\eta_t^2 + \eta_t^3]
+        \label{e446b}
+    \end{equation}
+    Because $\xi_{t-1}$ and $\eta_t$ are independent, the expectations of the second and third terms on the right are zero. Also, it is known that for an \emph{AR(1)}, $\sigma_{\eta}^2 = 1-\rho_1^2$ and $E[\xi_t] = E[\eta_t] = 0$. Therefore
+\begin{equation}
+    \gamma_{\eta} = \frac{\gamma_{\xi} (1-\rho_1^3)}{(1-\rho_1^2 )^{3/2}}
+        \label{e446}
+    \end{equation}
+    in which, for estimation purposes, $\rho_1$ is replaced by $r_1$, its \emph{sample estimate}.
+
+\end{frame}
+
+\begin{frame}{Application to non-normal series}
+    \begin{block}{Box-Cox transformations}
+    \end{block}
+    Box and Cox in 1964 suggest the following method of transforming and observed value $x$
+    \begin{equation}
+Y = \left\{
+\begin{array}{c}
+    \frac{x^{\lambda}-1}{\lambda} \quad \quad \lambda \neq 0 \\
+    \ln(x) \quad \quad \lambda = 0
+\end{array}
+\right.
+\label{e447}
+\end{equation}
+The parameter $\lambda$ could be chosen so that the skewness of the transformed series is a minimum. However, the efficieny of this approach is very low compared with more sophisticated \emph{maximum likelihood} method. A simpler procedure could be for different values of $\lambda = 0, \pm 0.5, \pm 1.0, \cdots$ the \emph{sample mean} $\bar{y}$, the \emph{standard deviation} $\hat{\sigma}_y$ (or the more robust interquartile range) and the \emph{median} $\hat{\zeta}_t$ are calculated from the transformed data. Then the statistics $d_\lambda = \frac{\bar{y}-\hat{\zeta}_y}{\hat{\sigma}_y}$ are compared and interpolated if necessary, to find the value of $\lambda$ for which $d_\lambda$ is a minimum. 
+
+A further refinement is to introduce a second parameter by replacing $x$ with $x-\zeta$ say. Of special interest is the situation when $\lambda = 0$ in equation~\ref{e447}. This is the case in which the variable has a \emph{lognormal distribution}.
+\end{frame}
+ 
+\begin{frame}{Application to non-normal series}
+    \begin{block}{Data generation using Markov model and lognormal distribution}
+    \end{block}
+    Consider the transformation $Y = \ln(X-\xi)$ where $X$ has \emph{mean} $\mu$ and \emph{variance} $\sigma_X^2$; $Y$ is normally distributed with \emph{mean} $\mu_Y$ and \emph{variance} $\sigma_Y^2$ and $\xi$ is a location parameter, which could be negative; also, the lag-l autocorrelation coefficients are $\rho_l$ and $\rho_{l,Y}$, respectively. 
+
+    It can be shown that
+\begin{equation}
+    \mu = e^{\mu_Y + \sigma_Y^2 /2} + \xi
+        \label{e448}
+    \end{equation}
+   and
+\begin{equation}
+    \sigma^2 = e^{2\mu_Y + \sigma_Y^2} \left( e^{\sigma_Y^2} -1 \right)
+        \label{e449}
+    \end{equation}
+    Also
+\begin{equation}
+    \gamma_1 = \left(e^{3\sigma_Y^2} - 3e^{\sigma_Y^2} + 2\right) \left(e^{\sigma_Y^2}-1 \right)^{-3/2}
+        \label{e450}
+    \end{equation}
+    where $\gamma_1$ is the coefficient of skewness of the population. By substituting sample estimators $g_1$, $s^2$ and $\bar{x}$ in the left-hand side of equations~\ref{e450}, ~\ref{e449} and ~\ref{e448} respectively, estimators $s_y^2$, $\bar{y}$ and $\tilde{\xi}$ of the parameters $\sigma_Y^2$, $\mu_Y$ and $\xi$ are obtained, in that order. The relationship between $\rho_l$ and $\rho_{l,Y}$ is determined by using equations~\ref{e448} and ~\ref{e449} as follows
+\begin{equation}
+E[X_t X_{t+l}] = E\left[ \left( e^{Y_t} + \xi \right)\left(e^{Y_{t+l}} + \xi \right) \right]= E\left[  e^{Y_t + Y_{t+l}} + \xi e^{Y_t} + \xi e^{Y_{t+l}} + \xi^2 \right]
+        \label{e450a}
+    \end{equation}
+    From equation~\ref{e448}, $E[e^{Y_t}] = e^{\mu_Y + \sigma_Y^2 / 2}$. It follows that 
+    \[
+        E\left[e^{Y_t + Y_{t+l}}\right] = e^{2\mu_Y + \frac{1}{2} var\left( Y_t + Y_{t+l}\right)} = e^{2\mu_Y + \sigma_Y^2 \left(1+\rho_{l,Y}\right)}
+    \]
+
+\end{frame}
+
+\begin{frame}{Application to non-normal series}
+    \begin{block}{Data generation using Markov model and lognormal distribution}
+    \end{block}
+    \vspace{-5pt}
+    Therefore, again using equation~\ref{e448}
+    \vspace{-5pt}
+    \begin{align*}
+        cov(X_t, X_{t+l}) &= E\left[(X_t - \mu)(X_{t+l}-\mu)\right]\\
+                          &= E(X_t X_{t+l}) - \mu^2 \\
+                          &=\left[ e^{2\mu_Y + \sigma_Y^2 (1-\rho_{l,Y})} + 2\xi e^{\mu_Y + \sigma_Y^2 /2} + \xi^2\right] - \left( e^{\mu_Y + \sigma_Y^2 /2} + \xi \right)^2 \\
+                          &= e^{2\mu_Y + \sigma_Y^2 (1+ \rho_{l,Y})} - e^{2\mu_Y + \sigma_Y^2}
+    \end{align*}
+     Hence, by using equation~\ref{e449}
+    \vspace{-5pt}
+\begin{equation}
+    \rho_l = \frac{cov(X_t, X_{t+l})}{\sigma^2} = \left(e^{\sigma_Y^2 \rho_{l,Y}}-1\right) \left(e^{\sigma_Y^2}-1\right)^{-1} 
+        \label{e451}
+    \end{equation}
+    By substituting the (estimated) lag-one serial correlation coefficient $r_1$ for $\rho_1$ in equation~\ref{e451}, an estimator $r_{1,Y}$ of $\rho_{1,Y}$ is obtained. The generating equation for the \emph{Markov lognormal model} is 
+    \vspace{-5pt}
+\begin{equation}
+    X_t = \xi + \left[e^{\mu_Y (1-\rho_{1,Y})}\right] (X_{t-1} -\xi)^{\rho_{1,Y}} e^{\sigma_Y \eta_t}
+        \label{e452}
+    \end{equation}
+    in which $\eta_t$ is an independent standard normal variate with a zero \emph{mean} and a \emph{variance} $1-\rho_{1,Y}^2$.
+    An alternative and more direct method is to use the second of the \emph{Box and Cox transformations} $y=\log(x)$. Then the parameter of, say, the \emph{Markov model} are estimated from the sequence $y$, and, finally, antilogarithms are taken on the generated data. However, this method has two disadvantages: firstly, \emph{zero values} cannot be transformed, and for this reason an arbitrary small value is sometimes added to all observed values; secondly, statistical and other properties of generated data may differ significantly from the properties of historical data. On the other hand, all values produced will be positive, unlike in the application of equation~\ref{e452}.
+\end{frame}
+
+\begin{frame}{Application to non-normal series}
+    \begin{block}{Dealing with non-normal distributions in general}
+    \end{block}
+    \begin{itemize}
+        \item For application purposes, the differences in \emph{skewness} of the \emph{stochastic component} $\xi_t$ and the \emph{random component} $\eta_t$, as given by equation~\ref{e446} for the \emph{Markov model}, should be noted.
+        \item A practical method is to calculate the \emph{skewness} and other distribution properties from the estimated independent \emph{residuals} which for a \emph{Markov model} is given by $\tilde{\eta}_t = \tilde{\xi}_t - r_1 \tilde{\xi}_{t-1}$, where $\tilde{\xi}_t$ is an observed standardized variable. 
+        \item This can be extended to the more complicated models by using appropriate forms of $\tilde{\eta}_t$, as given by equations 28, 29 and 30 in the lecture 12. 
+        \item However, it should be borne in mind that that all these procedures are subject to \emph{sampling errors}. Here, \emph{distributions} are deduced from estimated independent \emph{residuals} which may be distorted from model \emph{errors} and \emph{bias} in estimated parameters. 
+            \item The \emph{uncertainties} may be resolved to some extend by tests on generated data.
+    \end{itemize}
+\end{frame}
+
+%-------
+% From Kotte (Stochastic WR tech)
+\section{Seasonal models}
+\begin{frame}{Seasonal models}
+    \begin{block}{Generalities}
+    \end{block}
+    In hydrology, sesonal models applicable to monthly series were originally used by Thomas and Fiering in 1962. Let $x_{t,\tau}$ represent the flow in month $t$, where $t$, $t = 1,2, \cdots, 12N$ (and $N$ is the number of years), corresponds to the calendar month $\tau$, $\tau =1,2, \cdots, 12$. Then, seasonality is preserved by equating the standardised variable $\xi_t$ used, for example, in $\xi_t = \sum_{i=1}^p \phi_{p,i} \xi_{t-i} + \eta_t$ to the residuals $(x_{t,\tau} -\mu_{\tau})/\sigma_{\tau}$, in which $\mu_{\tau}$ and $\sigma_{\tau}$ represent the \emph{mean} and the \emph{standard deviation} respectively for the calendar month $\tau$. This method is known as \alert{prewhitening}. 
+\end{frame}
+
+\begin{frame}{Seasonal models}
+    \begin{block}{Autoregressive seasonal models}
+    \end{block}
+    The pth-order autoregressive seasonal model takes the form
+\begin{equation}
+    X_{t,\tau} = \mu_{\tau} + \sigma_{\tau} \sum_{i=1}^p \frac{\phi_{p,i} (X_{t-i,\tau-i} - \mu_{\tau-i})}{\sigma_{\tau-i}} + \sigma_{\tau} \eta_t
+        \label{e453}
+    \end{equation}
+    in which $E[\eta_t] = E[\eta_t \eta_{t-k}] = 0$ for $k\neq0$ and $var[\eta_t] = E[\eta_t^2] = 1-R^2$; note that, if $\tau -i \leq 0$, $\tau-i$ should be replaced by $\tau-i +12$. The order $p$ and the autoregressive parameter $\phi_{p,i}$ are estimated from the standardised $\xi_t$ series. 
+
+    Because $\mu_{\tau}$ and $\sigma_{\tau}$ have to be estimated from short historical samples, harmonic fitted statistics $\hat{\mu}_{\tau}$ and $\hat{\sigma}_{\tau}$ have been substituted in equation~\ref{e453} for estimating the autoregressive parameters. However, the resulting $\tilde{\xi_t}$ series and hence the autoregressive parameters may be significantly affected by sampling errors. This could happen when the \emph{sample statistics} $m_{\tau}$ and $s_{\tau}$ are used or when their harmonic fitted estimates $\hat{\mu}_{\tau}$ and $\hat{\sigma}_{\tau}$ are substituted  for the unknown parameters $\mu_{\tau}$ and $\sigma_{\tau}$. The advantage in the harmonic model is that it needs fewer parameters; also these are less affected by sample size. A further generalization of this model is possible by making $\phi_{p,i}$ seasonal but usually the differences between the seasonal  parameters are not significant. 
+\end{frame}
+
+\begin{frame}{Seasonal models}
+    \begin{block}{Thomas-Fiering seasonal model}
+    \end{block}
+This takes the form
+\begin{equation}
+    X_{t,\tau} = \frac{\mu_{\tau} + \sigma_{\tau} \rho_{\tau} ( X_{t-1, \tau-1} - \mu_{\tau-1})}{\sigma_{\tau-1}} + \sigma_{\tau} \eta_t
+        \label{e454}
+    \end{equation}
+    in which
+    \[
+    \rho_{\tau} = \frac{E\left[ (X_{t,\tau} - \mu_{\tau})(X_{t-1,\tau-1} - \mu_{\tau-1})\right]}{\sigma_{\tau} \sigma_{\tau-1}}
+\]
+is the coefficient of correlation between the flows in months $\tau$ and $\tau-1$. For the random component $E[\eta_t] = E[\eta_t \eta_{t-k}] = 0$ for $k\neq 0$. Also, recall that $var[\eta_t] = 1-\rho_{\tau}^2$.
+
+If \emph{skewness} is to be maintained, then by using a similar derivation as for the equation~\ref{e446}, the \emph{coefficient of skewness} to be applied to the random component in month $\tau$ is given by
+\begin{equation}
+    \gamma_{\eta, \tau} = \frac{\gamma_{\tau} - \rho_{\tau}^3 \gamma_{\tau-1}}{(1-\rho_{\tau}^2)^{3/2}}
+        \label{e455}
+    \end{equation}
+    where $\gamma_{\tau}$ is the \emph{coefficient of skewness} in $X_{t,\tau}$, $t=1,2,3,\cdots$.
+
+    The drawback here is that with  short records significant differences in the $\rho_{\tau}$ values may not be found. Besides, $\rho_{\tau}$ could be zero for particular months of the year, partly on account of \emph{random climatic movements} within the year. 
+
+\end{frame}
+ 
+\begin{frame}{Seasonal models}
+    \begin{block}{Box-Jenkins seasonal model}
+    \end{block}
+    An \emph{ARIMA} type model can also be used for generating data in which seasonal effects are accounted for. \emph{Backshift} operators such as $B^s \xi_t = \xi_{t-s}$ are used for this purpose when events $s$ time units apart are indetically distributed; for example, if the annual cycle is to be represented through a monthly series, $s=12$. Consider initially a model of the type \emph{ARIMA(1,0,1)} which is, of course, equivalent to ot \emph{ARMA(1,1)}. It is given by $(1-\Phi B^{12})\xi_t = (1-\Theta B^{12})\psi_t$, that is, $\xi_t - \Phi \xi_{t-12} = \psi_t - \Theta \psi_{t-12}$ where $\Phi$ and $\Theta$ are parameters and $\psi_t$ is a standardised residual. The next step is to apply a difference operator which is given by
+    \begin{align*}
+        \nabla_s \xi_t &= (1-B^s) \xi_t \\
+                       &= \xi_t - \xi_{t-s} \\
+        \nabla_s^2 \xi_t &= (1-B^s)^2 \xi_t \\
+                         &= \xi_t - 2\xi_{t-s} + \xi_{t-2s}
+    \end{align*}
+     and in general, $\nabla_s^D \xi_t = (1-B^s)^D \xi_t$. Accordingly, the seasonal \emph{ARIMA(P,D,Q)$_s$} model is represented by
+
+\begin{equation}
+    \Phi_P (B^s) \nabla_s^D \xi_t = \Theta_Q (B^s)\psi_t
+        \label{e456}
+    \end{equation}
+    However, the \emph{residual} $\psi(t) = \Theta_Q^{-1} (B^s) \Phi_P (B^s) \nabla_s^D \xi_t$ is usually not independent, mainly because the \emph{short-lag autocorrelation structure} is not incorporated in the model. For this reason, it is necessary to formulate a multiplicative  seasonal model which, in the general case, is the combination of two \emph{ARIMA} types and is denoted by $(p,d,q)x(P,D,Q)_s$.  
+\end{frame}
+
+\begin{frame}{Seasonal models}
+    \begin{block}{Box-Jenkins seasonal model}
+    \end{block}
+    The complete \emph{seasonal model} then takes the form
+\begin{equation}
+    \Phi_P (B^s) \phi_p (B) \nabla_s^D \nabla^d \xi_t = \Theta_Q (B^s) \theta_q (B) \eta_t
+        \label{e457}
+    \end{equation}
+     where $\eta_t$ is a standardised independent variable.
+
+     For example, a multiplicative \emph{ARIMA(2,0,0)x(1,1,1)$_{12}$} model (applied to monthly data) is given by $(1-\phi_1 B - \phi_2 B^2) (1-\Phi_1 B^{12})(1-B^{12})\xi_t = (1-\Theta_1 B^{12})\eta_t$. In application, the procedure is
+     \begin{enumerate}
+         \item Obtain a differenced sequence $\nabla_{12} \tilde{\xi}_t = \tilde{\xi}_t - \tilde{\xi}_{t-12}$ from a sample of observed data $\tilde{\xi}_t$, $t=1,2,3, \cdots, N$ 
+         \item The estimates $\hat{\Phi}_1$ and $\hat{\Theta}_1$ are found by applying a seasonal \emph{ARMA(1,1)$_{12}$} model to the differenced sequence. 
+         \item An \emph{AR(2)} model is applied to the residuals from the seasonal model. The generating equation, found by expanding the product $(1-\phi_1 B - \phi_2 B^2) (1-\Phi_1 B^{12})(1-B^{12})$ and substituting for the $B$ terms, is as follows 
+             \begin{align*}
+                 \xi_t &= \phi_1 \xi_{t-1} + \phi_2 \xi_{t-2} + (1+\Phi_1) \xi_{t-12} - (\phi_1 + \phi_1 \Phi_1)\xi_{t-13} \\
+                       &- (\phi_2 + \phi_2 \Phi_1) \xi_{t-14} - \Phi_1 \xi_{t-24} + \phi_1 \Phi_1 \xi_{t-25} + \phi_2 \Phi_1 \xi_{t-26} \\
+                       &+ \eta_t - \Theta_1 \eta_{t-12}
+             \end{align*}
+     \end{enumerate}
+     This type of model is applicable, strictly speaking, only when the \emph{monthly standard derivation} are \emph{not seasonal}. 
+\end{frame}
+ 
+\begin{frame}{Seasonal models}
+    \begin{block}{Models for daily flows: problems and references}
+    \end{block}
+    \begin{itemize}
+        \item When applied to \emph{daily flows}  the \emph{autoregressive} and general \emph{Box-Jenkins} models described so far have limitations, which could be serious. 
+        \item One reason is that, because \emph{daily data} have highly \emph{non-normal distributions}, extreme values and properties such as \emph{runs} (a sequence of events with reference to a given magnitude or level which are above the level or alternatively all are below the level) and \emph{crossings} (of the level occurs at the commencement as well as the end of the run) are not maintained through models that were  devised originally for \emph{normal processes}. 
+        \item Of equal significance is the fact that the \emph{rapid ascensions} and \emph{slow recessions} that are associated with individual rainfall events are not specifically modelled. 
+        \item A particular method of preserving  such time-irreversible characteristics is through \emph{filtered Poisson processes}. 
+        \item In application, a continuous series $X(t)$ of \emph{river flows} is considered to be generated by a number $N(t)$ of \emph{"rainfall shots"} $Y_m$ in the interval $(-\infty, t)$; $N(t)$ is a \emph{Poisson process} with mean $\nu$. 
+        \item In effect, the flow at time $t$ is contributed by pulses $Y_m e^{-b(t-\tau_m)}$, $m=0\pm 1 \pm, \cdots$, which are zero for $t< \tau_m$.
+    \item Here, the magnitude of a \emph{shot} $Y_m$ is an \emph{independent exponentially distributed} random variable with \emph{mean} $\theta$, $b$ is the \emph{decay (or hydrograph recession) rate} and $\tau_m$ denotes \emph{random arrivals times} of shots which are analogous to the times that \emph{rain storm start}.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Seasonal models}
+    \begin{block}{Models for daily flows: problems and references}
+    \end{block}
+    \begin{itemize}
+        \item The variable $m$ is considered to extend backwards to $-\infty$, so that
+\begin{equation}
+    X(t) = \sum_{m = -\infty}^{N(t)} Y_m e^{-b(t-\tau_m)}
+        \label{e458}
+    \end{equation}
+
+\item The model parameters $\nu$, $\theta$, and $b$ in the model are estimated from the \emph{means}, the \emph{standard deviations} and the \emph{lag-one serial correlation} in the data for each month. 
+\item The integration of equation~\ref{e458} between limits $t$ and $t-1$ gives the following discrete process
+\begin{equation}
+    X_t = e^{-bs} X_{t-s} + \eta_t
+        \label{e458}
+    \end{equation}
+    which has a \emph{Gamma density function}. 
+\item The advantage here is that the positively skewed \emph{innovation term} $\eta_t$ has a positive probability  of being exactly zero in contrast with random component in an \emph{AR(1)} process. 
+\item Exponentially distributed \emph{random numbers}  with means $1/\nu$ and $\theta$ are used for generating the times between the \emph{random arrivals} and the magnitudes of the \emph{shots} respectively. 
+\item The so-called \emph{single-shot noise model} is replaced by a \emph{double-shot noise model} if we attempt to maintain \emph{baseflow} and \emph{surface runoff} process separately. \emph{Seasonality} is accounted for by using different set of parameters for each calendar month.   
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Seasonal models}
+    \begin{block}{Models for daily flows: problems and references}
+    \end{block}
+    \begin{itemize}
+        \item The main \emph{shortcomings} are on account of undesirable fluctuations on the \emph{recessions} with faster \emph{decay rates} and excessive carry-over effects between months, and biased parameters. 
+        \item Also, \emph{coefficient of skewness} in generated data tend to be higher than historic data.
+        \item Another inadequacy is the basic assumption of \emph{independence} in \emph{storm events}. 
+        \item \emph{Daily flow models} must also cope with the \emph{dependency} in rainfall inputs, which could be approximated by \emph{Markov chains}. This can be useful in \emph{intermittent rivers}  where daily flow can be zero some days and the \emph{ascension} and \emph{recession} behaviour is generally sharp. 
+        \item In the case of \emph{perennial rivers}, usually large river, some deterministic aspects of river flow needs to be incorporated in daily flow models. 
+    \end{itemize}
+\end{frame}
+\end{document}
