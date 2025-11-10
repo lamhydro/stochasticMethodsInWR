@@ -1,0 +1,537 @@
+---
+title: "Time series analysis: daily mean streamflows"
+output: html_document
+---
+
+# **Call libraries**
+
+```{r callLib}
+library(readr)
+library(dplyr)
+library(moments)   # provides skewness() and kurtosis()
+library(reshape2)
+library(forecast)
+library(gridExtra)
+library(knitr)
+library(ggplot2)
+library(tseries)
+library(nortest)
+library(kableExtra)
+library(randtests)
+library(trend)
+library(xts)
+library(patchwork)  
+```
+
+# **Read data**
+
+## Read zip file names
+
+```{r rzip}
+zip_files <- list.files("/home/alejandro/Documents/unal/lectures/stochasticMethodsInWR/scripts/data/ElBancoMagMeanDailyDisch", pattern = "\\.zip$", full.names = TRUE)
+```
+
+## Read one CSV per zip
+
+```{r rcsv}
+data_list <- lapply(zip_files, function(zf) {
+  csv_name <- unzip(zf, list = TRUE)$Name[1]   # take the first CSV in zip
+  read_csv(unz(zf, csv_name))
+})
+```
+
+## Combine into one dataframe
+
+```{r cindf}
+data_all <- bind_rows(data_list)
+```
+
+## Covert a char date column into date
+
+```{r formatdata}
+data_all$date <- as.Date(data_all$Fecha, format = "%d/%m/%Y")
+```
+
+# **Time series preprocessing**
+## Display first rows
+```{r displaydata}
+head(data_all)
+X = data_all$Valor
+```
+
+## Show the data structure
+```{r datastr}
+str(data_all)
+```
+
+## Compute statistics summary
+```{r computestats}
+summary_stats <- data.frame(
+  Mean = mean(X, na.rm = TRUE),
+  SD = sd(X, na.rm = TRUE),
+  Min = min(X, na.rm = TRUE),
+  Max = max(X, na.rm = TRUE),
+  Median = median(X, na.rm = TRUE),
+  Skewness = skewness(X, na.rm = TRUE),
+  Kurtosis = kurtosis(X, na.rm = TRUE),
+  N = length(X)
+)
+```
+
+## Print stats
+```{r printstats, echo=FALSE}
+# Transpose the summary data frame
+summary_vertical <- data.frame(
+  Statistic = names(summary_stats),
+  Value = as.numeric(summary_stats[1, ])
+)
+kable(summary_vertical, digits = 2, caption = "Summary Statistics of the Time Series")
+```
+
+## Plot time series
+```{r plotts}
+tit <- paste(unique(data_all$Parametro), " at ", unique(data_all$NombreEstacion), sep="") 
+ggplot(data_all, aes(x = date, y = Valor)) +
+  geom_line(color = "blue", linewidth = 0.5) +
+  labs(title = tit, x = "Year", y = "Q (m^3 /s)") +
+  theme_minimal()
+```
+
+## Plot histogram
+```{r plothist}
+# Calculate summary statistics
+q <- quantile(data_all$Valor, probs = c(0.25, 0.5, 0.75))  # Q1, Median, Q3
+
+# Compute density-based histogram data
+h <- hist(X, plot = FALSE)
+dens <- h$counts / sum(h$counts) / diff(h$breaks[1:2])  # convert counts to density
+ymax <- max(dens)  # max histogram density
+
+ggplot(data_all, aes(x = Valor)) +
+  geom_histogram(aes(y = ..density..), bins = 15,
+                 fill = "skyblue", color = "white", alpha = 0.6) +
+  
+  # Density overlay
+  geom_density(color = "darkblue", size = 1.2, alpha = 0.7) +
+  
+  # Vertical lines for mean & quartiles
+  geom_vline(xintercept = summary_stats$Mean, color = "red", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = q[1], color = "darkgreen", linetype = "dotted", size = 1) +
+  geom_vline(xintercept = q[2], color = "blue", linetype = "solid", size = 1) +
+  geom_vline(xintercept = q[3], color = "darkgreen", linetype = "dotted", size = 1) +
+  
+  # Set limits to Y axis
+  coord_cartesian(ylim = c(0, ymax)) +
+  
+  # Labels for stats
+  annotate("text", x = summary_stats$Mean, y = 0.02, label = "Mean", color = "red", angle = 90, vjust = -0.5) +
+  annotate("text", x = q[2], y = 0.02, label = "Median", color = "blue", angle = 90, vjust = -0.5) +
+  
+  labs(
+    title = "Streamflow Histogram + Density with Mean & Quartiles",
+    x = "Q (m³/s)",
+    y = "Density"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Q–Q Plot of Time Series
+```{r qqplot, echo=TRUE, fig.width=6, fig.height=5}
+ggplot(data_all, aes(sample = Valor)) +
+  stat_qq(color = "steelblue", size = 2) +
+  stat_qq_line(color = "red", linetype = "dashed") +
+  labs(title = "Normal Q-Q Plot",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles") +
+  theme_minimal()
+```
+
+## Normality Summary of the Time Series
+```{r normality-summary, message=FALSE, warning=FALSE}
+# Normality tests
+#sw <- shapiro.test(X)
+ad <- ad.test(X)
+jb <- jarque.bera.test(X)
+
+# Combine results
+results <- data.frame(
+  Statistic = c("Mean", "Std. Deviation", "Skewness", "Kurtosis",
+                 "Anderson-Darling (p)", "Jarque-Bera (p)"),
+  Value = c(
+    summary_stats$Mean,
+    summary_stats$SD,
+    summary_stats$Skewness,
+    summary_stats$Kurtosis,
+    ad$p.value,
+    jb$p.value
+  ),
+  Interpretation = c(
+    "", "", 
+    ifelse(abs(summary_stats$Skewness) < 0.5, "≈ Symmetric", 
+           ifelse(summary_stats$Skewness > 0, "Right-skewed", "Left-skewed")),
+    ifelse(abs(summary_stats$Kurtosis - 3) < 0.5, "≈ Normal tails", 
+           ifelse(summary_stats$Kurtosis > 3, "Leptokurtic (heavy tails)", "Platykurtic (light tails)")),
+    ifelse(ad$p.value > 0.05, "Normal", "Not normal"),
+    ifelse(jb$p.value > 0.05, "Normal", "Not normal")
+  )
+)
+
+kable(results, digits = 4, caption = "Summary statistics and normality tests for the time series")
+```
+
+## Normalization of the Time Series
+```{r normalize-ts}
+# Example: standardize time series
+Xn <- scale(X)
+data_all$ValorN <- Xn
+
+# Check new mean and sd
+mean(Xn, na.rm = TRUE)
+sd(Xn, na.rm = TRUE)
+
+```
+
+## Comparison of Original and Normalized Time Series
+```{r normalized-plot, message=FALSE, warning=FALSE}
+
+# Prepare data
+df <- data.frame(
+  time = data_all$date,
+  Original = as.numeric(X),
+  Normalized = as.numeric(Xn)
+)
+
+# Plot with dual y-axes
+ggplot(df, aes(x = time)) +
+  geom_line(aes(y = Original, color = "Original"), size = 1) +
+  geom_line(aes(y = Normalized * sd(X) + mean(X), color = "Normalized"), size = 1) +
+  scale_y_continuous(
+    name = "Original values",
+    sec.axis = sec_axis(~ (. - mean(X)) / sd(X),
+                        name = "Normalized (Z-score)")
+  ) +
+  scale_color_manual(values = c("steelblue", "tomato")) +
+  labs(
+    title = "Original and Normalized Time Series",
+    x = "Year",
+    color = "Series"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.y.left = element_text(color = "steelblue"),
+    axis.title.y.right = element_text(color = "tomato"),
+    legend.position = "top"
+  )
+```
+
+## Q–Q Plot of Normalized Time Series
+```{r qqplot_normalized, echo=TRUE, fig.width=6, fig.height=5}
+ggplot(data_all, aes(sample = ValorN)) +
+  stat_qq(color = "steelblue", size = 2) +
+  stat_qq_line(color = "red", linetype = "dashed") +
+  labs(title = "Normal Q-Q Plot",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles") +
+  theme_minimal()
+```
+
+# Time series analysis
+## Randomness Tests
+```{r randomness-tests, message=FALSE, warning=FALSE}
+# Apply tests
+runs <- runs.test(X)
+tp   <- turning.point.test(X)
+lb   <- Box.test(X, lag = 20, type = "Ljung-Box")
+
+# Combine results
+results <- data.frame(
+  Test = c("Runs Test", "Turning Point Test", "Ljung-Box (lag=20)"),
+  Statistic = c(runs$statistic, tp$statistic, lb$statistic),
+  p_value = c(runs$p.value, tp$p.value, lb$p.value),
+  Decision = ifelse(c(runs$p.value, tp$p.value, lb$p.value) > 0.05,
+                    "Random (fail to reject H₀)",
+                    "Not random (reject H₀)")
+)
+
+knitr::kable(results, digits = 4, caption = "Tests for randomness in the time series")
+```
+
+## Trend Analysis for Annual Time Series
+```{r ts-annual-trend, message=FALSE, warning=FALSE}
+# Convert to time series
+#x <- ts(X, start = min(data_all$year), frequency = 1)
+x<- xts(X, order.by = data_all$date)
+
+# --- Trend estimation using a moving average ---
+trend <- stats::filter(x, rep(1/3, 3), sides = 2)
+
+# Plot
+plot(x, col = "steelblue", lwd = 2, main = "Annual Time Series with Trend", ylab = "Q (m³/s)", xlab = "Year")
+lines(trend, col = "tomato", lwd = 2)
+legend("topleft", legend = c("Original", "3-Year Moving Average"), col = c("steelblue", "tomato"), lwd = 2)
+```
+
+## Detrending a Daily Time Series and Testing for Trend"
+```{r}
+data_all$t <- as.numeric(data_all$date - min(data_all$date)) + 1
+
+# 2. Fit Linear Trend Model
+trend_model <- lm(Valor ~ t, data = data_all)
+print(summary(trend_model))
+
+# 3. Plot the Original Series and Fitted Trend
+ggplot(data_all, aes(x = date, y = Valor)) +
+  geom_line(color = "steelblue", alpha = 0.7) +
+  geom_line(aes(y = fitted(trend_model)), color = "red", linewidth = 1) +
+  labs(title = "Daily Time Series with Fitted Linear Trend",
+       x = "Date", y = "Value") +
+  theme_minimal(base_size = 14)
+
+# 4. Detrend the Series (Remove Linear Component)
+data_all$residuals <- residuals(trend_model)
+data_all$trend <- fitted(trend_model)
+ggplot(data_all, aes(x = date, y = residuals)) +
+  geom_line(color = "darkgreen") +
+  labs(title = "Detrended Daily Time Series (Residuals)",
+       x = "Date", y = "Residuals") +
+  theme_minimal(base_size = 14)
+
+# 5. Test for Normality of Residuals
+cat("\n--- Anderson-Darling Normality Test ---\n")
+print(ad.test(data_all$residuals))
+
+# 6. Q-Q Plot of Residuals
+qqnorm(data_all$residuals, main = "Q-Q Plot of Detrended Series Residuals")
+qqline(data_all$residuals, col = "red", lwd = 2)
+
+# 7. Test for Randomness of Residuals
+cat("\n--- Runs Test for Randomness ---\n")
+print(runs.test(data_all$residuals))
+```
+## Estimate the Spectral Density Function for the Detrended Daily Time Series
+After removing the linear trend from the daily time series, we can analyze the frequency components of the residuals (detrended series) using the spectral density function. This helps identify dominant periodicities (e.g., seasonal cycles) present in the data.
+
+```{r spectral-density, echo=TRUE, message=FALSE, warning=FALSE}
+# Compute the spectral density of the detrended series
+spectrum(data_all$residuals,
+         main = "Spectral Density of Detrended Daily Time Series",
+         xlab = "Frequency",
+         ylab = "Spectral Density",
+         col = "blue",
+         lwd = 2)
+
+# Optionally, use a smoothed periodogram (useful for noisy daily data)
+spec_res <- spectrum(data_all$residuals, spans = c(3, 3), plot = FALSE)
+
+# Plot smoothed spectrum
+plot(spec_res$freq, spec_res$spec, type = "l", col = "darkred", lwd = 2,
+     xlab = "Frequency", ylab = "Spectral Density (Smoothed)",
+     main = "Smoothed Spectral Density of Detrended Series")
+
+# Dominant frequency and period
+dominant_freq <- spec_res$freq[which.max(spec_res$spec)]
+dominant_period_days <- 1 / dominant_freq
+
+cat("Dominant frequency:", round(dominant_freq, 5), "cycles/day\n")
+cat("Approximate period:", round(dominant_period_days, 1), "days\n")
+
+```
+## ACF, PACF, and Autocorrelation Tests for the Detrended Daily Time Series
+
+```{r acf_pacf_ljung, fig.width=10, fig.height=5, message=FALSE, warning=FALSE}
+
+# --- Ensure detrended data exist ---
+if (!exists("data_all") || !"residuals" %in% names(data_all)) {
+  stop("Please define a data.frame 'df' with a column 'residuals' (detrended series).")
+}
+
+# --- Prepare the residuals ---
+res <- na.omit(as.numeric(data_all$residuals))
+n <- length(res)
+if (n < 4) stop("Not enough data points for ACF/PACF analysis.")
+
+# --- Compute ACF and PACF ---
+acf_res <- acf(res, plot = FALSE, lag.max = 365)
+pacf_res <- pacf(res, plot = FALSE, lag.max = 365)
+
+acf_df <- data.frame(lag = acf_res$lag[,1,1], acf = acf_res$acf[,1,1])
+pacf_df <- data.frame(lag = seq_along(pacf_res$acf), pacf = pacf_res$acf)
+
+# --- Confidence bands ---
+conf <- 2 / sqrt(n)
+
+# --- Create plots ---
+p_acf <- ggplot(acf_df, aes(x = lag, y = acf)) +
+  geom_bar(stat = "identity", width = 0.1, fill = "#1f77b4", color = "black") +
+  geom_hline(yintercept = 0, color = "black") +
+  geom_hline(yintercept = c(conf, -conf), linetype = "dashed", color = "red") +
+  labs(title = "ACF (detrended series)", x = "Lag (days)", y = "ACF") +
+  theme_minimal(base_size = 14)
+
+p_pacf <- ggplot(pacf_df, aes(x = lag, y = pacf)) +
+  geom_bar(stat = "identity", width = 0.1, fill = "#2ca02c", color = "black") +
+  geom_hline(yintercept = 0, color = "black") +
+  geom_hline(yintercept = c(conf, -conf), linetype = "dashed", color = "red") +
+  labs(title = "PACF (detrended series)", x = "Lag (days)", y = "PACF") +
+  theme_minimal(base_size = 14)
+
+# --- Show side-by-side plots ---
+(p_acf | p_pacf) + plot_annotation(title = "ACF and PACF of the Detrended Daily Time Series")
+
+# --- Print significant lags ---
+sig_acf <- subset(acf_df, lag > 0 & abs(acf) > conf)
+sig_pacf <- subset(pacf_df, abs(pacf) > conf)
+
+cat("\nSample size (n) =", n, "\n")
+cat("Approx. 95% confidence bounds = ±", round(conf, 4), "\n\n")
+
+if (nrow(sig_acf) > 0) {
+  cat("Significant ACF lags (|ACF| > 2/sqrt(n)):\n")
+  print(sig_acf)
+} else {
+  cat("No significant ACF lags detected.\n")
+}
+
+if (nrow(sig_pacf) > 0) {
+  cat("\nSignificant PACF lags (|PACF| > 2/sqrt(n)):\n")
+  print(sig_pacf)
+} else {
+  cat("\nNo significant PACF lags detected.\n")
+}
+
+# --- Ljung–Box test for randomness at multiple lags ---
+lags_to_test <- c(10, 20, 30)
+lb_results <- data.frame(
+  Lag = lags_to_test,
+  Statistic = NA,
+  p_value = NA
+)
+
+for (i in seq_along(lags_to_test)) {
+  test <- Box.test(res, lag = lags_to_test[i], type = "Ljung-Box")
+  lb_results$Statistic[i] <- test$statistic
+  lb_results$p_value[i] <- test$p.value
+}
+
+cat("\nLjung–Box Test Results:\n")
+print(lb_results)
+
+# --- Interpretation ---
+cat("\nInterpretation:\n")
+cat("If p-value < 0.05, there is evidence of autocorrelation up to that lag.\n")
+cat("If p-value >= 0.05, residuals appear random (no significant autocorrelation).\n")
+```
+
+# **Time series simulation and forecasting**
+## Fit Box–Jenkins (ARIMA) Model to Detrended Series
+
+---
+title: "Box–Jenkins (ARIMA) Model for Detrended Daily Time Series"
+output: html_document
+---
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+# ---- 1. Fit Box–Jenkins (ARIMA) model ----
+fit_arima <- auto.arima(data_all$residuals, seasonal = FALSE)
+summary(fit_arima)
+
+# ---- 2. Residual diagnostics ----
+checkresiduals(fit_arima)
+
+# ---- 2. Statistical tests ----
+res <- residuals(fit_arima)
+
+# Normality (Shapiro-Wilk)
+if (length(res) > 5000) {
+  cat("Shapiro-Wilk test not performed: sample too large.\n")
+} else {
+  print(shapiro.test(res))
+}
+
+# Randomness (Runs test)
+if (is.numeric(res)) {
+  print(runs.test(res))
+}
+
+# Step 3: Simulate fitted values (on detrended scale)
+data_all$sim_detrended <- fitted(fit_arima)
+
+# ----------------------------
+# Step 4: Add trend back
+# ----------------------------
+data_all$simulated <- data_all$sim_detrended + data_all$trend
+
+# ----------------------------
+# Step 4: Plot full series and zoomed year
+# ----------------------------
+# Define zoomed subset (last 365 days)
+df_zoom <- tail(data_all, 365)
+
+p1 <- ggplot(data_all, aes(x = date)) +
+  geom_line(aes(y = Valor, color = "Original"), linewidth = 1) +
+  geom_line(aes(y = simulated, color = "Simulated (ARIMA + Trend)"), linewidth = 1, linetype = "dashed") +
+  scale_color_manual(values = c("Original" = "blue", "Simulated (ARIMA + Trend)" = "red")) +
+  labs(title = "Full Daily Time Series",
+       x = "Date", y = "Value", color = "Series") +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "top")
+
+p2 <- ggplot(df_zoom, aes(x = date)) +
+  geom_line(aes(y = Valor, color = "Original"), linewidth = 1) +
+  geom_line(aes(y = simulated, color = "Simulated (ARIMA + Trend)"), linewidth = 1, linetype = "dashed") +
+  scale_color_manual(values = c("Original" = "blue", "Simulated (ARIMA + Trend)" = "red")) +
+  labs(title = "Zoomed View: Last Year",
+       x = "Date", y = "Value", color = "Series") +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "top")
+
+# Combine both plots
+p1 | p2
+
+# ---- 4. Forecast next 90 days ----
+n_forecast <- 90
+fc_detrended <- forecast(fit_arima, h = n_forecast)
+
+# ---- 5. Reconstruct full forecast (add trend back) ----
+future_dates <- seq(max(data_all$date) + 1, by = "day", length.out = n_forecast)
+future_t <- as.numeric(future_dates)
+future_trend <- predict(trend_model, newdata = data.frame(t = future_t))
+
+final_forecast <- data.frame(
+  date = future_dates,
+  forecast = fc_detrended$mean + future_trend,
+  lower = fc_detrended$lower[, 2] + future_trend,
+  upper = fc_detrended$upper[, 2] + future_trend
+)
+
+# ---- 6. Plot full series with trend + forecast + legend ----
+ggplot() +
+  geom_line(data = data_all, aes(x = date, y = Valor, color = "Observed"), linewidth = 0.6) +
+  geom_line(data = data_all, aes(x = date, y = trend, color = "Trend"), linewidth = 0.8, linetype = "dashed") +
+  geom_line(data = final_forecast, aes(x = date, y = forecast, color = "Forecast"), linewidth = 0.9) +
+  geom_ribbon(data = final_forecast, aes(x = date, ymin = lower, ymax = upper, fill = "95% CI"), alpha = 0.3) +
+  scale_color_manual(name = "Series", values = c("Observed" = "gray40", "Trend" = "red", "Forecast" = "blue")) +
+  scale_fill_manual(name = "Interval", values = c("95% CI" = "lightblue")) +
+  labs(title = "Box–Jenkins (ARIMA) Forecast with Linear Trend (Daily Series)",
+       x = "Date", y = "Value") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom")
+
+# ---- 7. Zoomed-in plot with legend ----
+zoom_days <- 180
+data_zoom <- data_all %>% filter(date >= max(date) - zoom_days)
+
+ggplot() +
+  geom_line(data = data_zoom, aes(x = date, y = Valor, color = "Observed"), linewidth = 0.6) +
+  geom_line(data = data_zoom, aes(x = date, y = trend, color = "Trend"), linewidth = 0.8, linetype = "dashed") +
+  geom_line(data = final_forecast, aes(x = date, y = forecast, color = "Forecast"), linewidth = 0.9) +
+  geom_ribbon(data = final_forecast, aes(x = date, ymin = lower, ymax = upper, fill = "95% CI"), alpha = 0.3) +
+  scale_color_manual(name = "Series", values = c("Observed" = "gray40", "Trend" = "red", "Forecast" = "blue")) +
+  scale_fill_manual(name = "Interval", values = c("95% CI" = "lightblue")) +
+  labs(title = "Zoomed Forecast with Trend",
+       x = "Date", y = "Value") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom")
+```
+

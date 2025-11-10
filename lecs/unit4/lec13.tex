@@ -40,7 +40,7 @@
 % Title Information
 \title{STOCHASTIC METHODS IN WATER RESOURCES}
 \vspace{25pt}
-\subtitle{Unit 4: Time series analysis \\ Lecture 11: Univariate, linear stochastic models}
+\subtitle{Unit 4: Time series analysis \\ Lecture 13: Univariate, linear stochastic models}
 \author{Luis Alejandro Morales, Ph.D.}
 \institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
 %\date{\today}
@@ -93,7 +93,7 @@
 \begin{frame}{Application to non-normal series}
     \begin{block}{Box-Cox transformations}
     \end{block}
-    Box and Cox in 1964 suggest the following method of transforming and observed value $x$
+    Box and Cox in 1964 suggest the following method of transforming an observed value $x$
     \begin{equation}
 Y = \left\{
 \begin{array}{c}
@@ -105,15 +105,15 @@ Y = \left\{
 \end{equation}
 The parameter $\lambda$ could be chosen so that the skewness of the transformed series is a minimum. However, the efficieny of this approach is very low compared with more sophisticated \emph{maximum likelihood} method. A simpler procedure could be for different values of $\lambda = 0, \pm 0.5, \pm 1.0, \cdots$ the \emph{sample mean} $\bar{y}$, the \emph{standard deviation} $\hat{\sigma}_y$ (or the more robust interquartile range) and the \emph{median} $\hat{\zeta}_t$ are calculated from the transformed data. Then the statistics $d_\lambda = \frac{\bar{y}-\hat{\zeta}_y}{\hat{\sigma}_y}$ are compared and interpolated if necessary, to find the value of $\lambda$ for which $d_\lambda$ is a minimum. 
 
-A further refinement is to introduce a second parameter by replacing $x$ with $x-\zeta$ say. Of special interest is the situation when $\lambda = 0$ in equation~\ref{e447}. This is the case in which the variable has a \emph{lognormal distribution}.
+A further refinement is to introduce a second parameter by replacing $x$ with $x-\xi$ say. Of special interest is the situation when $\lambda = 0$ in equation~\ref{e447}. This is the case in which the variable has a \emph{lognormal distribution}.
 \end{frame}
  
 \begin{frame}{Application to non-normal series}
     \begin{block}{Data generation using Markov model and lognormal distribution}
     \end{block}
-    Consider the transformation $Y = \ln(X-\xi)$ where $X$ has \emph{mean} $\mu$ and \emph{variance} $\sigma_X^2$; $Y$ is normally distributed with \emph{mean} $\mu_Y$ and \emph{variance} $\sigma_Y^2$ and $\xi$ is a location parameter, which could be negative; also, the lag-l autocorrelation coefficients are $\rho_l$ and $\rho_{l,Y}$, respectively. 
+    Consider the transformation $Y = \ln(X-\xi)$ where $X$ has \emph{mean} $\mu$ and \emph{variance} $\sigma_Y^2$; $Y$ is normally distributed with \emph{mean} $\mu_Y$ and \emph{variance} $\sigma_Y^2$ and $\xi$ is a location parameter, which could be negative; also, the lag-l autocorrelation coefficients are $\rho_l$ and $\rho_{l,Y}$, respectively. 
 
-    It can be shown that
+    Using the \emph{method of moments}, it can be shown that
 \begin{equation}
     \mu = e^{\mu_Y + \sigma_Y^2 /2} + \xi
         \label{e448}
@@ -197,9 +197,9 @@ E[X_t X_{t+l}] = E\left[ \left( e^{Y_t} + \xi \right)\left(e^{Y_{t+l}} + \xi \ri
     X_{t,\tau} = \mu_{\tau} + \sigma_{\tau} \sum_{i=1}^p \frac{\phi_{p,i} (X_{t-i,\tau-i} - \mu_{\tau-i})}{\sigma_{\tau-i}} + \sigma_{\tau} \eta_t
         \label{e453}
     \end{equation}
-    in which $E[\eta_t] = E[\eta_t \eta_{t-k}] = 0$ for $k\neq0$ and $var[\eta_t] = E[\eta_t^2] = 1-R^2$; note that, if $\tau -i \leq 0$, $\tau-i$ should be replaced by $\tau-i +12$. The order $p$ and the autoregressive parameter $\phi_{p,i}$ are estimated from the standardised $\xi_t$ series. 
+    in which $E[\eta_t] = E[\eta_t \eta_{t-k}] = 0$ for $k\neq0$ and $var[\eta_t] = E[\eta_t^2] = 1-R^2$; note that, if $\tau -i \leq 0$, $\tau-i$ should be replaced by $\tau-i +12$. The order $p$ and the \emph{autoregressive parameter} $\phi_{p,i}$ are estimated from the standardised $\xi_t$ series. 
 
-    Because $\mu_{\tau}$ and $\sigma_{\tau}$ have to be estimated from short historical samples, harmonic fitted statistics $\hat{\mu}_{\tau}$ and $\hat{\sigma}_{\tau}$ have been substituted in equation~\ref{e453} for estimating the autoregressive parameters. However, the resulting $\tilde{\xi_t}$ series and hence the autoregressive parameters may be significantly affected by sampling errors. This could happen when the \emph{sample statistics} $m_{\tau}$ and $s_{\tau}$ are used or when their harmonic fitted estimates $\hat{\mu}_{\tau}$ and $\hat{\sigma}_{\tau}$ are substituted  for the unknown parameters $\mu_{\tau}$ and $\sigma_{\tau}$. The advantage in the harmonic model is that it needs fewer parameters; also these are less affected by sample size. A further generalization of this model is possible by making $\phi_{p,i}$ seasonal but usually the differences between the seasonal  parameters are not significant. 
+    Because $\mu_{\tau}$ and $\sigma_{\tau}$ have to be estimated from short historical samples, \emph{harmonic fitted statistics} $\hat{\mu}_{\tau}$ and $\hat{\sigma}_{\tau}$ have been substituted in equation~\ref{e453} for estimating the \emph{autoregressive parameters}. However, the resulting $\tilde{\xi_t}$ series and hence the \emph{autoregressive parameters} may be significantly affected by sampling errors. This could happen when the \emph{sample statistics} $m_{\tau}$ and $s_{\tau}$ are used or when their \emph{harmonic fitted estimates} $\hat{\mu}_{\tau}$ and $\hat{\sigma}_{\tau}$ are substituted  for the unknown parameters $\mu_{\tau}$ and $\sigma_{\tau}$. The advantage in the \emph{harmonic model} is that it needs fewer parameters; also these are less affected by sample size. A further generalization of this model is possible by making $\phi_{p,i}$ seasonal but usually the differences between the seasonal  parameters are not significant. 
 \end{frame}
 
 \begin{frame}{Seasonal models}
@@ -207,14 +207,14 @@ E[X_t X_{t+l}] = E\left[ \left( e^{Y_t} + \xi \right)\left(e^{Y_{t+l}} + \xi \ri
     \end{block}
 This takes the form
 \begin{equation}
-    X_{t,\tau} = \frac{\mu_{\tau} + \sigma_{\tau} \rho_{\tau} ( X_{t-1, \tau-1} - \mu_{\tau-1})}{\sigma_{\tau-1}} + \sigma_{\tau} \eta_t
+    X_{t,\tau} = \mu_{\tau} + \frac{\sigma_{\tau} \rho_{\tau} ( X_{t-1, \tau-1} - \mu_{\tau-1})}{\sigma_{\tau-1}} + \sigma_{\tau} \eta_t
         \label{e454}
     \end{equation}
     in which
     \[
     \rho_{\tau} = \frac{E\left[ (X_{t,\tau} - \mu_{\tau})(X_{t-1,\tau-1} - \mu_{\tau-1})\right]}{\sigma_{\tau} \sigma_{\tau-1}}
 \]
-is the coefficient of correlation between the flows in months $\tau$ and $\tau-1$. For the random component $E[\eta_t] = E[\eta_t \eta_{t-k}] = 0$ for $k\neq 0$. Also, recall that $var[\eta_t] = 1-\rho_{\tau}^2$.
+is the \emph{coefficient of correlation} between the flows in months $\tau$ and $\tau-1$. For the random component $E[\eta_t] = E[\eta_t \eta_{t-k}] = 0$ for $k\neq 0$. Also, recall that $var[\eta_t] = 1-\rho_{\tau}^2$.
 
 If \emph{skewness} is to be maintained, then by using a similar derivation as for the equation~\ref{e446}, the \emph{coefficient of skewness} to be applied to the random component in month $\tau$ is given by
 \begin{equation}
@@ -230,7 +230,7 @@ If \emph{skewness} is to be maintained, then by using a similar derivation as fo
 \begin{frame}{Seasonal models}
     \begin{block}{Box-Jenkins seasonal model}
     \end{block}
-    An \emph{ARIMA} type model can also be used for generating data in which seasonal effects are accounted for. \emph{Backshift} operators such as $B^s \xi_t = \xi_{t-s}$ are used for this purpose when events $s$ time units apart are indetically distributed; for example, if the annual cycle is to be represented through a monthly series, $s=12$. Consider initially a model of the type \emph{ARIMA(1,0,1)} which is, of course, equivalent to ot \emph{ARMA(1,1)}. It is given by $(1-\Phi B^{12})\xi_t = (1-\Theta B^{12})\psi_t$, that is, $\xi_t - \Phi \xi_{t-12} = \psi_t - \Theta \psi_{t-12}$ where $\Phi$ and $\Theta$ are parameters and $\psi_t$ is a standardised residual. The next step is to apply a difference operator which is given by
+    An \emph{ARIMA} type model can also be used for generating data in which seasonal effects are accounted for. \emph{Backshift} operators such as $B^s \xi_t = \xi_{t-s}$ are used for this purpose when events $s$ time units apart are \emph{indetically distributed}; for example, if the \emph{annual cycle} is to be represented through a monthly series, $s=12$. Consider initially a model of the type \emph{ARIMA(1,0,1)} which is, of course, equivalent to ot \emph{ARMA(1,1)}. It is given by $(1-\Phi B^{12})\xi_t = (1-\Theta B^{12})\psi_t$, that is, $\xi_t - \Phi \xi_{t-12} = \psi_t - \Theta \psi_{t-12}$ where $\Phi$ and $\Theta$ are parameters and $\psi_t$ is a standardised residual. The next step is to apply a difference operator which is given by
     \begin{align*}
         \nabla_s \xi_t &= (1-B^s) \xi_t \\
                        &= \xi_t - \xi_{t-s} \\
@@ -299,7 +299,7 @@ If \emph{skewness} is to be maintained, then by using a similar derivation as fo
 \item The integration of equation~\ref{e458} between limits $t$ and $t-1$ gives the following discrete process
 \begin{equation}
     X_t = e^{-bs} X_{t-s} + \eta_t
-        \label{e458}
+        \label{e459}
     \end{equation}
     which has a \emph{Gamma density function}. 
 \item The advantage here is that the positively skewed \emph{innovation term} $\eta_t$ has a positive probability  of being exactly zero in contrast with random component in an \emph{AR(1)} process. 

@@ -1,0 +1,469 @@
+\documentclass[8pt]{beamer}
+\usetheme{default} % Very simple theme
+\usecolortheme{dove} % Minimalist grayscale colors
+\setbeamertemplate{navigation symbols}{} % Remove navigation bar
+
+% Define brand-like colors
+\definecolor{myblue}{RGB}{0, 102, 204}    % Blue for standard blocks
+\definecolor{mygreen}{RGB}{0, 153, 0}     % Green for example blocks
+\definecolor{myred}{RGB}{204, 0, 0}       % Red for alert blocks
+\definecolor{myorange}{RGB}{255, 128, 0} % For \emph
+
+% Accent color for titles, bullets, etc.
+\setbeamercolor{structure}{fg=myblue}
+
+% Block colors
+\setbeamercolor{block title}{bg=myblue, fg=white}
+\setbeamercolor{block body}{bg=blue!5, fg=black}
+
+\setbeamercolor{exampleblock title}{bg=mygreen, fg=white}
+\setbeamercolor{exampleblock body}{bg=green!5, fg=black}
+
+\setbeamercolor{alertblock title}{bg=myred, fg=white}
+\setbeamercolor{alertblock body}{bg=red!5, fg=black}
+\setbeamercolor{alerted text}{fg=myred}
+
+% Optional: color for \example text
+\setbeamercolor{example text}{fg=mygreen}
+
+% Custom emph (orange text instead of italic)
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textcolor{myorange}{#1}}
+\newcommand{\ve}[1]{\boldsymbol{#1}}
+
+\usepackage{graphicx} % Package for images
+\usepackage{amsmath} % Package for images
+\graphicspath{{figs/}} % Path to your figures directory
+\usepackage{array}  % For better column spacing
+\usepackage{caption} % Required for \captionof
+
+% Title Information
+\title{STOCHASTIC METHODS IN WATER RESOURCES}
+\vspace{25pt}
+\subtitle{Unit 4: Time series analysis \\ Lecture 14: Multivariate time series}
+\author{Luis Alejandro Morales, Ph.D.}
+\institute{Universidad Nacional de Colombia \\ Department of Civil and Agriculture Engineering} %// }
+%\date{\today}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------
+% From Kotte (Stochastic WR tech)
+\section{Multisite data generation}
+\begin{frame}{Multisite data generation}
+    \begin{block}{Generalities}
+    \end{block}
+    \begin{itemize}
+        \item For the \emph{planning}, \emph{design} and \emph{operational} studies  of water resources systems, concurrent sequences of flow data are required at more than one site. 
+        \item Therefore, it is  needed to formulate models  so that important relationships between time series are preserved, together with the properties of the individual series. 
+        \item For instance, rivers in a particular region tend to \emph{rise} and \emph{recess} at about the same times because of the proximity of catchment areas and possible similarities in catchment characteristics. 
+        \item Such correlations within the multiple time series are strengthened if the high flows are caused by frontal systems, the effects of which are widespread; this becomes more obvious when short-interval data are used.  
+        \item Here is presented extensions of the univariate \emph{autoregressive}, \emph{moving-average} and \emph{mixed} models for \emph{multiple time series}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{Two-site models}
+    \end{block}
+    Models for generalising concurrent  data at \emph{two sites} are formulated so that the \emph{covariance} and \emph{cross covariance} properties are maintained. In general, they are concerned only with the \emph{lag-one} serial correlation coefficients $\rho_1$ and $\rho_2$ in the flows in the two sites and the \emph{lag-zero} cross correlation coefficients $\rho$, apart from preserving the \emph{means} and \emph{standard deviations}. A particular model which serves the purpose is given by
+    \begin{equation}
+        \xi_{1,t} = \rho_1 \xi_{1,t-1} + (1-\rho_1^2)^{1/2} \lambda_{1,t}
+        \label{e460}
+    \end{equation}
+    \begin{equation}
+        \xi_{2,t} = \rho_2 \xi_{2,t-1} + \alpha \lambda_{1,t} + \beta \lambda_{2,t}
+        \label{e461}
+    \end{equation}
+    where $\xi_{1,t}$ and $\xi_{2,t}$ represent the standardised flows at the two sites, respectively, and $\lambda_{1,t}$ and $\lambda_{2,t}$ are two independent identically distributed standardised variates generated at time $t$. The parameters $\alpha$ and $\beta$ are chosen so that $E[\xi_{1,t} \xi_{2,t}] = \rho$ and $E[\xi_{2,t}^2] = 1$.
+
+    Because $E[\xi_{2,t-1} \lambda_{1,t}] = E[\xi_{2,t-1} \lambda_{2,t}] = E[\lambda_{1,t} \lambda_{2,t}] = 0$, by squaring equation~\ref{e461}, it follows that $1=\rho_2^2 + \alpha^2 + \beta^2$.
+
+    Again, if the left-hand side and the right-hand side of equation~\ref{e460} are multiplied by the left-hand side and the right-hand side of equation~\ref{e461}, respectively, 
+    \[
+        \rho = \rho_1 \rho_2 \rho + \alpha(1-\rho_1^2)^{1/2}
+    \]
+    hence 
+    \begin{equation}
+        \alpha = \frac{\rho(1-\rho_1 \rho_2)}{(1-\rho_1^2)^{1/2}}
+        \label{e462}
+    \end{equation}
+    \begin{equation}
+        \beta^2 = \frac{(1-\rho_1^2)(1-\rho_2^2) - \rho^2 (1-\rho_1 \rho_2)^2}{1-\rho_1^2}
+        \label{e463}
+    \end{equation}
+
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{First-order multisite autoregressive model}
+    \end{block}
+    It is assumed that series of flows of each site are \emph{standardized} to \emph{zero mean} and \emph{unit variance} after initially removing \emph{trend} and \emph{seasonality}. When applied to $m$ stations the $m\ x\ 1$ vector $\xi_t = (\xi_{1,t}, \xi_{2,t}, \cdots, \xi_{m,t})^T $, in which $T$ denotes the transpose, represents the flows at time $t$. The model takes the form
+    \begin{equation}
+        \boldsymbol{\xi_t} = \mathbf{A} \boldsymbol{\xi_{t-1}} + \mathbf{B} \boldsymbol{\eta_t}
+        \label{e464}
+    \end{equation}
+    where $\mathbf{A}$ and $\mathbf{B}$ are two $m\ x\ m$ matrices of parameters and $\boldsymbol{\eta_t} = (\eta_{1,t}, \eta_{2,t}, \cdots, \eta_{m,t})^T$ is an $m\ x\ 1$ vector of \emph{independent standard normal deviates}, generated at time $t$, which are also independent of the elements of vector $\xi_{t-1}$. The matrices $\mathbf{A}$ and $\mathbf{B}$ ensure that the lag-zero, lag-one and lag-minus-one cross correlations between the $m$ time series are maintained in addition to the \emph{lag-one serial correlations} for each series. In order to determine the elements of these two matrices, the first operation requiered is to post-multiply equation~\ref{e464} throughout by $\boldsymbol{\xi_{t-1}^T}$ and to take expectations. Accordingly
+    \[
+        E[\boldsymbol{\xi_t} \boldsymbol{\xi_{t-1}^T}] = \mathbf{A}E[\boldsymbol{\xi_{t-1}} \boldsymbol{\xi_{t-1}^T}] + \mathbf{B} E[\boldsymbol{\eta_t \xi_{t-1}^T}]
+    \]
+    From the prior assumptions, $E[\boldsymbol{\eta_t \xi_{t-1}^T}] = \boldsymbol{0}$. Hence, this equation may be written
+    \begin{equation}
+        \mathbf{M}_1 = \mathbf{A} \mathbf{M}_0
+        \label{e465}
+    \end{equation}
+    where $\mathbf{M}_1$ in an $m\ x\ m$ matrix in which the element of the ith row and jth column is $E[\xi_{i,t} \xi_{j, t-1}] = \rho_{i,j} (-1)$ which the \emph{lag-one cross correlation} between the ith and jth series. 
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{First-order multisite autoregressive model}
+    \end{block}
+    Here, the $(-1)$ in $\rho_{i,j}(-1)$ signifies that, in the \emph{cross correlation}, the jth series is lagged behind the ith series by one time unit when computing the sum of the \emph{cross product terms}. Likewise, $E[\xi_{i,t-1} \xi_{j,t}]$ is denoted by $\rho_{i,j}(+1)$. As noted before $\rho_{i,j}(-1) \neq \rho_{i,j}(+1)$ for $i \neq j$; for the diagonal elements of $\mathbf{M}_1$, however, which represent the lag-one \emph{serial correlations} of each of the series $\rho_{i,i} (-1) = \rho_{i,i} (+1)$. The matrix $\mathbf{M}_0$ represents the \emph{lag-zero cross correlations} between the series. (Also, it follows that $\mathbf{M}_1$ is asymmetric, whereas $\mathbf{M}_0$ is symmetric.) Hence, from equation~\ref{e465},
+    \begin{equation}
+        \mathbf{A} = \mathbf{M}_1 \mathbf{M}_0^{-1}
+        \label{e466}
+    \end{equation}
+    from which $\mathbf{A}$ can be estimated by substituting the estimated correlation coefficients in the matrices $\mathbf{M}_1$ and $\mathbf{M}_0$. 
+
+    In order to estimate $\mathbf{B}$, equation~\ref{e464} is post-multiplied throughout by $\boldsymbol{\xi_t^T}$, and expectations are taken. Hence
+    \begin{align*}
+        E[\xi_t \xi_t^T] &= \mathbf{A} E[\boldsymbol{\xi_{t-1} \xi_t^T}] + \mathbf{B} E[\boldsymbol{\eta_t \xi_t^T}] \\
+                         &= \mathbf{A} E[\boldsymbol{\xi_{t} \xi_{t-1}^T}]^T + \mathbf{B} E[\boldsymbol{\eta_t(A\xi_{t-1}+B\eta_t)^T}] \\
+                         &= \mathbf{A} E[\boldsymbol{\xi_{t} \xi_{t-1}^T}]^T + \mathbf{B} E[\boldsymbol{\eta_t \xi_{t-1}^T}]\mathbf{A}^T  + \mathbf{B}E[\boldsymbol{\eta_t \eta_t^T}] \mathbf{B}^T
+    \end{align*}
+    Because $E[\ve{\eta}_1 \ve{\xi}_{t-1}^T] = 0$ and $E[\ve{\eta}_t \ve{\eta}_t^T]$ is an identity matrix
+    \begin{equation}
+        \mathbf{M}_0 = \mathbf{A} \mathbf{M}_1^T + \mathbf{B}\mathbf{B}^T
+        \label{e467}
+    \end{equation}
+    If 
+    \begin{equation}
+        \mathbf{C} =  \mathbf{B}\mathbf{B}^T
+        \label{e468}
+    \end{equation}
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{First-order multisite autoregressive model}
+    \end{block}
+
+    which accordingly is a symmetrical matrix, it follows from equations~\ref{e468}, ~\ref{e467} and ~\ref{e466} that
+    \begin{equation}
+        \mathbf{C} =  \mathbf{M}_0 - \mathbf{M}_1 \mathbf{M}_0^{-1} \mathbf{M}_1^T
+        \label{e469}
+    \end{equation}
+    from which $\mathbf{C}$ can be estimated by substituting  the estimated matrices $\mathbf{M}_0$ and $\mathbf{M}_1$.
+
+    In contrast with matrix $\mathbf{A}$, $\mathbf{B}$ does not have a unique set of solutions. One method which is comparatively straightforward is to assume that $\mathbf{B}$ is \emph{lower triangular}. Accordingly, $\mathbf{B}$, $\mathbf{B}^T$ and $\mathbf{C}$ are written as follows
+\[
+    \mathbf{B}\mathbf{B}^T = 
+\begin{bmatrix}
+    b_{1,1} & 0 & 0 & \cdots & 0 \\
+    b_{2,1} & b_{2,2} & 0 & \cdots & 0 \\
+    b_{3,1} & b_{3,2} & b_{3,3} & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b_{m,1} & b_{m,2} & b_{m,3} & \cdots & b_{m,m}
+\end{bmatrix}
+\begin{bmatrix}
+    b_{1,1} & b_{2,1} & b_{3,1} & \cdots & b_{m,1} \\
+    0 & b_{2,2} & b_{2,3} & \cdots & b_{2,m} \\
+    0 & 0 & b_{3,3} & \cdots & b_{3,m} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & b_{m,m}
+\end{bmatrix}
+\]
+\[
+    \mathbf{C} = 
+\begin{bmatrix}
+    c_{1,1} & c_{2,1} & c_{3,1} & \cdots & c_{m,1} \\
+    c_{2,1} & c_{2,2} & c_{3,2} & \cdots & c_{m,2} \\
+    c_{3,1} & c_{3,2} & c_{3,3} & \cdots & c_{m,3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    c_{m,1} & c_{m,2} & c_{m,3} & \cdots & c_{m,m}
+\end{bmatrix}
+\]
+The diagonal elements are found from 
+\begin{align*}
+    b_{1,1} &= (c_{1,1})^{1/2}\\
+    b_{2,2} &= (c_{2,2} - b_{2,1}^2 )^{1/2}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{First-order multisite autoregressive model}
+    \end{block}
+    In general 
+    \begin{equation}
+        b_{k,k} = \left(c_{k,k} - b_{k,k-1}^2 - b_{k,k-2}^2 - \cdots - b_{k,1}^2 \right)^{1/2}
+        \label{e470}
+    \end{equation}
+
+    For these relationships to hold, $\mathbf{C}$ should be positive definite; thus the parameters as constrained as follows
+\begin{equation}
+\begin{aligned}
+    &c_{1,1} \geq 0\\
+    &c_{2,2} \geq b_{2,1}^2\\
+    &c_{3,3} \geq b_{3,2}^2 + b_{3,1}^2\\
+    &\vdots \\
+    &c_{k,k} \geq b_{k,k-1}^2 + b_{k,k-2}^2 + \cdots + b_{k,1}^2
+\end{aligned}
+\label{e471}
+\end{equation}
+Also, it follows from equation~\ref{e468} that the elements in the kth row are given by 
+\vspace{-5pt}
+\begin{align*}
+    b_{k,1} &= \frac{c_{k,1}}{b_{1,1}}\\
+    b_{k,2} &= \frac{c_{k,2} - b_{2,1} b_{k,1}}{b_{2,2}}\\
+    b_{k,3} &= \frac{c_{k,3} - b_{3,1} b_{k,1} - b_{3,2} b_{k,2}}{b_{3,3}}\\
+\end{align*}
+\vspace{-15pt}
+In general, 
+\vspace{-5pt}
+    \begin{equation}
+    b_{k,j} = \frac{c_{k,j} - b_{j,1}b_{k,1} - b_{j,2}b_{k,2} - \cdots - b_{j,j-1}b_{k,j-1}}{b_{j,j}} 
+        \label{e472}
+    \end{equation}
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{Higher-order multisite autoregressive model}
+    \end{block}
+    The \emph{firsti-order multisite model} can be extended to form a general autoregressive type of model
+    \begin{equation}
+        \boldsymbol{\xi_t} = \sum_{l=1}^{p} \mathbf{A}_l \boldsymbol{\xi}_{t-l} + \mathbf{B} \boldsymbol{\eta}_t
+        \label{e473}
+    \end{equation}
+    Let $\mathbf{M}_0$ and $\mathbf{M}_l$, $l = 1,2,\cdots,p$, denote the $m\ x\ m$ \emph{lag-zero} and \emph{lag-l correlation matrices} in respect of the correlated $\ve{\xi}$ component. Here, the matrix $\mathbf{M}_0$ is as defined after equation~\ref{e465}. However, $\mathbf{M}_l$ is such that its diagonal elements are the lag-l serial correlations at each of the $m$ stations, in order, and the general $(i,j)$th element is $E[\xi_{i,t} \xi_{j,t-l}] = \rho_{i,j} (-l)$ which is the lag-l cross correlation coefficient beteween the ith and the jth series lagged behind the ith series by $l$ time units. Then, by post-mutiplying equation~\ref{e473} by $\ve{\xi}_{t-i}^T$ and taking expectations
+    \begin{equation}
+        \mathbf{M}_i = \sum_{l=1}^{p} \mathbf{A}_l \mathbf{M}_{i-l} 
+        \label{e474}
+    \end{equation}
+    The simultaneous equations given by equation~\ref{e474} can be written
+\[
+    \left[\mathbf{M}_1\ \mathbf{M}_2\ \cdots \mathbf{M}_p \right] = \left[\mathbf{A}_1\ \mathbf{A}_2\ \cdots \mathbf{A}_p \right] 
+\begin{bmatrix}
+    \mathbf{M}_0 & \mathbf{M}_1   & \cdots & \mathbf{M}_{p-1} \\
+    \mathbf{M}_1^T & \mathbf{M}_0   & \cdots & \mathbf{M}_{p-2} \\
+    \vdots &  \vdots & \ddots & \vdots \\
+    \mathbf{M}_{p-1}^T & \mathbf{M}_{p-2}^T  & \cdots & \mathbf{M}_0 \\
+\end{bmatrix}
+\]
+
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{Higher-order multisite autoregressive model}
+    \end{block}
+    that is
+    \begin{equation}
+    \left[\mathbf{A}_1\ \mathbf{A}_2\ \cdots \mathbf{A}_p \right] =  \left[\mathbf{M}_1\ \mathbf{M}_2\ \cdots \mathbf{M}_p \right] 
+\begin{bmatrix}
+    \mathbf{M}_0 & \mathbf{M}_1   & \cdots & \mathbf{M}_{p-1} \\
+    \mathbf{M}_1^T & \mathbf{M}_0   & \cdots & \mathbf{M}_{p-2} \\
+    \vdots &  \vdots & \ddots & \vdots \\
+    \mathbf{M}_{p-1}^T & \mathbf{M}_{p-2}^T  & \cdots & \mathbf{M}_0 \\
+\end{bmatrix}^{-1}
+\label{e475}
+    \end{equation}
+Similarly, by post-multiplying equation~\ref{e473} by $\ve{\xi}_t^T$ and taking expectations
+    \begin{equation*}
+        \mathbf{M}_0 = \sum_{l=1}^{p} \mathbf{A}_l \mathbf{M}_{l}^T + \mathbf{B}\mathbf{B}^T
+    \end{equation*}
+\begin{equation}
+        \mathbf{B}\mathbf{B}^T = \mathbf{M}_0 - \sum_{l=1}^{p} \mathbf{A}_l \mathbf{M}_{l}^T  
+        \label{e476}
+    \end{equation}
+    The matrices $\mathbf{A}_i$, $i=1,2, \cdots$, can be obtained by solving equation~\ref{e475} after the matrix multiplications on the right. Simplification to reduce computation is possible assuming that the $\mathbf{A}_i$ matrices are diagonal matrices.
+
+    If $\mathbf{B} \mathbf{B}^T = \mathbf{C}$, say, then, by assuming a triangulation matrix for $\mathbf{B}$ as in the first-order model, the elements of $\mathbf{B}$ can be found. 
+\end{frame}
+
+\begin{frame}{Multisite data generation}
+    \begin{block}{Further comments on multisites models}
+    \end{block}
+    \begin{itemize}
+        \item The order of a \emph{multisite autoregressive model} could be estimated from the \emph{serial correlations} and estimated \emph{partial autocorrelations} of the individual series; here similarities amongst the different series are expected. 
+        \item The are problems, however, if the distribution is not \emph{multivariate normal}. In such cases, \emph{transformations} which result in approximate normality could be used. 
+        \item Alternatively, the \emph{marginal distributions} of the estimated \emph{residuals}, given for instance for the \emph{first-order model} by
+\begin{equation}
+    \ve{\eta}_t = \hat{\mathbf{B}}^{-1} \left(\tilde{\ve{\xi}}_t - \hat{\mathbf{A}} \tilde{\ve{\xi}}_{t-1} \right)
+        \label{e477}
+    \end{equation}
+    which follows from equation~\ref{e472} can be examined, and skewness and other properties can be calculated. 
+\item This means in practice that the distribution of the $m$ elements of the column vector $\ve{\eta}_t$ are investigated by using the estimated matrices $\mathbf{A}$ and $\mathbf{B}$ and the historical data $\ve{\xi}_t$, $t=1,2,\cdots,N$. The distribution of the \emph{random numbers} are then transformed to suitable distributions (e.g. mutivariate gamma distribution).
+\item Another difficulty might arise when historical sequences of different lengths are used for estimating the \emph{correlation matrices}. In such cases, constraints may be violated, which is equivalent to stating that $\mathbf{C}$ given by equation~\ref{e468} is not positive definite.
+    \end{itemize}
+\end{frame}
+
+%-------
+% From Kotte (Stochastic WR tech)
+\section{Short-term forecasting}
+\begin{frame}{Short-term forecasting}
+    \begin{block}{Generalities}
+    \end{block}
+    \begin{itemize}
+        \item One of the practical application of \emph{time series analysis} and \emph{stochastic models} is in \alert{shor-term forecasting}. 
+        \item Methods have been developed in recent years which could be used to \emph{control water resources systems} over \emph{immediate time horizons}. 
+        \item An effective forecasting procedure necessitates the efficient use of \emph{current and past information}, the \emph{best-fitting mathematical models} which should be changed or modified if necessary and the \emph{updating of parameters}.
+        \item Primitive methods of forecasting were based on the \emph{last observed value} or a \emph{mean value} from historical record. 
+        \item Then, \alert{moving averages} method were introduced. For instance, \emph{exponential smoothing} is one of the procedures that can be used. 
+        \item Here, the forecast $\hat{x}_t (1)$ at time $t+1$ is dependent on the current and past observations $x_t, x_{t-1}, \cdots$, follows
+\begin{equation}
+    \hat{x}_t (1) = \alpha x_t + \alpha(1-\alpha)x_{t-1} + \alpha(1-\alpha)^2 x_{t-2} + \alpha(1-\alpha)^3 x_{t-3} + \cdots 
+        \label{e478}
+    \end{equation}
+    in which the constant $\alpha$, $0<\alpha<1$ is heuristically fitted.
+\item A more \emph{flexible} and \emph{systematic} method of smoothing errors and of making \emph{short-term forecasting} is by means of \emph{Box-Jenkins models}. These models which are useful operationally for generating likely future sequences can also be adopted to produce a set of expected values.
+\item However, this is only practicable over the \emph{immediate future} because the variance of the forecast function increase with time. 
+ 
+    \end{itemize}
+\end{frame}
+
+ \begin{frame}{Short-term forecasting}
+    \begin{block}{Forecasting with ARMA(p,q) model}
+    \end{block}
+The model given by     
+     \begin{equation}
+            \xi_t = \phi_{p,1} \xi_{t-1} + \phi_{p,2} \xi_{t-2} + \cdots + \phi_{p,p} \xi_{t-p} + \eta_t - \theta_{q,1} \eta_{t-1} - \theta_{q,2} \eta_{t-2}-\cdots- \theta_{q,q} \eta_{t-q} 
+            \label{e427}
+        \end{equation}
+        can be used to produce a value of $x_t$ representing, say, \emph{annual flow} with \emph{mean} $\mu$ at time $t$; it is assumed that the series is free of \emph{trend} and \emph{periodicity}. That is
+     \begin{equation}
+         \phi_p (B) (X_t - \mu) = \theta_q (B) \eta_t
+            \label{e479}
+        \end{equation}
+        in which, as before, $\eta_t$ is the \emph{random component} with zero mean. 
+
+        For the purpose of forecasting a value $X_{t+l}$ at time $t$, where $l$ is the lead time of the forecast, equation~\ref{e479} is written
+     \begin{equation}
+         \begin{aligned}
+             X_{t+l} = &\mu + \phi_{p,1} (X_{t+l-1} - \mu) + \phi_{p,2} (X_{t+l-2} - \mu) + \cdots \\
+                       &+\phi_{p,p} (X_{t+l-p} - \mu) + \eta_{t+l} -\theta_{q,1} \eta_{t+l-1} \theta_{q,2} \eta_{t+l-2}\\
+                       &- \cdots - \theta_{q,q} \eta_{t+l-q}
+         \end{aligned}
+            \label{e480}
+        \end{equation}
+        Alternatively, $X_{t+l}$ can be equated to and infinite sum of current and previous shocks (a term commonly used for random effects) follows
+     \begin{equation}
+         X_{t+l} = \mu + (1+ \psi_1 B + \psi B^2 + \cdots) \eta_{t+l}
+            \label{e481}
+        \end{equation}
+        where $\psi_1$, $\psi_2$, $\cdots$ are a set of constants. The weights $\psi_1$, $\psi_2$, $\psi_3$, $\cdots$ are found by combining equations~\ref{e480} and ~\ref{e481} as follows
+     \begin{equation}
+         \begin{aligned}
+             (1-\phi_{p,1} B - &\phi_{p,2} B^2 - \cdots - \phi_{p,p} B^p) (1+ \psi_1 B + \psi_2 B^2 + \cdots) \\
+                               &= (1- \theta_{q,1} B - \theta_{q,2}B^2 - \cdots - \theta_{q,q} B^q)
+         \end{aligned}
+            \label{e482}
+        \end{equation}
+\end{frame}
+ 
+ \begin{frame}{Short-term forecasting}
+    \begin{block}{Forecasting with ARMA(p,q) model}
+    \end{block}
+    Then, by equating the coefficients of $B$, $B^2$, $B^3$, $\cdots$,
+ \begin{equation}
+         \begin{aligned}
+             \psi_1 &= \phi_{p,1} - \theta_{q,1}\\
+             \psi_2 &= \phi_{p,1}\psi_1 + \phi_{p,2} - \theta_{q,2}\\
+             \psi_3 &= \phi_{p,1}\psi_2 + \phi_{p,2}\psi_1 + \phi_{p,3} - \theta_{q,3}
+         \end{aligned}
+            \label{e483}
+        \end{equation}
+        and so on. 
+
+        Equations~\ref{e480} or ~\ref{e481} may be used as a forecast function. The \emph{optimal or minimum mean square error forecast} of lead $l$ and at time $t$ is $\hat{x}_t (l) = [X_{t+l}]$ which is the expectation of $X_{t+l}$, conditional of $X_t$, $X_{t-1}$, $X_{t-2}$, $\cdots$. This is obtained by using all the currently available information. Therefore, from equation~\ref{e480},
+     \begin{equation}
+         \begin{aligned}
+             \hat{x}_t (l) = &\mu + \phi_{p,1} \left[ X_{t+l-1} - \mu \right] + \phi_{p,2} \left[ X_{t+l-2} - \mu \right] + \cdots\\
+                             & + \phi_{p,p} \left[ X_{t+l-p} - \mu \right] + [\eta_{t+l}] - \theta_{q,1} [\eta_{t+l-1}] \\
+                             & - \theta_{q,2} [\eta_{t+l-2}] - \cdots -\theta_{q,q} [\eta_{t+l-q}] \\
+         \end{aligned}
+            \label{e484}
+        \end{equation}
+        
+        Again, from equation~\ref{e481}, the \emph{forecast} can also be given as follows.
+ \begin{equation}
+     \hat{x}_t (l) = \mu + [\eta_{t+l}] + \psi_1 [\eta_{t+l-1}] + \psi_2[\eta_{t+l-2}] + \cdots + \psi_l [\eta_t] + \psi_{t+1} [\eta_{t-1}] + \cdots
+           \label{e485}
+        \end{equation}
+        
+        When \emph{forecasting}, an $X$ variable within square brackets such as $[X_{t-i}]$ is replaced by the observed value $x_{t-i}$ if $i=0,1,2,3, \cdots$. With this notation, $[X_{t+i}]$ denotes a \emph{forecast} $\hat{x}_t (i)$ of lead time $i$ made at time origin $t$, if $i=1,2,3, \cdots$.
+     
+\end{frame}
+
+ \begin{frame}{Short-term forecasting}
+    \begin{block}{Forecasting with ARMA(p,q) model}
+    \end{block}
+    As regards the shocks, the \emph{conditional expectations} $[\eta_{t+i}] = 0$, in equations~\ref{e484} and ~\ref{e485}, for $i=1,2,3,\cdots$, because it represents an unknown future error. This means that in the right-hand side of equation~\ref{e485} all the terms between $\mu$ and $\psi_l [\eta_t]$ will be zero. However, $[\eta_{t-i}]$denotes the \emph{one-step-ahead forecast error} at time origin $t-i-1$, for $i=0,1,2,\cdots$, that is
+ \begin{equation}
+     [\eta_{t-i}] = x_{t-i} - \hat{x}_{t-i-1} (1)
+           \label{e486}
+        \end{equation}
+        in which $x_{t-i}$ is the observed value at time $t-i$ and $\hat{x}_{t-i-1}(1)$ is the forecast of the this value, made at time $t-i-1$.
+
+        From equations~\ref{e481} and ~\ref{e485} (in which the conditional expectations of future shocks are equated to zero) the \emph{minimum mean square forecast error} for lead time $l$ at time $t$  is
+ \begin{equation}
+     e_t (l) = x_{t+l} - \hat{x}_t (l) = \eta_{t+l} + \psi_1 \eta_{t+l-1} + \cdots + \psi_{l-1} \eta_{t+1}
+           \label{e487}
+        \end{equation}
+
+        Because $E[\eta_{t+l} \eta_{t+l-i}] =0$ for $i\neq0$ and $E[\eta_{t+l}^2] = 1$, 
+ \begin{equation}
+     var[e_t (l)] = \left( 1 + \psi_1^2 + \psi_2^2 + \cdots + \psi_{l-1}^2 \right) \sigma_{\eta}^2
+           \label{e488}
+        \end{equation}
+        
+        If we assume that the $e_t (l)$ values are \emph{normally distributed} with variance given by equation~\ref{e488}, confidence limits can be calculated for each forecast.  
+\end{frame}
+
+%-------
+% From Kotte (Stochastic WR tech)
+\section{Practical applications and general comments}
+\begin{frame}{Practical applications and general comments}
+    \begin{block}{Infilling missing flow data}
+    \end{block}
+    \begin{itemize}
+        \item Consider a situation where a section of a record is incomplete, whereas long records covering the \emph{missing section} are available for \emph{neighbouring gauging stations}. Such cases often arise in the application of \emph{multi-site models}.
+        \item Usually, the main reason for the lack of concurrent data sets is because flow records at some stations have commenced many years after. 
+        \item Prior to data \emph{generation}, \emph{simulation of a complex water resources system} is possible by using historical data if complete data sets are available at all stations. 
+        \item If long sections of data are missing rather than a few items, a stochastic approach by using time series models is required in order to maintain the \emph{covariance matrices}; this is not possible through a \emph{simple regression model}.
+        \item However, an infinite number of sequences that preserve the \emph{covariance matrices} estimated from the known sequences are realisable. 
+        \item For  data generation purpose, it is sometimes recommended to use the first-order multi-site model
+            \[
+                \mathbf{Y}_{t+1} = \mathbf{A}(\mathbf{Y}_t^T \mathbf{X}_{t+1}^T \mathbf{X}_t^T)^T + \mathbf{B}\ve{\eta}_{t+1}
+            \]
+            in  which flows at stations $Y$ are infilled by using current and antecedent flows at stations $X$. Iterative methods of determining the parameters $\mathbf{A}$ and $\mathbf{B}$ by using previously infilled data were  explained. 
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Practical applications and general comments}
+    \begin{block}{Comments on testing generated data}
+    \end{block}
+    \begin{itemize}
+        \item If we return to \emph{data generation methods} in general, their greatest potential seems to be in the \emph{simulation of large systems}. Here, we should bear in mind the assumptions and limitations of stochastic models. 
+        \item As regards the validity and choice of models, the question is often  asked about the best methods of testing generated data. 
+        \item From the practicing engineer's viewpoint, the \emph{preservation of statistics}, such as the \emph{mean}, the \emph{standard deviation} and the \emph{short-lag serial correlation}, is not particularly important because it is known that, on average, these will be maintained. 
+        \item Of greater concern in comparative assessments are aspects such as the \emph{yield and reliability} of a system, the \emph{duration curves} and other hydrological properties; \emph{runs}, \emph{run sums}, \emph{crossings} and \emph{extreme values} are also important. 
+        \item In other words, it is more purposeful to examine the properties that are not specifically incorporated in the models. The necessity to ascertain how realistic generated data are on the basis of such criteria cannot be overstressed. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Practical applications and general comments}
+    \begin{block}{Comments on applications of data generated methods}
+    \end{block}
+    \begin{itemize}
+        \item \emph{Data generated methods} has been used for \emph{operational purposes}. For instance, \emph{first-order multi-site models} have been used to produce monthly and daily data for multiple stations. 
+        \item \emph{Autoregressive log-normal} daily flow models has been used in some rivers for \emph{infilling and data generation}. Data generation using similar models has been implemented in various reservoir studies with the use of economic concepts. 
+        \item Note that the use of the models explained so far  are based almost exclusively on \emph{short-lag serial correlations}. The frequent use of such models is partly because available samples are usually  of limited size  and because any latent \emph{long-term movements} are difficult  to assess. For the same reasons, care and judgement are called for in application. 
+        \item A scrutiny  of some long sequences of historical data reveals properties  of particular significance in hydrology which need to be investigated. 
+    \end{itemize}
+\end{frame}
+\end{document}
+
