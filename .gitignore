@@ -17,6 +17,9 @@ exams/*
 *.cb
 *.cb2
 .*.lb
+*.nav
+*.bm
+*.snm
 
 ## Intermediate documents:
 *.dvi
