@@ -203,7 +203,7 @@ r_N^* =  max(x_1 + x_2 + \cdots + x_i - i\bar{x})-min(x_1 + x_2 + \cdots + x_i -
     \end{equation}
     Note that, for $i=N$, the terms within each set of parentheses in equaution~\ref{e514} sum to 0, but this does not necessarily apply to the corresponding terms in equation~\ref{e513}; hence, we have the addition of two zeros in the equation for $r_N$. 
 
-    To understand the \emph{range} more clearly, consider a hypothetical situation in which the \emph{observed flows} sequence is routed through a \emph{reservoir} of capacity $r_N^*$ with \emph{initial storage} $|d_N^-|$ and a constant \emph{withdrawal rate} $\bar{x}$ (incluging losses) per unit time. Under these conditions, the reservoir will be full on one or more occasions without overflowing, it will empty at least once and the withdrawal rate will be maintained throughout.
+%    To understand the \emph{range} more clearly, consider a hypothetical situation in which the \emph{observed flows} sequence is routed through a \emph{reservoir} of capacity $r_N^*$ with \emph{initial storage} $|d_N^-|$ and a constant \emph{withdrawal rate} $\bar{x}$ (incluging losses) per unit time. Under these conditions, the reservoir will be full on one or more occasions without overflowing, it will empty at least once and the withdrawal rate will be maintained throughout.
 
 \end{frame}
 
@@ -267,17 +267,21 @@ to give the adjusted rescaled range
 \end{frame}
 
   \begin{frame}{Range analysis}
+    \vspace{-5pt}
       \begin{block}{Range and rescaled range in small samples}
     \end{block}
+    \vspace{-5pt}
     The interpretation of the \emph{Hurst phenomenon} given above, which is the commonly accepted one, is undoubtedly important from theoretical considerations. However, for practical purposes knowledge of the small sample behaviour of the \emph{range statistics} is required. 
     \begin{enumerate}
         \item \emph{Independent identically  distributed standard normal variate} are considered. For this adjusted range, it has been proved that
+    \vspace{-5pt}
 \begin{equation}
     E[R_N^*] = \sqrt{\frac{N}{2\pi}} \sum_{i=1}^{N-1} \left[i(N-i)\right]^{-1/2}
     \label{e520}
     \end{equation}
 
 \item It has been stablished that, for the \emph{rescaled adjusted range} 
+    \vspace{-5pt}
 \begin{equation}
     E[R_N^{**}] = \sqrt{\frac{1}{\pi}} \left[\frac{\Gamma((N-1)/2)}{\Gamma(N/2)} \right] \sum_{i=1}^{N-1} \left[(N-i)/i\right]^{1/2}
     \label{e521}
@@ -289,8 +293,31 @@ Again, for a sequence of inputs from a \emph{gamma population} with a two-parame
     \label{e522}
     \end{equation}
 \end{enumerate}
-One important outcome of the theoretical work on the rescaled range as given by equation~\ref{e521} is that for finite sequences of \emph{independent  normal variates} the exponent $h$ is equation~\ref{e519} is significantly greater than 0.5. The asymptotic value, $h=0.5$, is reached only when $N$ is much larger than the sample sizes found in practices. Likewise, \emph{Hurst's exponent} $K$ defined by equation~\ref{e516} undergoes transitory behaviour but at a slower rate. 
+One important outcome of the theoretical work on the rescaled range as given by equation~\ref{e521} is that for finite sequences of \emph{independent  normal variates} the exponent $h$ is equation~\ref{e519} is significantly greater than 0.5. The asymptotic value, $h=0.5$, is reached only when $N$ is much larger than the sample sizes found in practices. 
+%Likewise, \emph{Hurst's exponent} $K$ defined by equation~\ref{e516} undergoes transitory behaviour but at a slower rate. 
 \end{frame}
  
 
+\begin{frame}{Range analysis}
+    \begin{block}{Explanation of Hurst phenomenon and experiments}
+    \end{block}
+    \begin{itemize}
+        \item As seen before, observed sequences are not, in essence, normally distributed. However, computer experiments show that the \emph{adjusted rescaled range} $r_N^{**}$ is seemingly insensitive to changes in the marginal distributions.
+        \item This is the contrast with the \emph{adjusted range} $r_N^*$ which becomes independent of the distribution only when $N$ is large, perhaps greater than 1000 in highly  skewed data. 
+        \item The important characteristics of natural time series is \emph{persistence}. This is the property by which high flows tend to follow high flows and low flows tend to follow low flows. 
+        \item A particular method of measuring persistence is through the \emph{serial correlagram}. The effect of (positive) serial correlation on the \emph{adjusted rescaled range} can be demonstrated by generating data sets using the \emph{AR(p)} and the \emph{ARMA(p,q)} models.
+        \item In this way $K(N)$ and $h(N)$ are found to take on values greater than those for independent variates. These differences increase with increases in the \emph{serial correlation}. 
+        \item However, they decrease for very large sample sizes; furthermore, it has been shown analytically that when $N$ becomes very large the \emph{Hurst coefficient} tends to the asymptotic value of 0.5 for \emph{ARMA} processes. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Range analysis}
+    \begin{block}{Explanation of Hurst phenomenon and experiments}
+    \end{block}
+    \begin{itemize}
+        \item It follows from all of this that the preasymptotic  periods, over which the \emph{Hurst coefficient} is greater than 0.5 are much larger than those from independent variates.
+        \item From the practical point of view, because sample sizes investigated by \emph{Hurst} were less than 2000, it seems reasonable to assume that \emph{serial correlation} can, at least, partly account for the observed \emph{Hurst phenomenon}.
+        \item To conclude, it can be said that both \emph{serial correlation} and \emph{non-stationarity} can account for the \emph{Hurst} effect over finite time horizons. Indeed, many natural processes seem to have both these properties in varying degrees so that it is difficult to identify the effect of each. 
+    \end{itemize}
+\end{frame}
 \end{document}

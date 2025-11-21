@@ -36,6 +36,7 @@
 \graphicspath{{figs/}} % Path to your figures directory
 \usepackage{array}  % For better column spacing
 \usepackage{caption} % Required for \captionof
+%\usepackage{enumitem}
 
 % Title Information
 \title{STOCHASTIC METHODS IN WATER RESOURCES}
@@ -248,7 +249,7 @@ much too large. The reason is the existance of clusters with very high data valu
         var[Z(\mathbf{x})] &= E[Z(\mathbf{x})-\mu_Z ]^2 = \sigma_Z^2 = \text{ constant (and finite)}\\
         COV\left[Z(\mathbf{x}_1), Z(\mathbf{x}_2)\right] &= E\left[ (Z(\mathbf{x}_1)-\mu_Z )  (Z(\mathbf{x}_2)-\mu_Z )\right] = C_Z (\mathbf{x}_2 - \mathbf{x}_1 ) = C(\mathbf{h})
     \end{align*}
-    \emph{Simple kriging} is the appropriate \emph{kriging method} if the \emph{random forest} is \emph{second order stationary} and the \emph{mean} of the \emph{random forest} $E[Z(\mathbf{x})] = \mu$ is known without error. With \emph{simple kriging} a predictor $\hat{Z}(\mathbf{x}_0)$ is sought that
+    \emph{Simple kriging} is the appropriate \emph{kriging method} if the \emph{random function} is \emph{second order stationary} and the \emph{mean} of the \emph{random function} $E[Z(\mathbf{x})] = \mu$ is known without error. With \emph{simple kriging} a predictor $\hat{Z}(\mathbf{x}_0)$ is sought that
     \begin{enumerate}
         \item is a linear function of the surrounding data,
         \item is unbiased: $E[\hat{Z}(\mathbf{x}_0)- Z(\mathbf{x}_0) ] = 0$,
@@ -275,7 +276,7 @@ much too large. The reason is the existance of clusters with very high data valu
             \begin{equation}
                 \begin{aligned}
                 &var[\hat{Z}(\mathbf{x}_0) -Z(\mathbf{x}_0)]  = E[\hat{Z}(\mathbf{x}_0) -Z(\mathbf{x}_0)]^2 = \\
-                &E\left[  \sum_{i=1}^n \lambda_i E[Z(\mathbf{x}_i)-\mu_Z] -[Z(\mathbf{x}_0) -\mu_Z]\right]^2 = \\
+                &E\left[  \sum_{i=1}^n \lambda_i [Z(\mathbf{x}_i)-\mu_Z] -[Z(\mathbf{x}_0) -\mu_Z]\right]^2 = \\
                 &\sum_{i=1}^n \sum_{j=1}^n  \lambda_i \lambda_j E\left[[Z(\mathbf{x}_i)-\mu_Z]  [Z(\mathbf{x}_j)-\mu_Z] \right] - \\
                 &2\sum_{i=1}^n \lambda_i E\left[[Z(\mathbf{x}_i)-\mu_Z] [Z(\mathbf{x}_0)-\mu_Z] \right] + E[Z(\mathbf{x}_0)-\mu_z]^2
                 \end{aligned}
@@ -364,12 +365,58 @@ much too large. The reason is the existance of clusters with very high data valu
             \vspace{-5pt}
             \begin{equation}
                 C (h) = \left\{ \begin{array}{l}  c_0 + c_1  \text{, if } h= 0  \\ c_1 e^{-h/a} \text{, if }  h > 0 \end{array} \right. 
-                \label{e711}
+                \label{e713}
             \end{equation}
             where $c_0 + c_1 = \sigma_Z^2$. In this case $c_0$ is often used to model the part of the variance that is attributable to \emph{observation errors} or \emph{spatial variation} that occurs at distances smaller than the minimal distance between observations.
 
 
     \end{itemize}
+    \end{frame}
+
+ \begin{frame}{Spatial interpolation by kriging}
+    \begin{block}{Simple kriging: practical application}
+    \end{block}
+    The practical application of \emph{simple kriging} would involve the mapping of some variable observed at a limited number of locations. In practice, the kriging routine would consist of the following steps: 
+    \begin{enumerate} 
+    \item Estimate the \emph{mean} and the \emph{covariance} function from the observed data after \emph{declustering}.
+    \item Fit a permissible \emph{covariance model} to the \emph{experimental semivariogram}. Usually one does not estimate the \emph{covariance function} but the \emph{semivariogram} when \emph{kriging}. The \emph{semivariogram} is somewhat better suited for estimating data that are \emph{irregularly distributed} in space. After fitting a \emph{semivariogram function } that is suited for \emph{wide sense stationary processes}, the \emph{covariance function} can be obtained as:
+            \begin{equation}
+                C_Z (\mathbf{h}) = \sigma_Z^2 - \gamma_Z (\mathbf{h})
+                \label{e519}
+            \end{equation}
+        
+    \end{enumerate} 
+    \end{frame}
+
+ \begin{frame}{Spatial interpolation by kriging}
+    \begin{block}{Simple kriging: practical application}
+    \end{block}
+
+    The \emph{semivariogram} of the syntethic data set based on 140 data points and the fitted model (\emph{spherical model}) is below.
+
+            \begin{center}
+            \includegraphics[width=0.6\linewidth]{fiBi78.png}  % from Bierk
+            \end{center}
+            Note that if \emph{kriging} is used for making maps, the locations where the predictions are made are usually located on a grid. So, when in the following steps we refer to a prediction location $\mathbf{x}_0$ we refer to a location on this grid. Thus, the following steps are repeated for every grid node:
+\begin{enumerate}
+  \setcounter{enumi}{2} % continue from 3  \item Third item
+  \item Solve the \emph{simple kriging system} using equation~\ref{e711} and the \emph{covariance function} $C_Z (\mathbf{h})$ (see equation~\ref{e519}). $\lambda_i$ are obtained for location $\mathbf{x}_0$.
+  \item Predict the value $Z(\mathbf{x}_0)$. With the $\lambda_i$, the observed values $z(\mathbf{x}_i)$ and the estimated value of $\mu_Z$ in equation~\ref{e75} the unknown value of $Z(\mathbf{x}_0)$ is predicted.
+\end{enumerate}
+    \end{frame}
+
+ \begin{frame}{Spatial interpolation by kriging}
+    \begin{block}{Simple kriging: practical application}
+    \end{block}
+
+\begin{enumerate}
+  \setcounter{enumi}{4} % continue from 4  
+  \item Calculate the \emph{variance} of the \emph{prediction error}.  Using $\lambda_i (\mathbf{x}_0)$, $C_Z (\mathbf{h})$ and $\sigma_Z^2$ the variance of the prediction error is calculated with equation~\ref{e711}. The result is a map of predicted properties on a grid and a map of associated \emph{error variances}. The figure below shows the map of kriging predictions and the associated \emph{prediction variance} or \emph{kriging variance}.
+\end{enumerate}
+
+            \begin{center}
+            \includegraphics[width=0.9\linewidth]{fiBi79.png}  % from Bierk
+            \end{center}
     \end{frame}
 \end{document}
 

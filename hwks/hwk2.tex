@@ -1,0 +1,82 @@
+\documentclass[10pt, a4paper]{exam}
+\usepackage{graphicx}
+\usepackage[a4paper, total={7in, 9.5in}]{geometry}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\renewcommand\ULthickness{1.0pt}   
+\setlength\ULdepth{1.3ex}
+
+\begin{document}
+
+
+	\noindent
+	\begin{minipage}[l]{0.1\textwidth}
+		\noindent
+		\includegraphics[width=2.8\textwidth]{ESCUDO.png}
+	\end{minipage}
+\hfill
+\begin{minipage}[c]{0.8\textwidth}
+	\begin{center}
+		{\large  Departamento de Ingeniería civil y Agrícola\par
+		\large	Facultad de Ingeniería	\par
+	% \large \textbf{Taller propiedades de los fluidos}	\par
+        \large \textbf{HOMEWORK 2\\ Time series analysis}\\
+} Luis Alejandro Morales Ph.D
+	\end{center}
+\end{minipage}
+\par
+\vspace{0.2in}
+\noindent
+    \uline{M\'etodos Estoc\'asticos en Recursos Hidr\'aulicos [2025858]	\hfill 2025-II}
+\par 
+\vspace{0.15in}
+\noindent
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Important notes}
+\begin{itemize}
+    \item The computational processing must be made in the \texttt{R programming language}.  
+    \item The report must be  written concisely in \TeX, \texttt{markdown} (\texttt{R} report format) or \texttt{MS Word}. It must contain the plots and the analysis based on the results.
+    \item The report must be named as \texttt{FirstSurnameSecondSurname\_hwk2\_SMWR\_2025\_II.pdf} \\ (\texttt{MoralesMarin\_hwk2\_SMWR\_II.pdf}). This must be sent to \texttt{lmoralesm@unal.edu.co} with the subject \texttt{hwk2\_SMWR}
+\end{itemize}
+
+
+\section*{Time series analysis}
+
+For the following hydrological time series:
+\begin{itemize}
+    \item annual average streamflow,
+    \item monthly average streamflow, and
+    \item monthly precipitation,
+\end{itemize}
+
+whose length must be at least \emph{20 years}, acquired from \emph{IDEAM}, \emph{CAR}, \emph{IDIGER}, or other national or regional agencies, do the following:
+
+\begin{enumerate}
+
+\item Plot the \emph{time series}, the \emph{histogram}, and the \emph{cumulative histogram}. Analyze and discuss the results.
+
+\item Estimate the \emph{mean}, \emph{variance}, \emph{skewness}, \emph{kurtosis}, and \emph{interquartile range}. Organize the results in tables and analyze them.
+
+\item Determine the presence of a \emph{trend} in the series. Check whether the trend is statistically significant using, for example, the \emph{Mann–Kendall test}. Discuss the results.
+
+\item Compute the \emph{spectral density function} or \emph{periodogram} of the series. Identify the main harmonics and fit a sinusoidal model if periodicity affects the stationarity of the series. Discuss the results.
+
+\item If this is the case, remove the trend and/or periodicity from the time series and ensure that the series is \emph{stationary}. Plot the treated series.
+
+\item Compute and plot the \emph{autocorrelation function (ACF)} and the \emph{partial autocorrelation function (PACF)} with confidence limits. Analyze their shapes and make inferences about the possible model type and order.
+
+\item Fit a \emph{Box–Jenkins ARIMA} model to the residual time series. Report the model order and parameters, \emph{AIC} and \emph{BIC} criteria and discuss the results.
+
+\item Plot \emph{model residuals} and test residuals for \emph{normality} and \emph{randomness}. Discuss the results. 
+
+\item Reproduce the original series using the fitted model and plot the results.
+
+\item Use the model to forecast the time series 10 units ahead and plot the results withe confidence intervals for 75\% and 90\%.
+
+\end{enumerate}
+  
+\end{document}
+
+
+
