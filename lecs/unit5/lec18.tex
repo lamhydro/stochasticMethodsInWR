@@ -55,18 +55,60 @@
 
 %-------
 % From Bierkens
-\section{Log-normal kriging}
- \begin{frame}{Log-normal kriging}
-     \begin{block}{Generalities}
+\section{Estimating the local conditional distribution}
+\begin{frame}{Estimating the local conditional distribution}
+    \begin{block}{Generalities}
+    \end{block}
+        \begin{itemize}
+            \item \emph{Kriging} can also be used to estimate for each \emph{non-observed location} the \emph{probability distribution} $f_z(z; \mathbf{x} | z(\mathbf{x}_i), i= 1, .., n)$, i.e the \emph{probability distribution} given the \emph{observed values} at the \emph{observation locations}.
+            \item Recall that each \emph{realisation} is \emph{conditioned} by the \emph{observations}, i.e. it passes through the observed value, but is free to vary between observations. The farther away from an observation, the more the realisations differ.
+            \item This is reflected by the \emph{conditional pdf} $f_z(z; \mathbf{x} | z(\mathbf{x}_i), i= 1, .., n)$ at a given location. The farther away from an observation, the larger the \emph{variance} of the \emph{conditional pdf}, which means the more \emph{uncertain} we are about the actual but unknown value $z(\mathbf{x})$.
+            \item The following  methods can be used to estimate the \emph{conditional pdf} $f_z(z; \mathbf{x} | z(\mathbf{x}_i), i= 1, .., n)$ through kriging.
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Estimating the local conditional distribution}
+    \begin{block}{Multivariate Gaussian random functions}
+    \end{block}
+    If, apart from being \emph{wide sense stationary}, the \emph{random space function} is also \emph{multivariate Gaussian distributed} then we have:
+    \begin{enumerate}
+        \item The \emph{kriging error} is \emph{Gaussian distributed} with \emph{mean} zero and \emph{variance} equal to the \emph{simple kriging variance} $\sigma_{SK}^2 (\mathbf{x}_0) = var\left[\hat{Z}(\mathbf{x}_0) - Z(\mathbf{x})\right]$.  A \emph{95\%-prediction interval} would then be given by $\left[ \hat{z}_{SK}(\mathbf{x}_0) - 2\sigma_{SK}(\mathbf{x}_0), \hat{z}_{SK}(\mathbf{x}_0)+ 2\sigma_{SK}(\mathbf{x}_0) \right]$ where $\hat{z}_{SK}(\mathbf{x}_0)$ is the \emph{simple kriging prediction}.
+        \item The \emph{conditional cumulative probability distribution function (ccpdf)} is \emph{Gaussian} with \emph{mean} equal to the \emph{simple kriging prediction} $\hat{z}_{SK}(\mathbf{x}_0)$ and \emph{variance} equal to the \emph{variance of the simple kriging prediction error} $\sigma_{SK}^2(\mathbf{x}_0)$:
+  \begin{equation}
+                    F_{z|z_1,\cdots,z_n} (z; \mathbf{x}_0 | z(\mathbf{x}_i), i=1,\cdots,n) = \frac{1}{\sqrt{2\pi \sigma_{SK}^2 (\mathbf{x}_0)}} \int_{-\infty}^z e^{\frac{-\left[z-\hat{y}_{SK}(\mathbf{x}_0) \right]^2}{\sigma_{SK}^2 (\mathbf{x}_0)}} dz
+                \label{e731}
+            \end{equation}
+            where $z(\mathbf{x}_1),\cdots,z(\mathbf{x}_n)$ are the observed values at locations $\mathbf{x}_1 ,\cdots,\mathbf{x}_n$ respectively.
+           
+    \end{enumerate}
+    The second property is very convenient and the reason why the \emph{multivariate Gaussian} and \emph{stationary random spatial function} is very popular model in \emph{geostatistics}.
+\end{frame}
+
+\begin{frame}{Estimating the local conditional distribution}
+    \begin{block}{Multivariate Gaussian random functions}
+    \end{block}
+    \begin{itemize}
+        \item After performing \emph{simple kriging predictions}, one is able to give an estimate of the \emph{ccpdf} of $Z(\mathbf{x})$ \emph{exceeding} a given \emph{threshold} for every location in the domain of interest.
+        \item For instance, if $Z(\mathbf{x})$ is a \emph{concentration of some pollutant} in the groundwater and $z_c$ is \emph{critical threshold} above which the \emph{pollutant} becomes a \emph{health hazard}, \emph{simple kriging} and equation~\ref{e731} can be used to map the \emph{probability of exceeding} this \emph{threshold}, given the concentrations found at the observation locations.
+        \item Instead of \emph{delineating} a \emph{single plume} based upon some \emph{predicted value}, \emph{several alternative plumes} can be delineated, depending on which \emph{probability contour} is taken as its boundary.
+         \item This way, both the \emph{observed concentration} values as well as the \emph{local uncertainty} are taken into account when mapping the plume. 
+         \item Also, the \emph{risk} of not treating \emph{hazardous groundwater} can be weighted against the \emph{costs of remediation}. For instance, if the risk of not treating \emph{hazardous groundwater} should be smaller than 5\%, all the water within the 0.05 contour should be treated.
+         \item Obsviously this results in much higher costs then if, for instance, a 10\% \emph{risk} is deemed acceptable.
+ 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Log-normal kriging}
     \end{block}
     \begin{itemize}
         \item Many geophysical variables, such as \emph{hydraulic conductivity} and \emph{pollutant concentration}, are approximately \emph{log-normal distributed}.
-        \item A frequently used \emph{random space function} model to decribe these variables is the \emph{multivariate log-normal distribution}.
+        \item A frequently used \emph{random space function} model to describe these variables is the \emph{multivariate log-normal distribution}.
         \item If $Z(\mathbf{x})$ is \emph{multivariate log-normal distributed}, the natural logarithm $Y(\mathbf{x})=\ln(Z(\mathbf{x}))$ is \emph{multivariate normal distributed}. \alert{Log-normal kriging} then consists of the following steps:
             \begin{enumerate}
                 \item Transform the observations $z(\mathbf{x}_i)$ by taking their logarithms $y(\mathbf{x}_i) = \ln(z(\mathbf{x}_i))$.
-                \item Estimate the \emph{semivariogram} $\hat{\gamma}_Y (\mathbf{h})$ from the log-transformed data $y(\mathbf{x}_i)$ and fit a permissible model (note: that mean $m_Y$ must be determined and assumed known if \emph{simple kriging} is used). u                
-                \item Using the \emph{semivariogram} $\hat{\gamma}_Y (\mathbf{h})$, the data $y(\mathbf{x}_i)$ (and the mean $m_Y$ in case of \emph{simple kriging}), the kriging equations are solved to obtain at every non-observed location $\mathbf{x}_0$ the prediction $\hat{Y}_{SK} (\mathbf{x}_0)$ and prediction error variance $\sigma_{YSK}^2 (\mathbf{x}_0)$ in cased of \emph{simple kriging} or $\hat{Y}_{OK} (\mathbf{x}_0)$, $\hat{Y}_{YOK} (\mathbf{x}_0)$ in case of \emph{ordinary kriging}.
+                \item Estimate the \emph{semivariogram} $\hat{\gamma}_Y (\mathbf{h})$ from the log-transformed data $y(\mathbf{x}_i)$ and fit a permissible model (note: that mean $m_Y$ must be determined and assumed known if \emph{simple kriging} is used).                 
+                \item Using the \emph{semivariogram} $\hat{\gamma}_Y (\mathbf{h})$, the data $y(\mathbf{x}_i)$ (and the mean $m_Y$ in case of \emph{simple kriging}), the kriging equations are solved to obtain at every non-observed location $\mathbf{x}_0$ the \emph{prediction} $\hat{Y}_{SK} (\mathbf{x}_0)$ and \emph{prediction error variance} $\sigma_{YSK}^2 (\mathbf{x}_0)$ in cased of \emph{simple kriging} or $\hat{Y}_{OK} (\mathbf{x}_0)$, $\sigma_{YOK}^2 (\mathbf{x}_0)$ in case of \emph{ordinary kriging}.
                 \item An unbiased prediction of $Z(\mathbf{x}_0)$ is obtained by the following backtransforms footnote:
                     \begin{itemize}
                         \item for \emph{simple kriging}:
@@ -86,13 +128,13 @@
     \end{itemize}
 \end{frame}
 
- \begin{frame}{Log-normal kriging}
-     \begin{block}{Generalities}
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Log-normal kriging}
     \end{block}
 %    \begin{itemize}
 \begin{enumerate}
     \setcounter{enumi}{4} % continues from item 3
-    \item If $Y(\mathbf{x})$ is \emph{multivariate Gaussian} distributed and \emph{stationary}, the \emph{conditional cumulative probability distribution function} can be calculated from the \emph{simple kriging} prediction $\hat{y}_{SK}(\mathbf{x}_0)$ and prediction \emph{variance} as:
+    \item If $Y(\mathbf{x})$ is \emph{multivariate Gaussian} distributed and \emph{stationary}, the \emph{conditional cumulative probability distribution function (ccpdf)} can be calculated from the \emph{simple kriging} prediction $\hat{y}_{SK}(\mathbf{x}_0)$ and prediction \emph{variance} as:
             \begin{equation}
                 F_{z|z_1,\cdots,z_n} (z; \mathbf{x}_0 | z(\mathbf{x}_i), i=1,\cdots,n) = \frac{1}{\sqrt{2\pi \sigma_{YSK}^2 (\mathbf{x}_0)}} \int_{-\infty}^z e^{\frac{-\left[\ln(z)-\hat{y}_{SK}(\mathbf{x}_0) \right]^2}{\sigma_{YSK}^2 (\mathbf{x}_0)}} dz
                 \label{e734}
@@ -102,20 +144,17 @@
 %\end{itemize}
 \end{frame}
 
-%-------
-% From Bierkens
-\section{Kriging normal-score transforms}
- \begin{frame}{Kriging normal-score transforms}
-     \begin{block}{Generalities}
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Kriging normal-score transforms}
     \end{block}
-    An even more general \emph{transformation} is the \alert{normal-score transform} using the \emph{histogram}. Through this transform, it is possible to \emph{transform} any set of observations to \emph{univariate Gaussian distributed variables}, regardless of the distribution of these observations. A \emph{normal score-transform} proceeds as follows:
+    An even more general \emph{transformation} is the \alert{normal-score transform} using the \emph{histogram}. Through this transform, it is possible to \emph{transform} any set of observations to \emph{univariate Gaussian distributed variables}, regardless of the distribution of these observations. A \emph{normal-score transform} proceeds as follows:
     \begin{enumerate} 
         \item The $n$ observations are \emph{ranked} in ascending order:
             \[
                 z(\mathbf{x}_i)^{(1)} \leq z(\mathbf{x}_j)^{(2)} \leq \cdots \leq z(\mathbf{x}_k)^{(r)} \leq \cdots \leq z(\mathbf{x}_l)^{(n)}
             \]
             where $r=1,\cdots,n$ are the \emph{ranks} of the observations.
-        \item The \emph{cumulative probability} associated with observation $z(\mathbf{x}_k)$ with rank $r$ is estimated as:
+        \item The \emph{cumulative probability} associated with observation $z(\mathbf{x}_k) = z_k$ with rank $r$ is estimated as:
             \begin{equation}
                 \hat{F}(z_k) = \frac{r(z_k)}{n+1}
                 \label{e735}
@@ -134,8 +173,8 @@
     \end{enumerate} 
 \end{frame}
 
- \begin{frame}{Kriging normal-score transforms}
-     \begin{block}{Generalities}
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Kriging normal-score transforms}
     \end{block}
     The figure below shows graphically how the \emph{normal-score transform} works. The left figure shows the estimated \emph{cumulative distribution} of the original (non-transformed) data and the right figure the \emph{standard Gaussian cumulative distribution}. The dashed lines show how the observed values $z_k$ are transformed into the \emph{normal-score transform} $y_{ns}(z_k)$.
         \begin{center}
@@ -144,16 +183,16 @@
 
 \end{frame}
 
- \begin{frame}{Kriging normal-score transforms}
-     \begin{block}{Generalities}
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Kriging normal-score transforms}
     \end{block}
             \vspace{-5pt}
-    If we assume that the \emph{normal-score transforms} are \emph{stationary} and \emph{multivariate Gaussian distributed},  the local pdfs can be obtained through \emph{simple kriging} as follows:
+            If we assume that the \emph{normal-score transforms} are \emph{stationary} and \emph{multivariate Gaussian distributed},  the \emph{local ccpdfs} can be obtained through \emph{simple kriging} as follows:
     \begin{enumerate}
-        \item Perform a \emph{normal score transform} of the observations such as decribed above.
+        \item Perform a \emph{normal-score transform} of the observations such as described above.
         \item Estimate the \emph{semivariogram} of the \emph{normal-score transformed data} $y_{ns}(\mathbf{x}_k) = y_{ns}(z(\mathbf{x}_k))$ and fit a permissible semivariogram model $\gamma_Y (\mathbf{h})$. By definition, the mean value of the \emph{transformed random space function} $Y_{ns} (\mathbf{x}_0)$ is zero.
         \item Use the fitted \emph{semivariogram model} and the \emph{normal-score transforms} $y_{ns} (\mathbf{x}_k)$ in the \emph{simple kriging} equations (with $m_Y =0$) to obtain the \emph{prediction} $\hat{Y}_{SK} (\mathbf{x}_0)$ and the associated \emph{prediction error variance} $\sigma_{YSK}^2 (\mathbf{x}_0)$.
-        \item The local \emph{cdf} is then given by
+        \item The local \emph{ccpdf} is then given by
             \vspace{-5pt}
             \begin{equation}
                 \begin{aligned}
@@ -168,8 +207,8 @@
     This is also shown graphically in figure above. Suppose we want to known for the non-observed location the probability that $Z(\mathbf{x}_0) \leq z$. We first obtain through the transformation the value of $y_{ns}(z)$. From the \emph{simple kriging} of transformed data we have at $\mathbf{x}_0 : \hat{y}_{SK}(\mathbf{x}_0)$ and $\sigma_{YSK}^2 (\mathbf{x}_0)$. Finally, we evaluate $Pr\left[G\left(\hat{y}_{SK}(\mathbf{x}_0), \sigma_{YSK}(\mathbf{x}_0)\right) \leq y_{ns}(z)\right]$ (see equation~\ref{e738}) to obtain the probability.
 \end{frame}
 
- \begin{frame}{Kriging normal-score transforms}
-     \begin{block}{Generalities}
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Kriging normal-score transforms}
     \end{block}
     \begin{itemize}
         \item To calculate the \emph{normal-score transform} of any given value $z$ (which is not necessarily equal to the value of one of the observations), the resolution of the estimated \emph{cdf} $\hat{F}(z)$ must be increased.
@@ -178,20 +217,24 @@
         \item Usually a \emph{power model} is used to \emph{extrapolate} the \emph{lower tail} and a \emph{hyperbolic model} to \emph{extrapolate} the \emph{upper tail}.
     \end{itemize}
 \end{frame}
- \begin{frame}{Kriging normal-score transforms}
-     \begin{block}{Generalities}
+
+\begin{frame}{Estimating the local conditional distribution}
+     \begin{block}{Kriging normal-score transforms}
     \end{block}
-    The figure below shows the \emph{histogram} and the \emph{semivariogram} of of the \emph{normal score transforms}. It can be seen that \emph{semivariogram} is less noisy than that of the \emph{non-transformed data}, because transformation decreases the effect of the very large values.
+    The figure below shows the \emph{histogram} and the \emph{semivariogram} of the \emph{normal score transforms}. It can be seen that \emph{semivariogram} is less noisy than that of the \emph{non-transformed data}, because transformation decreases the effect of the very large values.
         \begin{center}
             \includegraphics[width=\linewidth]{fiBi715.png}  % from Bierk
         \end{center}
 \end{frame}
 
+%-------
+% From Bierkens
+\section{Geostatistical simulation}
 \begin{frame}{Geostatistical simulation}
      \begin{block}{Generalities}
     \end{block}
     \begin{itemize}
-        \item The third field of application of \emph{geostatistics} is simulating realisations of the \emph{conditional random function} $Z(\mathbf{x} | z(\mathbf{x}_i), i=1,\cdots,n$.
+        \item The third field of application of \emph{geostatistics} is simulating realisations of the \emph{conditional random function} $Z(\mathbf{x} | z(\mathbf{x}_i), i=1,\cdots,n)$.
         \item The aim of \emph{geostatistical simulation} is to generate in the individual conditional realisations. There are two important reasons why sometimes individual realisations of the conditional \emph{random spatial function} are preferred over the interpolated map that is provided by \emph{kriging}:
             \begin{enumerate}
                 \item \emph{kriging} provides a so called \emph{best linear prediction} (it produces values that minimize the \emph{variance of the prediction error}: $var[\hat{Z}(\mathbf{x}_0)-Z(\mathbf{x}_0)]$, but the resulting maps are much smoother than reality.The individual realisations are very noisy and rugged while the \emph{kriging prediction} produces a smoothly varying surface. The \emph{noisy realisations} have a \emph{semivariogram} that resembles that of the data, so one can say that the real variation of the property considered is much more like the realisations than the \emph{kriging map}.
@@ -229,7 +272,7 @@
     \end{block}
 \begin{enumerate}
     \setcounter{enumi}{2} % continues from item 3
-    \item A random value $P$ between zero and one is drawn from a \emph{uniform distribution} $U[0,1]$. Using the \emph{inverse of the conditional distribution} (see equation~\ref{e739} the \emph{random quantile} $P$ is used to draw a \emph{random value Z}:
+    \item A random value $P$ between zero and one is drawn from a \emph{uniform distribution} $U[0,1]$. Using the \emph{inverse of the conditional distribution} (see equation~\ref{e739}) the \emph{random quantile} $P$ is used to draw a \emph{random value Z}:
 
             \begin{equation}
                 Z(\mathbf{x}_1) = N^{-1} \left[P;\hat{Z}_{SK}(\mathbf{x}_1), \sigma_{SK}(\mathbf{x}_1) \right]
